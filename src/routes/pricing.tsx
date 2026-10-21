@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 import { Check, Minus } from "lucide-react";
 import { CookieBanner, CtaButton, Footer, Nav } from "@/components/site";
 import { LandingPricing } from "@/components/landing/convert";
-import { Strike } from "@/components/landing/shared";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { AGENTS, type AgentKey } from "@/data/painPoints";
 import { PLANS } from "@/lib/funnel";
@@ -106,7 +105,12 @@ function PricingPage() {
             <div>
               <p className="text-sm font-extrabold uppercase tracking-wider opacity-70">Launch offer</p>
               <p className="mt-3 text-2xl font-extrabold">Setup</p>
-              <p className="mt-1 text-5xl font-extrabold tabular-nums"><Strike>$1,000</Strike> <span className="text-accent">$0</span></p>
+              <p className="mt-1 text-5xl font-extrabold tabular-nums">
+                <span className="relative inline-block opacity-75">$1,000
+                  <motion.span aria-hidden initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="absolute left-0 top-1/2 h-1 w-full origin-left rounded-full bg-accent" />
+                </span>{" "}
+                <motion.span initial={{ opacity: 0, scale: 0.6 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ type: "spring", delay: 0.9 }} className="inline-block text-accent">$0</motion.span>
+              </p>
             </div>
             <div>
               <p className="text-sm font-extrabold uppercase tracking-wider opacity-70">Plus</p>
