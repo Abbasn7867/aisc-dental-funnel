@@ -154,7 +154,7 @@ export function DashboardMock() {
             </div>
             <div className="space-y-5">
               <div className="rounded-2xl bg-card p-4">
-                <p className="text-sm font-extrabold">Quick Start — Get Set Up in About 10 Minutes</p>
+                <p className="text-sm font-extrabold">Quick Start — Get Set Up in Minutes</p>
                 <ul className="mt-3 space-y-2">
                   {CHECKLIST.map(([t, m], i) => (
                     <li key={t} className="flex items-center gap-2.5 text-sm">
