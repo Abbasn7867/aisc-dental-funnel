@@ -127,7 +127,7 @@ export function DashboardMock() {
   }, [inView]);
   return (
     <section className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHead center eyebrow="Your dashboard" title={<>Ready in <span className="text-gradient">about 10 minutes.</span></>} />
+      <SectionHead center eyebrow="Your dashboard" title={<>Ready in <span className="text-gradient">minutes.</span></>} />
       <div ref={ref} className="perspective mx-auto mt-14 max-w-5xl">
         <motion.div initial={{ rotateX: 14, opacity: 0, y: 40 }} whileInView={{ rotateX: 5, opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.9 }}
           className="rounded-[1.75rem] border-[10px] border-ink bg-background p-5 shadow-soft md:p-7">
