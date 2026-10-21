@@ -137,7 +137,7 @@ function Infographic() {
                   <svg width="48" height="8" className="hidden lg:block" aria-hidden><line x1="0" y1="4" x2="48" y2="4" stroke={color} strokeWidth="2.5" strokeDasharray="6 4" className="flow-dash" /></svg>
                   <div className="flex -space-x-2">
                     {agents.map((a) => (
-                      <img key={a} src={AGENT_PHOTOS[a]} alt={AGENTS[a].name} title={`${AGENTS[a].name}, ${AGENTS[a].role}`} className="h-10 w-10 rounded-full border-2 border-card object-cover object-[50%_20%]" style={{ boxShadow: `0 0 0 2px ${AGENTS[a].color}` }} />
+                      <img key={a} src={AGENT_PHOTOS[a]} alt={AGENTS[a].name} title={`${AGENTS[a].name}, ${AGENTS[a].role}`} loading="lazy" decoding="async" className="h-10 w-10 rounded-full border-2 border-card object-cover object-[50%_20%]" style={{ boxShadow: `0 0 0 2px ${AGENTS[a].color}` }} />
                     ))}
                   </div>
                   <svg width="48" height="8" className="hidden lg:block" aria-hidden><line x1="0" y1="4" x2="48" y2="4" stroke={color} strokeWidth="2.5" strokeDasharray="6 4" className="flow-dash" /></svg>

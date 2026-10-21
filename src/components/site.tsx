@@ -62,7 +62,7 @@ export function Footer() {
     <footer className="mt-24 border-t bg-card">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.4fr_1fr]">
         <div>
-          <img src={logo.url} alt="AI Solution Company" className="h-12 w-auto" />
+          <img src={logo.url} alt="AI Solution Company" loading="lazy" decoding="async" className="h-12 w-auto" />
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
             The Complete AI Front Office for dental practices. Eight AI employees, led by Amy, that free your team for the patients in the chair.
           </p>

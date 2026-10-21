@@ -81,7 +81,7 @@ function Hero() {
         </div>
         <div className="relative mx-auto w-full max-w-sm">
           <div className="overflow-hidden rounded-[2rem] shadow-soft ring-8 ring-card">
-            <img src={amy.url} alt="Amy, the AI receptionist, wearing a headset at a dental front desk" className="h-[30rem] w-full object-cover object-[50%_25%]" />
+            <img src={amy.url} alt="Amy, the AI receptionist, wearing a headset at a dental front desk" loading="lazy" decoding="async" className="h-[30rem] w-full object-cover object-[50%_25%]" />
           </div>
           <div className="glass float-y absolute -left-10 top-10 rounded-2xl p-4 shadow-soft">
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Incoming call · 11:42 pm</p>
@@ -106,7 +106,7 @@ function Team() {
           <article key={a.name} className="group rounded-3xl border bg-card p-6 shadow-soft transition hover:-translate-y-1.5">
             <div className="flex items-center gap-3">
               <div className={`grid h-12 w-12 place-items-center rounded-full ring-4 ring-offset-2 ${a.ring} overflow-hidden font-extrabold text-primary-foreground`}>
-                <img src={a.photo} alt={`${a.name}, ${a.role}`} className="h-full w-full object-cover object-[50%_20%]" />
+                <img src={a.photo} alt={`${a.name}, ${a.role}`} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_20%]" />
               </div>
               <div>
                 <h3 className="text-lg font-extrabold">{a.name}</h3>
