@@ -57,14 +57,19 @@ export function loadAnalytics() {
   }
 
   if (META_PIXEL_ID) {
-    const fb = (w.fbq ??= ((...a: unknown[]) => (fb.q ??= []).push(a)) as W["fbq"] & { q?: unknown[] });
-    (w as W & { _fbq?: unknown })._fbq = fb;
+    type Fbq = ((...a: unknown[]) => void) & { q?: unknown[] };
+    const w2 = w as W & { fbq?: Fbq; _fbq?: unknown };
+    if (!w2.fbq) {
+      const fb: Fbq = (...a: unknown[]) => { (fb.q ??= []).push(a); };
+      w2.fbq = fb;
+    }
+    w2._fbq = w2.fbq;
     const s = document.createElement("script");
     s.async = true;
     s.src = "https://connect.facebook.net/en_US/fbevents.js";
     document.head.appendChild(s);
-    w.fbq!("init", META_PIXEL_ID);
-    w.fbq!("track", "PageView");
+    w2.fbq("init", META_PIXEL_ID);
+    w2.fbq("track", "PageView");
   }
 }
 
