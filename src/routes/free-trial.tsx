@@ -1,7 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CookieBanner, Footer, LegalLinks, Nav } from "@/components/site";
-import { CONSENT_MARKETING, CONSENT_SMS, DASHBOARD_URL, LEGAL } from "@/lib/funnel";
+import { CONSENT_MARKETING, CONSENT_SMS, DASHBOARD_URL, LEGAL, PLANS, formatUsd } from "@/lib/funnel";
+
+type TrialSearch = { plan?: "receptionist" | "pro" | "full"; billing?: "monthly" | "yearly" };
 
 export const Route = createFileRoute("/free-trial")({
   head: () => ({
@@ -13,6 +15,10 @@ export const Route = createFileRoute("/free-trial")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+  }),
+  validateSearch: (s: Record<string, unknown>): TrialSearch => ({
+    plan: s.plan === "receptionist" || s.plan === "pro" || s.plan === "full" ? s.plan : undefined,
+    billing: s.billing === "yearly" || s.billing === "monthly" ? s.billing : undefined,
   }),
   component: FreeTrial,
 });
@@ -27,6 +33,8 @@ const fields = [
 
 function FreeTrial() {
   const [done, setDone] = useState(false);
+  const { plan, billing } = Route.useSearch();
+  const chosen = PLANS.find((p) => p.id === plan);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -34,6 +42,8 @@ function FreeTrial() {
     const now = new Date().toISOString();
     const record = {
       ...Object.fromEntries(fields.map((f) => [f.name, fd.get(f.name)])),
+      plan: plan ?? null,
+      billing: billing ?? null,
       consent_sms_account: fd.get("consent_sms_account") ? { text: CONSENT_SMS, at: now } : null,
       consent_marketing: fd.get("consent_marketing") ? { text: CONSENT_MARKETING, at: now } : null,
     };
@@ -67,7 +77,12 @@ function FreeTrial() {
               <a href={DASHBOARD_URL} className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 font-bold text-primary-foreground shadow-glow">Go to my dashboard →</a>
             </div>
           ) : (
-            <form onSubmit={submit} className="space-y-4">
+            <form onSubmit={submit} className="space-y-4" data-trial-form>
+              {chosen && (
+                <p className="rounded-2xl bg-mint-soft px-4 py-3 text-sm font-semibold">
+                  Selected plan: <b>{chosen.name}</b> · {formatUsd(billing === "yearly" ? chosen.yearly : chosen.monthly)}/month, billed {billing ?? "monthly"} · starts with your 14-day free trial
+                </p>
+              )}
               {fields.map((f) => (
                 <label key={f.name} className="block">
                   <span className="text-sm font-bold">{f.label}</span>

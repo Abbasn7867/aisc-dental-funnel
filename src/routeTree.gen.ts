@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as FreeTrialRouteImport } from './routes/free-trial'
+import { Route as FrontOfficeRouteImport } from './routes/front-office'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +23,40 @@ const FreeTrialRoute = FreeTrialRouteImport.update({
   path: '/free-trial',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrontOfficeRoute = FrontOfficeRouteImport.update({
+  id: '/front-office',
+  path: '/front-office',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/free-trial': typeof FreeTrialRoute
+  '/front-office': typeof FrontOfficeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/free-trial': typeof FreeTrialRoute
+  '/front-office': typeof FrontOfficeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/free-trial': typeof FreeTrialRoute
+  '/front-office': typeof FrontOfficeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/free-trial'
+  fullPaths: '/' | '/free-trial' | '/front-office'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/free-trial'
-  id: '__root__' | '/' | '/free-trial'
+  to: '/' | '/free-trial' | '/front-office'
+  id: '__root__' | '/' | '/free-trial' | '/front-office'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   FreeTrialRoute: typeof FreeTrialRoute
+  FrontOfficeRoute: typeof FrontOfficeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +75,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FreeTrialRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/front-office': {
+      id: '/front-office'
+      path: '/front-office'
+      fullPath: '/front-office'
+      preLoaderRoute: typeof FrontOfficeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   FreeTrialRoute: FreeTrialRoute,
+  FrontOfficeRoute: FrontOfficeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

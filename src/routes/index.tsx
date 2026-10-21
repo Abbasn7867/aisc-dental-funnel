@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { Link, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import amy from "@/assets/amy.png.asset.json";
 import desk from "@/assets/front-desk.png.asset.json";
@@ -48,7 +48,7 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <CtaButton size="lg" />
-            <a href="#pricing" className="font-bold text-primary underline-offset-4 hover:underline">See pricing</a>
+            <Link to="/front-office" className="font-bold text-primary underline-offset-4 hover:underline">See all 54 problems we solve →</Link>
           </div>
           <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-muted-foreground">
             <li>✓ 14-day free trial, full platform</li>
@@ -235,6 +235,16 @@ function Index() {
         <Hero />
         <Team />
         <Recommender />
+        <section className="mx-auto max-w-6xl px-6 pt-28">
+          <Link to="/front-office" className="group flex flex-col items-start justify-between gap-6 rounded-[2.5rem] bg-ink p-10 text-ink-foreground shadow-soft transition hover:-translate-y-1 md:flex-row md:items-center md:p-14">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">The full tour</p>
+              <h2 className="mt-2 text-3xl font-extrabold md:text-4xl">54 front-office problems. 8 AI employees. 1 front office.</h2>
+              <p className="mt-3 max-w-xl opacity-80">See every problem we solve, hear Amy on real calls, and walk through a day at your practice.</p>
+            </div>
+            <span className="shrink-0 rounded-full bg-accent px-6 py-3 font-extrabold text-accent-foreground transition group-hover:translate-x-1">Explore the full page →</span>
+          </Link>
+        </section>
         <How />
         <Pricing />
         <Faq />
