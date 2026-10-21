@@ -2,7 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/aisc-logo.png.asset.json";
 import { LEGAL } from "@/lib/funnel";
-import { loadAnalytics } from "@/lib/tracking";
+import { loadAnalytics, readConsent, saveConsent, syncAnalyticsConsent, NOTICE_TEXT } from "@/lib/tracking";
+import { Button } from "@/components/ui/button";
 
 export function CtaButton({ size = "md", className = "" }: { size?: "md" | "lg"; className?: string }) {
   const pad = size === "lg" ? "px-8 py-4 text-base" : "px-5 py-2.5 text-sm";
@@ -75,6 +76,7 @@ export function Footer() {
             ))}
           </div>
           <LegalLinks className="mt-6" />
+          <Link to="/tracking-privacy" className="mt-3 inline-block underline">Website measurement privacy</Link>
           <p className="mt-6">© AI Solution Company</p>
         </div>
       </div>
@@ -84,26 +86,32 @@ export function Footer() {
 
 export function CookieBanner() {
   const [show, setShow] = useState(false);
+  const [saving, setSaving] = useState(false);
   useEffect(() => {
-    const choice = localStorage.getItem("aisc-cookie-choice");
-    setShow(!choice);
-    if (choice === "all") loadAnalytics();
+    setShow(!readConsent());
+    void loadAnalytics();
+    const settings = () => setShow(true);
+    const storage = () => syncAnalyticsConsent();
+    window.addEventListener("aisc-cookie-settings", settings);
+    window.addEventListener("storage", storage);
+    return () => { window.removeEventListener("aisc-cookie-settings", settings); window.removeEventListener("storage", storage); };
   }, []);
-  if (!show) return null;
-  const choose = (v: string) => {
-    localStorage.setItem("aisc-cookie-choice", v);
-    if (v === "all") loadAnalytics();
-    setShow(false);
+  if (!show) return <Button variant="outline" size="sm" className="fixed bottom-1 left-1 z-50" onClick={() => setShow(true)}>Cookie settings</Button>;
+  const choose = async (v: "all" | "essential") => {
+    setSaving(true);
+    try { await saveConsent(v); setShow(false); } finally { setSaving(false); }
   };
   return (
     <div role="dialog" aria-label="Cookie notice" className="glass fixed inset-x-4 bottom-4 z-50 mx-auto max-w-2xl rounded-2xl p-5 shadow-soft">
       <p className="text-sm">
-        We use essential cookies to run this site. With your OK, we'd also use analytics cookies to improve it. Nothing optional loads until you choose.{" "}
+        {NOTICE_TEXT}{" "}
+        <Link to="/tracking-privacy" className="font-semibold text-primary underline">Website measurement privacy</Link>{" · "}
         <a href={LEGAL.cookies} target="_blank" rel="noopener noreferrer" className="font-semibold text-primary underline">Cookie Policy</a>
       </p>
-      <div className="mt-4 flex gap-3">
-        <button onClick={() => choose("all")} className="rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground">Accept all</button>
-        <button onClick={() => choose("essential")} className="rounded-full border bg-card px-5 py-2 text-sm font-bold">Essential only</button>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <Button disabled={saving} onClick={() => void choose("all")} className="rounded-full px-5 font-bold">Accept all</Button>
+        <Button variant="outline" disabled={saving} onClick={() => void choose("essential")} className="rounded-full px-5 font-bold">Essential only</Button>
+        {readConsent() && <Button variant="ghost" onClick={() => setShow(false)}>Close</Button>}
       </div>
     </div>
   );

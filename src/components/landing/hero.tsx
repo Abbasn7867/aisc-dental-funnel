@@ -3,8 +3,8 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform } from "fram
 import { useEffect, useState } from "react";
 import { BadgeCheck, Clock, FileLock2, Lock, PhoneCall, ShieldCheck, X } from "lucide-react";
 import logo from "@/assets/aisc-logo.png.asset.json";
-import heroWide from "@/assets/landing/hero-wide.webp";
-import heroMobile from "@/assets/landing/hero-mobile.webp";
+import heroWide from "@/assets/landing/hero-amy-wide.webp";
+import heroMobile from "@/assets/landing/hero-amy-mobile.webp";
 import { CtaButton } from "@/components/site";
 import { OfferLine, Strike, TypedCall, type CallLine } from "./shared";
 import { CountUp, WordReveal } from "./motion-text";
@@ -116,7 +116,7 @@ export function Hero() {
           {/* Mobile/tablet: 4:5 art-directed crop shown as its own block so the face is never sliced */}
           <picture className="mt-10 block overflow-hidden rounded-[2rem] shadow-soft lg:hidden">
             <source media="(min-width: 640px) and (max-width: 1023px)" srcSet={heroWide} />
-            <img src={heroMobile} alt="Smiling dental front-desk coordinator wearing a headset at a bright reception desk" width={1024} height={1280} className="aspect-[4/5] w-full object-cover object-[50%_35%] sm:aspect-[21/9] sm:object-[75%_30%]" />
+            <img src={heroMobile} alt="Amy, your AI receptionist, wearing a headset at the dental reception desk" width={928} height={1152} className="aspect-[4/5] w-full object-cover object-[50%_35%] sm:aspect-[21/9] sm:object-[75%_30%]" />
           </picture>
         </motion.div>
 

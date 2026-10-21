@@ -14,7 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CtaBar, ExitPopup } from "../components/site-overlays";
 import { CookieBanner } from "../components/site";
-import { captureAttribution } from "../lib/tracking";
+import { captureAttribution, trackPageView, track } from "../lib/tracking";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useRouterState } from "@tanstack/react-router";
 
@@ -123,7 +123,17 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const href = useRouterState({ select: (s) => s.location.href });
-  useEffect(() => { captureAttribution(); }, [href]);
+  useEffect(() => { captureAttribution(); trackPageView(); }, [href]);
+  useEffect(() => {
+    const offerClick = (event: MouseEvent) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const link = target.closest<HTMLAnchorElement>("a[href]");
+      if (link && new URL(link.href).pathname === "/free-trial") track("offer_click");
+    };
+    document.addEventListener("click", offerClick);
+    return () => document.removeEventListener("click", offerClick);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
