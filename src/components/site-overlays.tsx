@@ -64,7 +64,7 @@ export function CtaBar() {
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         <div className="flex items-center gap-3 pr-8 sm:flex-1 sm:pr-0">
           <span className="relative shrink-0">
-            <img src={amy.url} alt="" className="h-11 w-11 rounded-full object-cover object-top" />
+            <img src={amy.url} alt="" className="h-11 w-11 rounded-full object-cover object-[50%_20%]" />
             <span className="pulse-ring absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-card bg-accent" />
           </span>
           <div className="text-sm leading-snug">
@@ -159,7 +159,7 @@ export function ExitPopup() {
           >
             <button aria-label="Close" onClick={() => setOpen(false)} className="absolute right-4 top-4 rounded-full p-1.5 hover:bg-secondary"><X className="h-4 w-4" /></button>
             <div className="relative mx-auto h-20 w-20">
-              <img src={amy.url} alt="Amy, AI receptionist" className="pulse-ring h-20 w-20 rounded-full object-cover object-top ring-4 ring-accent" />
+              <img src={amy.url} alt="Amy, AI receptionist" className="pulse-ring h-20 w-20 rounded-full object-cover object-[50%_20%] ring-4 ring-accent" />
             </div>
             <div className="mx-auto mt-3 flex h-6 w-24 items-center justify-center gap-[3px]" aria-hidden>
               {Array.from({ length: 12 }).map((_, i) => <span key={i} className="wave-bar w-[3px] rounded-full bg-signature" style={{ height: `${40 + ((i * 29) % 60)}%`, animationDelay: `${i * 80}ms` }} />)}

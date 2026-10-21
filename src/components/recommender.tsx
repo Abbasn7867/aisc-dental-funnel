@@ -84,7 +84,7 @@ export function Recommender() {
                     if (!a) return null;
                     return (
                       <article key={r.agent} className="flex gap-4 rounded-2xl border bg-background p-5">
-                        <img src={a.photo} alt={`${a.name}, ${a.role}`} className={`h-14 w-14 shrink-0 rounded-full object-cover object-top ring-4 ring-offset-2 ${a.ring}`} />
+                        <img src={a.photo} alt={`${a.name}, ${a.role}`} className={`h-14 w-14 shrink-0 rounded-full object-cover object-[50%_20%] ring-4 ring-offset-2 ${a.ring}`} />
                         <div>
                           <h3 className="font-extrabold">{a.name} <span className="font-semibold text-muted-foreground">· {a.role}</span></h3>
                           <p className="mt-1 text-sm text-muted-foreground">{r.reason}</p>

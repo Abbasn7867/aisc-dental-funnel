@@ -52,7 +52,7 @@ export function AgentChip({ agent, size = "sm" }: { agent: AgentKey; size?: "sm"
   const dim = size === "md" ? "h-9 w-9" : "h-6 w-6";
   return (
     <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-card py-0.5 pl-0.5 pr-2.5 text-xs font-bold shadow-sm" style={{ boxShadow: `inset 0 0 0 1.5px ${a.color}` }}>
-      <img src={AGENT_PHOTOS[agent]} alt="" className={`${dim} rounded-full object-cover object-top`} />
+      <img src={AGENT_PHOTOS[agent]} alt="" className={`${dim} rounded-full object-cover object-[50%_20%]`} />
       <span style={{ color: a.color }}>{a.name}</span>
     </span>
   );
@@ -138,7 +138,7 @@ export function TypedCall({ lines, outcome, playKey, loop = false, compact = fal
     <div ref={ref} className="flex h-full flex-col">
       <div className="flex items-center gap-3">
         <div className="relative">
-          <img src={AGENT_PHOTOS.amy} alt="Amy, AI receptionist" className="h-12 w-12 rounded-full object-cover object-top ring-2 ring-agent-amy ring-offset-2" />
+          <img src={AGENT_PHOTOS.amy} alt="Amy, AI receptionist" className="h-12 w-12 rounded-full object-cover object-[50%_20%] ring-2 ring-agent-amy ring-offset-2" />
           {!done && <span className="pulse-ring absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-card bg-accent" />}
         </div>
         <div className="flex-1">
