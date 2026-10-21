@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { CookieBanner, Footer } from "@/components/site";
 import { AnnouncementBar, Hero, LandingNav, TrustStrip } from "@/components/landing/hero";
+import { Configurator } from "@/components/landing/configurator";
 import { PainSection } from "@/components/landing/pain";
 import { CallPlayer, ProofCall, TeamSection } from "@/components/landing/team";
 import { CompareSlider, DashboardMock, DayTimeline, FlipCards } from "@/components/landing/story";
@@ -29,6 +30,7 @@ function FrontOffice() {
         <Hero />
         <TrustStrip />
         <PainSection />
+        <Configurator />
         <TeamSection />
         <ProofCall />
         <CallPlayer />

@@ -1,6 +1,6 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { AGENTS, CATEGORIES, type AgentKey } from "@/data/painPoints";
 import { PLANS, formatUsd } from "@/lib/funnel";
@@ -88,12 +88,14 @@ export function Configurator({ standalone = false }: { standalone?: boolean }) {
   const [enabled, setEnabled] = useState<Set<string>>(() => new Set(ALL_PAIN_IDS));
   const [open, setOpen] = useState<Record<string, boolean>>({ c1: true });
   const [sheet, setSheet] = useState(false);
+  const ref = useRef<HTMLElement>(null);
+  const inView = useInView(ref, { margin: "-30% 0px -30% 0px" });
   const toggle = (id: string) => setEnabled((s) => { const n = new Set(s); n.has(id) ? n.delete(id) : n.add(id); return n; });
   const preset = (agents: AgentKey[]) => setEnabled(new Set(idsForAgents(agents)));
   const planName = useMemo(() => PLANS.find((p) => p.id === recommendPlan(enabled))!.name, [enabled]);
 
   return (
-    <section id="configure" className={`mx-auto max-w-6xl scroll-mt-24 px-6 ${standalone ? "py-12" : "py-28"}`}>
+    <section ref={ref} id="configure" className={`mx-auto max-w-6xl scroll-mt-24 px-6 ${standalone ? "py-12" : "py-28"}`}>
       <SectionHead eyebrow="Configurator" title={<>Build your <span className="text-gradient">AI front office</span></>} sub="Turn off anything you don't need. Watch your team and plan update." />
       <div className="mt-6 flex flex-wrap gap-2">
         <span className="self-center text-sm font-bold text-muted-foreground">Quick presets:</span>
@@ -140,7 +142,7 @@ export function Configurator({ standalone = false }: { standalone?: boolean }) {
         </aside>
       </div>
       {/* Mobile bottom sheet */}
-      <div className="fixed inset-x-0 bottom-16 z-30 px-3 lg:hidden">
+      <div className={`fixed inset-x-0 bottom-16 z-30 px-3 transition lg:hidden ${inView ? "" : "pointer-events-none translate-y-8 opacity-0"}`}>
         <div className="mx-auto max-w-lg rounded-3xl border bg-card shadow-glow">
           <button onClick={() => setSheet((s) => !s)} aria-expanded={sheet} className="flex w-full items-center justify-between px-5 py-3 text-sm font-extrabold">
             <span>{enabled.size} of {ALL_PAIN_IDS.length} on · {planName}</span>

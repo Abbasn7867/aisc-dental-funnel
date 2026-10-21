@@ -26,7 +26,8 @@ export function Nav() {
           <Link to="/front-office" className="font-bold text-primary hover:text-foreground">Full tour</Link>
           <a href="/#team" className="hover:text-foreground">AI team</a>
           <a href="/#how" className="hover:text-foreground">How it works</a>
-          <a href="/#pricing" className="hover:text-foreground">See pricing</a>
+          <Link to="/configure" className="hover:text-foreground">Build yours</Link>
+          <Link to="/pricing" className="hover:text-foreground">Pricing</Link>
           <a href="/#faq" className="hover:text-foreground">FAQ</a>
         </div>
         <CtaButton />
