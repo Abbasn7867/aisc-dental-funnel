@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CookieBanner, Footer, LegalLinks, Nav } from "@/components/site";
 import { CONSENT_MARKETING, CONSENT_SMS, DASHBOARD_URL, LEGAL, PLANS, formatUsd } from "@/lib/funnel";
 
-type TrialSearch = { plan?: "receptionist" | "pro" | "full" | undefined; billing?: "monthly" | "yearly" | undefined };
+type TrialSearch = { plan?: "receptionist" | "pro" | "full" | undefined; billing?: "monthly" | "yearly" | undefined; pains?: string | undefined };
 
 export const Route = createFileRoute("/free-trial")({
   head: () => ({
@@ -22,6 +22,7 @@ export const Route = createFileRoute("/free-trial")({
     return {
       plan: plan === "receptionist" || plan === "pro" || plan === "full" ? plan : undefined,
       billing: billing === "yearly" || billing === "monthly" ? billing : undefined,
+      pains: typeof s["pains"] === "string" ? (s["pains"] as string).slice(0, 400) : undefined,
     };
   },
   component: FreeTrial,
@@ -37,7 +38,7 @@ const fields = [
 
 function FreeTrial() {
   const [done, setDone] = useState(false);
-  const { plan, billing } = Route.useSearch();
+  const { plan, billing, pains } = Route.useSearch();
   const chosen = PLANS.find((p) => p.id === plan);
 
   function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -48,6 +49,7 @@ function FreeTrial() {
       ...Object.fromEntries(fields.map((f) => [f.name, fd.get(f.name)])),
       plan: plan ?? null,
       billing: billing ?? null,
+      pains: pains ? pains.split(",") : null,
       consent_sms_account: fd.get("consent_sms_account") ? { text: CONSENT_SMS, at: now } : null,
       consent_marketing: fd.get("consent_marketing") ? { text: CONSENT_MARKETING, at: now } : null,
     };
