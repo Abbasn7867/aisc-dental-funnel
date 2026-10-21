@@ -3,7 +3,7 @@ const REF_COOKIE = "aisc_ref";
 const REF_DAYS = 45;
 const UTM_KEY = "aisc_utm";
 
-export type Utm = { utm_source?: string; utm_medium?: string; utm_campaign?: string };
+export type Utm = { utm_source?: string | undefined; utm_medium?: string | undefined; utm_campaign?: string | undefined };
 
 const clean = (v: string | null, max = 100) => (v ? v.trim().slice(0, max).replace(/[^\w.\-~ ]/g, "") || undefined : undefined);
 

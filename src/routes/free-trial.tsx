@@ -52,7 +52,7 @@ function maskPhone(v: string) {
 
 const input = "mt-1 w-full rounded-xl border border-input bg-background px-4 py-3 outline-none focus:border-primary aria-[invalid=true]:border-destructive";
 
-function Field({ id, label, error, children, hint }: { id: string; label: string; error?: string; hint?: string; children: React.ReactNode }) {
+function Field({ id, label, error, children, hint }: { id: string; label: string; error?: string | undefined; hint?: string; children: React.ReactNode }) {
   return (
     <div>
       <label htmlFor={id} className="text-sm font-bold">{label}{hint && <span className="font-normal text-muted-foreground"> {hint}</span>}</label>
