@@ -11,6 +11,7 @@
 - [x] SEO: unique titles (home = "AI Receptionist & Front Office for Dental Practices | AI Solution Company"), canonical + og:url + og:image + twitter:image per page, branded 1200×630 share image, sitemap.xml, robots.txt with Sitemap line, Organization + Product JSON-LD (no ratings), h1 on every page
 - [x] Performance: lazy-loading on all below-fold images, hero font preloaded
 - [x] Tracking: cookie banner now site-wide from __root, GA4 + Meta pixel load only after "Accept all", "Lead" event fires on successful /free-trial submission (no form values sent)
+- [ ] Hero: semi side pose of Amy (head tilted, gaze to the left) matching the uploaded reference, uniform across phone, tablet and desktop
 - [ ] Polish (next): magnetic hover, CTA ripple, cursor glow on pricing/dark sections, animated section dividers, self-drawing icons, timeline parallax
 - [ ] GoHighLevel webhook URL — waiting on user
 - [x] Install supplied Meta pixel 2206705753230004, standard Lead and offer_click, regional blocking, versioned consent evidence, withdrawal and linked privacy supplement; tests pass
