@@ -173,7 +173,7 @@ const SCENARIOS: { id: string; label: string; outcome: string; lines: CallLine[]
 ];
 
 export function CallPlayer() {
-  const [active, setActive] = useState(SCENARIOS[0].id);
+  const [active, setActive] = useState(SCENARIOS[0]!.id);
   const [run, setRun] = useState(0);
   const sc = SCENARIOS.find((s) => s.id === active)!;
   return (

@@ -53,10 +53,10 @@ export function DayTimeline() {
           <div className="lg:sticky lg:top-28 lg:self-start">
             <div className="glass rounded-[2rem] p-8 text-center shadow-soft">
               <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Right now</p>
-              <motion.p key={DAY[active].time} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-5xl font-extrabold tabular-nums text-gradient">
-                {DAY[active].time}
+              <motion.p key={DAY[active]!.time} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-2 text-5xl font-extrabold tabular-nums text-gradient">
+                {DAY[active]!.time}
               </motion.p>
-              <div className="mt-5 flex justify-center"><AgentChip agent={DAY[active].agent} size="md" /></div>
+              <div className="mt-5 flex justify-center"><AgentChip agent={DAY[active]!.agent} size="md" /></div>
               <div className="mt-6 h-1.5 overflow-hidden rounded-full bg-secondary">
                 <motion.div className="h-full bg-signature" animate={{ width: `${((active + 1) / DAY.length) * 100}%` }} />
               </div>
