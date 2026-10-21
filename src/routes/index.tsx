@@ -1,3 +1,4 @@
+import { WordReveal } from "@/components/landing/motion-text";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import amy from "@/assets/amy.png.asset.json";

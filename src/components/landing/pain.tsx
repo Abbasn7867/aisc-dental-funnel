@@ -1,3 +1,4 @@
+import { CountUp } from "./motion-text";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";

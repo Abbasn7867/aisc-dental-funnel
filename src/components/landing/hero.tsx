@@ -7,6 +7,7 @@ import heroWide from "@/assets/landing/hero-wide.webp";
 import heroMobile from "@/assets/landing/hero-mobile.webp";
 import { CtaButton } from "@/components/site";
 import { OfferLine, Strike, TypedCall, type CallLine } from "./shared";
+import { CountUp, WordReveal } from "./motion-text";
 
 export function AnnouncementBar() {
   const [open, setOpen] = useState(true);
