@@ -6,12 +6,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { PLANS, formatUsd, planPrice, type Billing } from "@/lib/funnel";
 import { CtaButton } from "@/components/site";
 import { CATEGORY_META, OfferLine, SectionHead, Strike } from "./shared";
+import pricingBand from "@/assets/landing/band-pricing.webp";
+import finalBand from "@/assets/landing/band-final.webp";
 
 const HOW = [
-  { icon: CalendarPlus, title: "Book a Free Trial", text: "Takes about 2 minutes.", photo: CATEGORY_META.c1.photo },
-  { icon: Settings2, title: "Set up your profile", text: <>Profile, FAQs and greeting from your dashboard in about 10 minutes, or let our team do it for you (setup <Strike>$1,000</Strike> $0).</>, photo: CATEGORY_META.c2.photo },
-  { icon: PhoneCall, title: "Your number + instant test call", text: "Your own number, and a recorded test call in 3–4 minutes.", photo: CATEGORY_META.c3.photo },
-  { icon: Rocket, title: "Go live, 24/7", text: "Your AI front office starts answering, booking and following up.", photo: CATEGORY_META.c9.photo },
+  { icon: CalendarPlus, title: "Book a Free Trial", text: "Takes about 2 minutes.", photo: CATEGORY_META.c1.photo, focus: CATEGORY_META.c1.focus },
+  { icon: Settings2, title: "Set up your profile", text: <>Profile, FAQs and greeting from your dashboard in about 10 minutes, or let our team do it for you (setup <Strike>$1,000</Strike> $0).</>, photo: CATEGORY_META.c2.photo, focus: CATEGORY_META.c2.focus },
+  { icon: PhoneCall, title: "Your number + instant test call", text: "Your own number, and a recorded test call in 3–4 minutes.", photo: CATEGORY_META.c3.photo, focus: CATEGORY_META.c3.focus },
+  { icon: Rocket, title: "Go live, 24/7", text: "Your AI front office starts answering, booking and following up.", photo: CATEGORY_META.c9.photo, focus: CATEGORY_META.c9.focus },
 ];
 
 export function HowItWorks() {
@@ -36,8 +38,8 @@ export function HowItWorks() {
               transition={{ delay: 0.3 + i * 0.4 }}
               className="overflow-hidden rounded-3xl border bg-card shadow-soft"
             >
-              <div className="relative h-28">
-                <img src={s.photo} alt="" loading="lazy" className="h-full w-full object-cover" />
+              <div className="relative aspect-[4/3]">
+                <img src={s.photo} alt="" loading="lazy" className="h-full w-full object-cover" style={{ objectPosition: s.focus }} />
                 <span className="absolute -bottom-6 left-5 grid h-12 w-12 place-items-center rounded-2xl bg-primary text-lg font-extrabold text-primary-foreground shadow-glow ring-4 ring-card">{i + 1}</span>
               </div>
               <div className="p-5 pt-9">
@@ -80,7 +82,14 @@ export function LandingPricing() {
   const [billing, setBilling] = useState<Billing>("monthly");
   return (
     <section id="pricing" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
-      <SectionHead center eyebrow="Pricing" title={<>Simple plans. <span className="text-gradient">Full platform in every trial.</span></>} />
+      <div className="relative flex min-h-[420px] items-center overflow-hidden rounded-[2.5rem] bg-ink p-8 text-ink-foreground shadow-soft md:min-h-[360px] md:p-14">
+        <img src={pricingBand} alt="Clean dental instruments on a tray beside a dental chair in a sunlit operatory" loading="lazy" width={1920} height={640} className="absolute inset-0 h-full w-full object-cover object-[75%_50%]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/10" />
+        <div className="relative max-w-xl">
+          <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">Pricing</p>
+          <h2 className="mt-3 text-4xl font-extrabold leading-[1.05] md:text-5xl">Simple plans. <span className="text-gradient">Full platform in every trial.</span></h2>
+        </div>
+      </div>
       <div className="mt-8 flex justify-center">
         <span className="rounded-full bg-signature px-5 py-2 text-sm font-extrabold text-primary-foreground shadow-glow"><OfferLine /></span>
       </div>
@@ -164,11 +173,13 @@ export function LandingFaq() {
 export function FinalBand() {
   return (
     <section className="px-4 pt-10">
-      <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[2.5rem] bg-signature p-12 text-center text-primary-foreground shadow-glow md:p-20">
-        <div className="blob left-1/4 top-0 h-64 w-64 bg-card opacity-20" />
-        <h2 className="relative text-4xl font-extrabold md:text-6xl">Your patients are calling. Let Amy answer.</h2>
+      <div className="relative mx-auto flex min-h-[420px] max-w-6xl flex-col items-center justify-center overflow-hidden rounded-[2.5rem] bg-ink p-10 text-center text-ink-foreground shadow-glow md:min-h-[360px] md:items-end md:p-20 md:text-right">
+        {/* People sit in the left third, so the text and the dark side of the overlay go right */}
+        <img src={finalBand} alt="A family checking in at a bright, calm dental reception desk" loading="lazy" width={1920} height={832} className="absolute inset-0 h-full w-full object-cover object-[20%_35%]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20 md:bg-gradient-to-l md:from-ink md:via-ink/85 md:to-ink/0" />
+        <h2 className="relative max-w-xl text-4xl font-extrabold md:text-6xl">Your patients are calling. Let Amy answer.</h2>
         <CtaButton size="lg" className="relative mt-8 bg-ink hover:bg-ink" />
-        <p className="relative mt-5 font-semibold opacity-95"><OfferLine /></p>
+        <p className="relative mt-5 max-w-xl font-semibold opacity-95"><OfferLine /></p>
       </div>
     </section>
   );

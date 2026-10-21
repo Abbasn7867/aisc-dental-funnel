@@ -6,18 +6,18 @@ import withImg from "@/assets/landing/with.jpg";
 import withoutImg from "@/assets/landing/without.jpg";
 import { AGENT_ORDER, AGENT_PHOTOS, AgentChip, CATEGORY_META, SectionHead } from "./shared";
 
-const DAY: { time: string; moment: string; agent: AgentKey; photo: string; alt: string }[] = [
-  { time: "7:00 AM", moment: "Your morning report is waiting: calls answered, visits booked and show rates from yesterday.", agent: "trisha", photo: CATEGORY_META.c11.photo, alt: CATEGORY_META.c11.alt },
-  { time: "7:45 AM", moment: "Phones light up before the doors open. Every call is answered and booked into your schedule.", agent: "amy", photo: CATEGORY_META.c1.photo, alt: CATEGORY_META.c1.alt },
-  { time: "8:30 AM", moment: "Today's patients are re-verified for eligibility, close to the appointment, not weeks before.", agent: "morgan", photo: CATEGORY_META.c4.photo, alt: CATEGORY_META.c4.alt },
-  { time: "10:15 AM", moment: "A cancellation opens a chair. The slot is offered to the waitlist and filled.", agent: "leena", photo: CATEGORY_META.c5.photo, alt: CATEGORY_META.c5.alt },
-  { time: "12:30 PM", moment: "Lunch break, phones still covered. No voicemail, no lost new patients.", agent: "amy", photo: CATEGORY_META.c9.photo, alt: CATEGORY_META.c9.alt },
-  { time: "2:00 PM", moment: "Faxes, emails and portal messages land in one routed queue; urgent ones are flagged first.", agent: "joseph", photo: CATEGORY_META.c10.photo, alt: CATEGORY_META.c10.alt },
-  { time: "3:30 PM", moment: "A treatment plan unscheduled for 7 days gets a friendly follow-up.", agent: "kim", photo: CATEGORY_META.c6.photo, alt: CATEGORY_META.c6.alt },
-  { time: "5:30 PM", moment: "Today's patients get a review request; any unhappy feedback goes privately to your team.", agent: "elise", photo: CATEGORY_META.c8.photo, alt: CATEGORY_META.c8.alt },
-  { time: "7:00 PM", moment: "Patients lapsed 6–12 months get a warm note inviting them back.", agent: "stephanie", photo: CATEGORY_META.c7.photo, alt: CATEGORY_META.c7.alt },
-  { time: "10:00 PM", moment: "A parent books a checkup after the kids are asleep. Confirmed in minutes.", agent: "amy", photo: CATEGORY_META.c2.photo, alt: CATEGORY_META.c2.alt },
-  { time: "Sunday", moment: "Office closed, front office open: weekend calls booked, Monday's reminders already sent.", agent: "amy", photo: CATEGORY_META.c3.photo, alt: CATEGORY_META.c3.alt },
+const DAY: { time: string; moment: string; agent: AgentKey; photo: string; alt: string; focus: string }[] = [
+  { time: "7:00 AM", moment: "Your morning report is waiting: calls answered, visits booked and show rates from yesterday.", agent: "trisha", photo: CATEGORY_META.c11.photo, alt: CATEGORY_META.c11.alt, focus: CATEGORY_META.c11.focus },
+  { time: "7:45 AM", moment: "Phones light up before the doors open. Every call is answered and booked into your schedule.", agent: "amy", photo: CATEGORY_META.c1.photo, alt: CATEGORY_META.c1.alt, focus: CATEGORY_META.c1.focus },
+  { time: "8:30 AM", moment: "Today's patients are re-verified for eligibility, close to the appointment, not weeks before.", agent: "morgan", photo: CATEGORY_META.c4.photo, alt: CATEGORY_META.c4.alt, focus: CATEGORY_META.c4.focus },
+  { time: "10:15 AM", moment: "A cancellation opens a chair. The slot is offered to the waitlist and filled.", agent: "leena", photo: CATEGORY_META.c5.photo, alt: CATEGORY_META.c5.alt, focus: CATEGORY_META.c5.focus },
+  { time: "12:30 PM", moment: "Lunch break, phones still covered. No voicemail, no lost new patients.", agent: "amy", photo: CATEGORY_META.c9.photo, alt: CATEGORY_META.c9.alt, focus: CATEGORY_META.c9.focus },
+  { time: "2:00 PM", moment: "Faxes, emails and portal messages land in one routed queue; urgent ones are flagged first.", agent: "joseph", photo: CATEGORY_META.c10.photo, alt: CATEGORY_META.c10.alt, focus: CATEGORY_META.c10.focus },
+  { time: "3:30 PM", moment: "A treatment plan unscheduled for 7 days gets a friendly follow-up.", agent: "kim", photo: CATEGORY_META.c6.photo, alt: CATEGORY_META.c6.alt, focus: CATEGORY_META.c6.focus },
+  { time: "5:30 PM", moment: "Today's patients get a review request; any unhappy feedback goes privately to your team.", agent: "elise", photo: CATEGORY_META.c8.photo, alt: CATEGORY_META.c8.alt, focus: CATEGORY_META.c8.focus },
+  { time: "7:00 PM", moment: "Patients lapsed 6–12 months get a warm note inviting them back.", agent: "stephanie", photo: CATEGORY_META.c7.photo, alt: CATEGORY_META.c7.alt, focus: CATEGORY_META.c7.focus },
+  { time: "10:00 PM", moment: "A parent books a checkup after the kids are asleep. Confirmed in minutes.", agent: "amy", photo: CATEGORY_META.c2.photo, alt: CATEGORY_META.c2.alt, focus: CATEGORY_META.c2.focus },
+  { time: "Sunday", moment: "Office closed, front office open: weekend calls booked, Monday's reminders already sent.", agent: "amy", photo: CATEGORY_META.c3.photo, alt: CATEGORY_META.c3.alt, focus: CATEGORY_META.c3.focus },
 ];
 
 function DayStop({ d, i, onActive }: { d: (typeof DAY)[number]; i: number; onActive: (i: number) => void }) {
@@ -33,7 +33,7 @@ function DayStop({ d, i, onActive }: { d: (typeof DAY)[number]; i: number; onAct
       transition={{ duration: 0.5 }}
       className="grid overflow-hidden rounded-3xl border bg-card shadow-soft sm:grid-cols-[200px_1fr]"
     >
-      <img src={d.photo} alt={d.alt} loading="lazy" className="h-40 w-full object-cover sm:h-full" />
+      <img src={d.photo} alt={d.alt} loading="lazy" className="aspect-[4/3] w-full object-cover sm:h-full" style={{ objectPosition: d.focus }} />
       <div className="p-5">
         <p className="text-sm font-extrabold text-primary">{d.time}</p>
         <p className="mt-1 font-bold">{d.moment}</p>
@@ -77,9 +77,9 @@ export function CompareSlider() {
     <section className="mx-auto max-w-6xl px-6 py-28">
       <SectionHead center eyebrow="Without vs with AISC" title={<>Same desk. <span className="text-gradient">Different day.</span></>} sub="Drag the handle to compare." />
       <div className="relative mx-auto mt-12 aspect-video max-w-5xl overflow-hidden rounded-[2rem] shadow-soft select-none">
-        <img src={withImg} alt="Calm front desk, receptionist focused on one patient" className="absolute inset-0 h-full w-full object-cover" width={1280} height={720} loading="lazy" />
+        <img src={withImg} alt="Calm front desk, receptionist focused on one patient" className="absolute inset-0 h-full w-full object-cover object-[50%_35%]" width={1280} height={720} loading="lazy" />
         <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
-          <img src={withoutImg} alt="Stressed front desk with phones ringing and a line at the counter" className="absolute inset-0 h-full w-full object-cover" width={1280} height={720} loading="lazy" />
+          <img src={withoutImg} alt="Stressed front desk with phones ringing and a line at the counter" className="absolute inset-0 h-full w-full object-cover object-[50%_35%]" width={1280} height={720} loading="lazy" />
         </div>
         <span className="glass absolute left-4 top-4 rounded-full px-3 py-1 text-xs font-extrabold">Without</span>
         <span className="glass absolute right-4 top-4 rounded-full px-3 py-1 text-xs font-extrabold">With AISC</span>

@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CtaBar, ExitPopup } from "../components/site-overlays";
 import { captureAttribution } from "../lib/tracking";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useRouterState } from "@tanstack/react-router";
 
 function NotFoundComponent() {
@@ -125,9 +126,18 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <ScrollProgress />
+      <div key={useRouterState({ select: (s) => s.location.pathname })} className="page-fade">
+        <Outlet />
+      </div>
       <CtaBar />
       <ExitPopup />
     </QueryClientProvider>
   );
+}
+
+function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, mass: 0.3 });
+  return <motion.div aria-hidden className="fixed inset-x-0 top-0 z-[80] h-1 origin-left bg-signature" style={{ scaleX }} />;
 }

@@ -10,6 +10,7 @@ import { CONSENT_MARKETING, CONSENT_SMS, LEGAL, PLANS, formatUsd } from "@/lib/f
 import { trialFormSchema, type TrialForm } from "@/lib/leads.schema";
 import { submitLead } from "@/lib/leads.functions";
 import { getRef, getUtm } from "@/lib/tracking";
+import trialBg from "@/assets/landing/band-trial.webp";
 
 type TrialSearch = { plan?: "receptionist" | "pro" | "full" | undefined; billing?: "monthly" | "yearly" | undefined; pains?: string | undefined };
 
@@ -104,7 +105,11 @@ function FreeTrial() {
   const a11y = (k: keyof TrialForm) => ({ id: k, "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${k}-err` : undefined });
 
   return (
-    <div>
+    <div className="relative isolate">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] overflow-hidden">
+        <img src={trialBg} alt="" width={1920} height={640} className="h-full w-full object-cover object-[70%_50%] opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
+      </div>
       <Nav />
       <main className="relative mx-auto grid max-w-6xl gap-12 px-6 pb-20 pt-16 lg:grid-cols-[1fr_1.15fr]">
         <div>
