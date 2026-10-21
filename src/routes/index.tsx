@@ -1,3 +1,4 @@
+import { WordReveal } from "@/components/landing/motion-text";
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import amy from "@/assets/amy.png.asset.json";
@@ -41,7 +42,7 @@ function Hero() {
             <span className="pulse-ring h-2.5 w-2.5 rounded-full bg-accent" /> Answering calls 24/7, nights, weekends &amp; holidays
           </span>
           <h1 className="mt-6 text-5xl font-extrabold leading-[1.02] md:text-7xl">
-            Every call answered. <span className="text-gradient">Every chair filled.</span>
+            <WordReveal segments={[{ text: "Every call answered." }, { text: "Every chair filled.", className: "text-gradient" }]} />
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
             The Complete AI Front Office from AI Solution Company gives your dental practice 8 AI employees, led by Amy, your AI receptionist. They take the phones, scheduling and follow-up so your front desk can focus on the patients in front of them.

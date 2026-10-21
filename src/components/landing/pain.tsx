@@ -1,3 +1,4 @@
+import { CountUp } from "./motion-text";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
@@ -86,8 +87,8 @@ export function PainSection() {
           sub="Here is every problem we built the AI Front Office to solve, grouped the way your day actually runs."
         />
         <div className="mt-10 flex flex-wrap gap-3">
-          {[`${TOTAL} problems`, "8 AI employees", "1 front office"].map((t) => (
-            <span key={t} className="glass rounded-full px-5 py-2 text-lg font-extrabold shadow-soft">{t}</span>
+          {([[TOTAL, "problems"], [8, "AI employees"], [1, "front office"]] as const).map(([v, t]) => (
+            <span key={t} className="glass rounded-full px-5 py-2 text-lg font-extrabold shadow-soft"><CountUp value={v} /> {t}</span>
           ))}
         </div>
         <div className="mt-14 grid gap-8 lg:grid-cols-3">

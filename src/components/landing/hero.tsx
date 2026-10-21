@@ -7,6 +7,7 @@ import heroWide from "@/assets/landing/hero-wide.webp";
 import heroMobile from "@/assets/landing/hero-mobile.webp";
 import { CtaButton } from "@/components/site";
 import { OfferLine, Strike, TypedCall, type CallLine } from "./shared";
+import { CountUp, WordReveal } from "./motion-text";
 
 export function AnnouncementBar() {
   const [open, setOpen] = useState(true);
@@ -100,17 +101,17 @@ export function Hero() {
             <span className="pulse-ring h-2.5 w-2.5 rounded-full bg-accent" /> Live 24/7 · nights, weekends &amp; holidays
           </span>
           <h1 className="mt-6 text-[2.6rem] font-extrabold leading-[1.02] sm:text-6xl lg:text-[4.1rem]">
-            Your dental practice, always answering. <span className="text-gradient">Every call booked, every chair filled.</span>
+            <WordReveal segments={[{ text: "Your dental practice, always answering." }, { text: "Every call booked, every chair filled.", className: "text-gradient" }]} />
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-            Meet Amy and the AI Front Office team: 8 AI employees that answer, book, follow up and report for your practice, 24/7.
+            Meet Amy and the AI Front Office team: <CountUp value={8} /> AI employees that answer, book, follow up and report for your practice, 24/7.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <CtaButton size="lg" />
             <a href="#pricing" className="rounded-full border bg-card px-6 py-3.5 font-bold text-primary shadow-sm hover:-translate-y-0.5 transition">See pricing</a>
           </div>
           <p className="mt-5 text-sm font-semibold text-muted-foreground">
-            14 days free · $0 setup (was <Strike>$1,000</Strike>) · $250 bonus credits
+            <CountUp value={14} /> days free · $0 setup (was <Strike>$1,000</Strike>) · <CountUp value={250} prefix="$" /> bonus credits
           </p>
           {/* Mobile/tablet: 4:5 art-directed crop shown as its own block so the face is never sliced */}
           <picture className="mt-10 block overflow-hidden rounded-[2rem] shadow-soft lg:hidden">
