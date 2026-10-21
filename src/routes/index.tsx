@@ -3,7 +3,7 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import amy from "@/assets/amy.png.asset.json";
 import desk from "@/assets/front-desk.png.asset.json";
-import { CookieBanner, CtaButton, Footer, Nav } from "@/components/site";
+import { CtaButton, Footer, Nav } from "@/components/site";
 import { Recommender } from "@/components/recommender";
 import { AGENTS, PLANS, formatUsd, planPrice, type Billing } from "@/lib/funnel";
 
@@ -252,7 +252,6 @@ function Index() {
         <FinalCta />
       </main>
       <Footer />
-      <CookieBanner />
     </div>
   );
 }

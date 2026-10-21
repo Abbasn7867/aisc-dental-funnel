@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CookieBanner, Footer, Nav } from "@/components/site";
+import { Footer, Nav } from "@/components/site";
 import { Configurator } from "@/components/landing/configurator";
 
 export const Route = createFileRoute("/configure")({
@@ -18,7 +18,6 @@ export const Route = createFileRoute("/configure")({
       <Nav />
       <main><Configurator standalone /></main>
       <Footer />
-      <CookieBanner />
     </div>
   ),
 });

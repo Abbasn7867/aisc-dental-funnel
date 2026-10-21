@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { CookieBanner, Footer, Nav } from "@/components/site";
+import { Footer, Nav } from "@/components/site";
 import { CATEGORIES } from "@/data/painPoints";
 import { CONSENT_MARKETING, CONSENT_SMS, LEGAL, PLANS, formatUsd } from "@/lib/funnel";
 import { trialFormSchema, type TrialForm } from "@/lib/leads.schema";
@@ -224,7 +224,6 @@ function FreeTrial() {
         </div>
       </main>
       <Footer />
-      <CookieBanner />
     </div>
   );
 }

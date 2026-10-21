@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { CookieBanner, Footer } from "@/components/site";
+import { Footer } from "@/components/site";
 import { AnnouncementBar, Hero, LandingNav, TrustStrip } from "@/components/landing/hero";
 import { Configurator } from "@/components/landing/configurator";
 import { PainSection } from "@/components/landing/pain";
@@ -45,7 +45,6 @@ function FrontOffice() {
         <FinalBand />
       </main>
       <Footer />
-      <CookieBanner />
     </div>
   );
 }

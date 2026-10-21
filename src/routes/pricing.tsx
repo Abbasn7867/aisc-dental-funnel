@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Check, Minus } from "lucide-react";
-import { CookieBanner, CtaButton, Footer, Nav } from "@/components/site";
+import { CtaButton, Footer, Nav } from "@/components/site";
 import { LandingPricing } from "@/components/landing/convert";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { AGENTS, type AgentKey } from "@/data/painPoints";
@@ -134,7 +134,6 @@ function PricingPage() {
         </section>
       </main>
       <Footer />
-      <CookieBanner />
     </div>
   );
 }
