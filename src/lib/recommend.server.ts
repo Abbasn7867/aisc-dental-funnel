@@ -39,7 +39,7 @@ function runIdFetch() {
 }
 
 export async function recommendAgents(needs: string): Promise<{ data: Recommendation | null; error: string | null }> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env['LOVABLE_API_KEY'];
   if (!apiKey) return { data: null, error: "The recommender isn't configured yet." };
 
   const provider = createOpenAI({
