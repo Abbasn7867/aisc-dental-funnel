@@ -96,6 +96,7 @@ export function Configurator({ standalone = false }: { standalone?: boolean }) {
 
   return (
     <section ref={ref} id="configure" className={`mx-auto max-w-6xl scroll-mt-24 px-6 ${standalone ? "py-12" : "py-28"}`}>
+      {standalone && <h1 className="sr-only">Build your AI front office</h1>}
       <SectionHead eyebrow="Configurator" title={<>Build your <span className="text-gradient">AI front office</span></>} sub="Turn off anything you don't need. Watch your team and plan update." />
       <div className="mt-6 flex flex-wrap gap-2">
         <span className="self-center text-sm font-bold text-muted-foreground">Quick presets:</span>

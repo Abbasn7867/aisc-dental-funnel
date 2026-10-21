@@ -3,20 +3,42 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import amy from "@/assets/amy.png.asset.json";
 import desk from "@/assets/front-desk.png.asset.json";
-import { CookieBanner, CtaButton, Footer, Nav } from "@/components/site";
+import { CtaButton, Footer, Nav } from "@/components/site";
 import { Recommender } from "@/components/recommender";
-import { AGENTS, PLANS, formatUsd, planPrice, type Billing } from "@/lib/funnel";
+import { AGENTS, PLANS, SITE_URL, formatUsd, planPrice, type Billing } from "@/lib/funnel";
+import { seoMeta } from "@/lib/seo";
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "AI Solution Company",
+      url: SITE_URL,
+      description: "The AI front office for dental practices: 8 AI employees, led by Amy, that answer, book, follow up and report 24/7.",
+    },
+    {
+      "@type": "Product",
+      name: "AI Front Office for Dental Practices",
+      brand: { "@type": "Organization", name: "AI Solution Company" },
+      description: "8 AI employees, led by Amy the AI receptionist, that answer calls 24/7, book appointments and follow up with patients for dental practices.",
+      offers: [
+        { "@type": "Offer", name: "Receptionist", price: "497", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Pro", price: "1497", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Full Team", price: "1997", priceCurrency: "USD" },
+      ],
+    },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "The Complete AI Front Office for Dental Practices | AI Solution Company" },
-      { name: "description", content: "Amy and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform." },
-      { property: "og:title", content: "The Complete AI Front Office for Dental Practices" },
-      { property: "og:description", content: "8 AI employees led by Amy, your AI receptionist. 14-day free trial, $0 setup during launch." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    ...seoMeta(
+      "/",
+      "AI Receptionist & Front Office for Dental Practices | AI Solution Company",
+      "Amy and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform.",
+    ),
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(JSON_LD) }],
   }),
   component: Index,
 });
@@ -59,7 +81,7 @@ function Hero() {
         </div>
         <div className="relative mx-auto w-full max-w-sm">
           <div className="overflow-hidden rounded-[2rem] shadow-soft ring-8 ring-card">
-            <img src={amy.url} alt="Amy, the AI receptionist, wearing a headset at a dental front desk" className="h-[30rem] w-full object-cover object-[50%_25%]" />
+            <img src={amy.url} alt="Amy, the AI receptionist, wearing a headset at a dental front desk" loading="lazy" decoding="async" className="h-[30rem] w-full object-cover object-[50%_25%]" />
           </div>
           <div className="glass float-y absolute -left-10 top-10 rounded-2xl p-4 shadow-soft">
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Incoming call · 11:42 pm</p>
@@ -84,7 +106,7 @@ function Team() {
           <article key={a.name} className="group rounded-3xl border bg-card p-6 shadow-soft transition hover:-translate-y-1.5">
             <div className="flex items-center gap-3">
               <div className={`grid h-12 w-12 place-items-center rounded-full ring-4 ring-offset-2 ${a.ring} overflow-hidden font-extrabold text-primary-foreground`}>
-                <img src={a.photo} alt={`${a.name}, ${a.role}`} className="h-full w-full object-cover object-[50%_20%]" />
+                <img src={a.photo} alt={`${a.name}, ${a.role}`} loading="lazy" decoding="async" className="h-full w-full object-cover object-[50%_20%]" />
               </div>
               <div>
                 <h3 className="text-lg font-extrabold">{a.name}</h3>
@@ -252,7 +274,6 @@ function Index() {
         <FinalCta />
       </main>
       <Footer />
-      <CookieBanner />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/aisc-logo.png.asset.json";
 import { LEGAL } from "@/lib/funnel";
+import { loadAnalytics } from "@/lib/tracking";
 
 export function CtaButton({ size = "md", className = "" }: { size?: "md" | "lg"; className?: string }) {
   const pad = size === "lg" ? "px-8 py-4 text-base" : "px-5 py-2.5 text-sm";
@@ -61,7 +62,7 @@ export function Footer() {
     <footer className="mt-24 border-t bg-card">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 py-14 md:grid-cols-[1.4fr_1fr]">
         <div>
-          <img src={logo.url} alt="AI Solution Company" className="h-12 w-auto" />
+          <img src={logo.url} alt="AI Solution Company" loading="lazy" decoding="async" className="h-12 w-auto" />
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
             The Complete AI Front Office for dental practices. Eight AI employees, led by Amy, that free your team for the patients in the chair.
           </p>
@@ -84,11 +85,14 @@ export function Footer() {
 export function CookieBanner() {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    setShow(!localStorage.getItem("aisc-cookie-choice"));
+    const choice = localStorage.getItem("aisc-cookie-choice");
+    setShow(!choice);
+    if (choice === "all") loadAnalytics();
   }, []);
   if (!show) return null;
   const choose = (v: string) => {
     localStorage.setItem("aisc-cookie-choice", v);
+    if (v === "all") loadAnalytics();
     setShow(false);
   };
   return (

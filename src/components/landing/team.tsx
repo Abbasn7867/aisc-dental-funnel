@@ -99,10 +99,10 @@ export function ProofCall() {
           <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground shadow-soft">
             <div className="flex items-center justify-between border-b pb-3">
               <p className="font-extrabold">Calls</p>
-              <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-muted-foreground">Sample dashboard</span>
+              <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-muted-foreground">Illustrative dashboard</span>
             </div>
             <div className="mt-4 flex items-center gap-3 rounded-2xl bg-background p-4">
-              <button aria-label="Play sample recording (illustration)" className="grid h-11 w-11 place-items-center rounded-full bg-primary text-primary-foreground"><Play className="h-4 w-4" /></button>
+              <button aria-label="Play recording (illustration)" className="grid h-11 w-11 place-items-center rounded-full bg-primary text-primary-foreground"><Play className="h-4 w-4" /></button>
               <div className="flex-1">
                 <p className="text-sm font-extrabold">Test call · 3:12 · Recording ready</p>
                 <Waveform active bars={34} />

@@ -70,6 +70,9 @@ export const LEGAL = {
 
 export const DASHBOARD_URL = "https://aisolutioncompany.com/practice/dashboard";
 
+// [ADD FINAL DOMAIN] Canonical/OG base URL for this funnel. Update when the funnel's domain is confirmed.
+export const SITE_URL = "https://aisolutioncompany.com";
+
 export const CONSENT_SMS =
   "I agree to receive text messages and calls, including automated and AI-assisted calls, from AI Solution Company at the number provided about my free trial, account setup and service notices. Message frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.";
 export const CONSENT_MARKETING =

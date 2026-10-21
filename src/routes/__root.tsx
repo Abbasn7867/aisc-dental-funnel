@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CtaBar, ExitPopup } from "../components/site-overlays";
+import { CookieBanner } from "../components/site";
 import { captureAttribution } from "../lib/tracking";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useRouterState } from "@tanstack/react-router";
@@ -90,6 +91,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "preload", as: "font", type: "font/woff2", href: "https://fonts.gstatic.com/s/plusjakartasans/v12/LDIbaomQNQcsA88c7O9yZ4KMCoOg4IA6-91aHEjcWuA_KUn9TR_V.woff2", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" },
       {
         rel: "stylesheet",
@@ -132,6 +134,7 @@ function RootComponent() {
       </div>
       <CtaBar />
       <ExitPopup />
+      <CookieBanner />
     </QueryClientProvider>
   );
 }

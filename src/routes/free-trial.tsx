@@ -4,27 +4,24 @@ import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
-import { CookieBanner, Footer, Nav } from "@/components/site";
+import { Footer, Nav } from "@/components/site";
 import { CATEGORIES } from "@/data/painPoints";
 import { CONSENT_MARKETING, CONSENT_SMS, LEGAL, PLANS, formatUsd } from "@/lib/funnel";
 import { trialFormSchema, type TrialForm } from "@/lib/leads.schema";
 import { submitLead } from "@/lib/leads.functions";
-import { getRef, getUtm } from "@/lib/tracking";
+import { getRef, getUtm, trackLead } from "@/lib/tracking";
+import { seoMeta } from "@/lib/seo";
 import trialBg from "@/assets/landing/band-trial.webp";
 
 type TrialSearch = { plan?: "receptionist" | "pro" | "full" | undefined; billing?: "monthly" | "yearly" | undefined; pains?: string | undefined };
 
 export const Route = createFileRoute("/free-trial")({
-  head: () => ({
-    meta: [
-      { title: "Book a Free Trial | AI Solution Company for Dental Practices" },
-      { name: "description", content: "Start your 14-day free trial of the full platform. $0 setup (was $1,000), $250 bonus credits and an instant test call in 3–4 minutes." },
-      { property: "og:title", content: "Start your 14-day free trial of the full platform" },
-      { property: "og:description", content: "All 8 AI employees, led by Amy. $0 setup during launch and $250 bonus credits." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    seoMeta(
+      "/free-trial",
+      "Book a Free Trial | AI Solution Company for Dental Practices",
+      "Start your 14-day free trial of the full platform. $0 setup (was $1,000), $250 bonus credits and an instant test call in 3–4 minutes.",
+    ),
   validateSearch: (s: Record<string, unknown>): TrialSearch => {
     const plan = s["plan"];
     const billing = s["billing"];
@@ -98,6 +95,7 @@ function FreeTrial() {
     const utm = getUtm();
     const res = await send({ data: { ...v, pain_ids: painIds, ...utm, ref_code: getRef() } });
     if (!res.ok) { setServerError(res.error); return; }
+    trackLead();
     navigate({ to: "/thank-you" });
   });
 
@@ -224,7 +222,6 @@ function FreeTrial() {
         </div>
       </main>
       <Footer />
-      <CookieBanner />
     </div>
   );
 }
