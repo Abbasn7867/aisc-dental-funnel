@@ -14,6 +14,7 @@ import { Route as ConfigureRouteImport } from './routes/configure'
 import { Route as FreeTrialRouteImport } from './routes/free-trial'
 import { Route as FrontOfficeRouteImport } from './routes/front-office'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/free-trial': typeof FreeTrialRoute
   '/front-office': typeof FrontOfficeRoute
   '/pricing': typeof PricingRoute
+  '/thank-you': typeof ThankYouRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/free-trial': typeof FreeTrialRoute
   '/front-office': typeof FrontOfficeRoute
   '/pricing': typeof PricingRoute
+  '/thank-you': typeof ThankYouRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,12 +70,25 @@ export interface FileRoutesById {
   '/free-trial': typeof FreeTrialRoute
   '/front-office': typeof FrontOfficeRoute
   '/pricing': typeof PricingRoute
+  '/thank-you': typeof ThankYouRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/configure' | '/free-trial' | '/front-office' | '/pricing'
+  fullPaths:
+    | '/'
+    | '/configure'
+    | '/free-trial'
+    | '/front-office'
+    | '/pricing'
+    | '/thank-you'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/configure' | '/free-trial' | '/front-office' | '/pricing'
+  to:
+    | '/'
+    | '/configure'
+    | '/free-trial'
+    | '/front-office'
+    | '/pricing'
+    | '/thank-you'
   id:
     | '__root__'
     | '/'
@@ -75,6 +96,7 @@ export interface FileRouteTypes {
     | '/free-trial'
     | '/front-office'
     | '/pricing'
+    | '/thank-you'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -83,6 +105,7 @@ export interface RootRouteChildren {
   FreeTrialRoute: typeof FreeTrialRoute
   FrontOfficeRoute: typeof FrontOfficeRoute
   PricingRoute: typeof PricingRoute
+  ThankYouRoute: typeof ThankYouRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -122,6 +145,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -131,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   FreeTrialRoute: FreeTrialRoute,
   FrontOfficeRoute: FrontOfficeRoute,
   PricingRoute: PricingRoute,
+  ThankYouRoute: ThankYouRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
