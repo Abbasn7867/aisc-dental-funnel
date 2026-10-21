@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Replace the full-tour opening photo's woman with the user's Amy agent, retaining desktop/mobile framing
+- [x] Replace the full-tour opening photo's woman with the user's Amy agent; full face verified at 1137px and 390px
 
 - [x] Photo framing: no cut-off faces (focal points, 4:3 cards, QA at 360/768/1280/1920)
 - [x] Polish: new photos (hero desktop + mobile, proof call, pricing header, final CTA, free-trial/thank-you backgrounds)
@@ -13,5 +13,7 @@
 - [x] Tracking: cookie banner now site-wide from __root, GA4 + Meta pixel load only after "Accept all", "Lead" event fires on successful /free-trial submission (no form values sent)
 - [ ] Polish (next): magnetic hover, CTA ripple, cursor glow on pricing/dark sections, animated section dividers, self-drawing icons, timeline parallax
 - [ ] GoHighLevel webhook URL — waiting on user
-- [ ] Connect supplied Meta pixel 2206705753230004; connect GA4; verify signup/offer events and consent (GA4 ID and visitor-consent choice pending)
+- [x] Install supplied Meta pixel 2206705753230004, standard Lead and offer_click, regional blocking, versioned consent evidence, withdrawal and linked privacy supplement; tests pass
+- [ ] Verify published pixel delivery and Meta receipt — no public deployment yet; SDK loaded in preview but no event transmission observed (synthetic signup saved, withdrawal and blocked-region checks passed)
+- [ ] Connect GA4 — connection declined; measurement ID unavailable
 - [ ] Final funnel domain — confirm, then update SITE_URL in src/lib/funnel.ts (canonical, OG URLs, sitemap, robots)
