@@ -1,3 +1,12 @@
+import amyPhoto from "@/assets/amy.png.asset.json";
+import leenaPhoto from "@/assets/leena.jpg.asset.json";
+import kimPhoto from "@/assets/kim.jpg.asset.json";
+import morganPhoto from "@/assets/morgan.jpg.asset.json";
+import stephaniePhoto from "@/assets/stephanie.jpg.asset.json";
+import trishaPhoto from "@/assets/trisha.jpg.asset.json";
+import elisePhoto from "@/assets/elise.jpg.asset.json";
+import josephPhoto from "@/assets/joseph.jpg.asset.json";
+
 export type Billing = "monthly" | "yearly";
 
 export const PLANS = [
@@ -42,14 +51,14 @@ export function planPrice(plan: (typeof PLANS)[number], billing: Billing) {
 export const formatUsd = (n: number) => `$${n.toLocaleString("en-US")}`;
 
 export const AGENTS = [
-  { name: "Amy", role: "Receptionist", color: "bg-agent-amy", ring: "ring-agent-amy", count: 7, area: "Appointment Booking & Scheduling" },
-  { name: "Leena", role: "Schedule Optimizer", color: "bg-agent-leena", ring: "ring-agent-leena", count: 4, area: "Rescheduling, No-Shows & Late Arrivals" },
-  { name: "Morgan", role: "Patient Intake", color: "bg-agent-morgan", ring: "ring-agent-morgan", count: 14, area: "Intake, Consent Forms, Eligibility & Benefits" },
-  { name: "Kim", role: "Case Acceptance", color: "bg-agent-kim", ring: "ring-agent-kim", count: 3, area: "Clinical Communication Gaps" },
-  { name: "Stephanie", role: "Follow-up", color: "bg-agent-stephanie", ring: "ring-agent-stephanie", count: 5, area: "Recall, Retention & Re-Engagement" },
-  { name: "Elise", role: "Patient Experience", color: "bg-agent-elise", ring: "ring-agent-elise", count: 7, area: "Review & Reputation Management" },
-  { name: "Joseph", role: "Fax Management", color: "bg-agent-joseph", ring: "ring-agent-joseph", count: 8, area: "Referral & Care Coordination" },
-  { name: "Trisha", role: "Practice Manager", color: "bg-agent-trisha", ring: "ring-agent-trisha", count: 6, area: "Practice Intelligence & Reporting" },
+  { name: "Amy", photo: amyPhoto.url, role: "Receptionist", color: "bg-agent-amy", ring: "ring-agent-amy", count: 7, area: "Appointment Booking & Scheduling" },
+  { name: "Leena", photo: leenaPhoto.url, role: "Schedule Optimizer", color: "bg-agent-leena", ring: "ring-agent-leena", count: 4, area: "Rescheduling, No-Shows & Late Arrivals" },
+  { name: "Kim", photo: kimPhoto.url, role: "Case Acceptance", color: "bg-agent-kim", ring: "ring-agent-kim", count: 3, area: "Clinical Communication Gaps" },
+  { name: "Morgan", photo: morganPhoto.url, role: "Patient Intake", color: "bg-agent-morgan", ring: "ring-agent-morgan", count: 14, area: "Intake, Consent Forms, Eligibility & Benefits" },
+  { name: "Stephanie", photo: stephaniePhoto.url, role: "Follow-up", color: "bg-agent-stephanie", ring: "ring-agent-stephanie", count: 5, area: "Recall, Retention & Re-Engagement" },
+  { name: "Trisha", photo: trishaPhoto.url, role: "Practice Manager", color: "bg-agent-trisha", ring: "ring-agent-trisha", count: 6, area: "Practice Intelligence & Reporting" },
+  { name: "Elise", photo: elisePhoto.url, role: "Patient Experience", color: "bg-agent-elise", ring: "ring-agent-elise", count: 7, area: "Review & Reputation Management" },
+  { name: "Joseph", photo: josephPhoto.url, role: "Fax Management", color: "bg-agent-joseph", ring: "ring-agent-joseph", count: 8, area: "Referral & Care Coordination" },
 ] as const;
 
 export const LEGAL = {

@@ -78,11 +78,11 @@ function Team() {
   return (
     <Section id="team" eyebrow="Meet your AI team" title={<>Eight AI employees. <span className="text-gradient">One calm front desk.</span></>}>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {AGENTS.map((a, i) => (
+        {AGENTS.map((a) => (
           <article key={a.name} className="group rounded-3xl border bg-card p-6 shadow-soft transition hover:-translate-y-1.5">
             <div className="flex items-center gap-3">
-              <div className={`grid h-12 w-12 place-items-center rounded-full ring-4 ring-offset-2 ${a.ring} ${i === 0 ? "" : a.color} overflow-hidden font-extrabold text-primary-foreground`}>
-                {i === 0 ? <img src={amy.url} alt="" className="h-full w-full object-cover object-top" /> : a.name[0]}
+              <div className={`grid h-12 w-12 place-items-center rounded-full ring-4 ring-offset-2 ${a.ring} overflow-hidden font-extrabold text-primary-foreground`}>
+                <img src={a.photo} alt={`${a.name}, ${a.role}`} className="h-full w-full object-cover object-top" />
               </div>
               <div>
                 <h3 className="text-lg font-extrabold">{a.name}</h3>
