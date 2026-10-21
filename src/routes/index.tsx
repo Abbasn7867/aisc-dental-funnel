@@ -5,18 +5,40 @@ import amy from "@/assets/amy.png.asset.json";
 import desk from "@/assets/front-desk.png.asset.json";
 import { CtaButton, Footer, Nav } from "@/components/site";
 import { Recommender } from "@/components/recommender";
-import { AGENTS, PLANS, formatUsd, planPrice, type Billing } from "@/lib/funnel";
+import { AGENTS, PLANS, SITE_URL, formatUsd, planPrice, type Billing } from "@/lib/funnel";
+import { seoMeta } from "@/lib/seo";
+
+const JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      name: "AI Solution Company",
+      url: SITE_URL,
+      description: "The AI front office for dental practices: 8 AI employees, led by Amy, that answer, book, follow up and report 24/7.",
+    },
+    {
+      "@type": "Product",
+      name: "AI Front Office for Dental Practices",
+      brand: { "@type": "Organization", name: "AI Solution Company" },
+      description: "8 AI employees, led by Amy the AI receptionist, that answer calls 24/7, book appointments and follow up with patients for dental practices.",
+      offers: [
+        { "@type": "Offer", name: "Receptionist", price: "497", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Pro", price: "1497", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Full Team", price: "1997", priceCurrency: "USD" },
+      ],
+    },
+  ],
+};
 
 export const Route = createFileRoute("/")({
   head: () => ({
-    meta: [
-      { title: "The Complete AI Front Office for Dental Practices | AI Solution Company" },
-      { name: "description", content: "Amy and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform." },
-      { property: "og:title", content: "The Complete AI Front Office for Dental Practices" },
-      { property: "og:description", content: "8 AI employees led by Amy, your AI receptionist. 14-day free trial, $0 setup during launch." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
+    ...seoMeta(
+      "/",
+      "AI Receptionist & Front Office for Dental Practices | AI Solution Company",
+      "Amy and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform.",
+    ),
+    scripts: [{ type: "application/ld+json", children: JSON.stringify(JSON_LD) }],
   }),
   component: Index,
 });

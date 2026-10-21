@@ -8,18 +8,15 @@ import { AGENTS, type AgentKey } from "@/data/painPoints";
 import { PLANS } from "@/lib/funnel";
 import { PLAN_AGENTS, type PlanId } from "@/lib/configurator";
 import { AGENT_ORDER } from "@/components/landing/shared";
+import { seoMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/pricing")({
-  head: () => ({
-    meta: [
-      { title: "Pricing | AI Front Office for Dental Practices | AI Solution Company" },
-      { name: "description", content: "Receptionist, Pro and Full Team plans. The full platform free for 14 days, $0 setup during launch and $250 bonus credits." },
-      { property: "og:title", content: "Simple pricing. The full platform, free for 14 days." },
-      { property: "og:description", content: "Compare Receptionist, Pro and Full Team plans for your dental front office." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    seoMeta(
+      "/pricing",
+      "Pricing | AI Front Office for Dental Practices | AI Solution Company",
+      "Receptionist, Pro and Full Team plans. The full platform free for 14 days, $0 setup during launch and $250 bonus credits.",
+    ),
   component: PricingPage,
 });
 
