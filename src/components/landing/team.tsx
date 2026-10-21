@@ -116,7 +116,7 @@ export function ProofCall() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6, type: "spring", stiffness: 120 }}
-            className="glass absolute -bottom-8 -left-4 flex items-center gap-3 rounded-2xl p-4 text-foreground shadow-soft md:-left-10"
+            className="glass absolute -bottom-16 -left-4 flex items-center gap-3 rounded-2xl p-4 text-foreground shadow-soft md:-left-10"
           >
             <span className="grid h-10 w-10 place-items-center rounded-full bg-mint-soft"><Mail className="h-5 w-5 text-primary" /></span>
             <div>
