@@ -39,6 +39,11 @@ export function TeamSection() {
                 <p className="text-sm font-bold" style={{ color: a.color }}>{a.role}</p>
                 <p className="mt-3 text-sm text-muted-foreground">{cats.join(" · ")}</p>
                 <p className="mt-2 text-xs font-extrabold">Solves {items.length} problems</p>
+                {lead && (
+                  <ul className="mt-4 space-y-1.5 text-sm">
+                    {items.slice(2, 5).map((it) => <li key={it.id} className="rounded-xl bg-background p-2.5">✓ {it.fix}</li>)}
+                  </ul>
+                )}
                 <ul className="mt-3 max-h-0 space-y-1.5 overflow-hidden text-sm opacity-0 transition-all duration-500 group-hover:max-h-60 group-hover:opacity-100 group-focus-within:max-h-60 group-focus-within:opacity-100">
                   {items.slice(0, 2).map((it) => (
                     <li key={it.id} className="rounded-xl bg-background p-2.5">✓ {it.fix}</li>
@@ -48,6 +53,11 @@ export function TeamSection() {
             </motion.article>
           );
         })}
+        <div className="flex flex-col justify-center rounded-3xl bg-signature p-6 text-primary-foreground shadow-glow">
+          <p className="text-2xl font-extrabold">All 8, working together.</p>
+          <p className="mt-2 text-sm opacity-90">Every one is included in your 14-day free trial.</p>
+          <CtaButton className="mt-5 bg-ink hover:bg-ink" />
+        </div>
       </div>
     </section>
   );
