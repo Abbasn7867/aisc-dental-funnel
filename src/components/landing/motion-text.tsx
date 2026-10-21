@@ -37,10 +37,10 @@ export function CountUp({ value, duration = 1400, prefix = "", suffix = "" }: { 
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const reduce = useReducedMotion();
-  const [n, setN] = useState(0);
+  // Show the real number until the animation actually runs, so it never gets stuck at 0.
+  const [n, setN] = useState<number | null>(null);
   useEffect(() => {
-    if (!inView) return;
-    if (reduce) return setN(value);
+    if (!inView || reduce) return;
     let raf = 0;
     const start = performance.now();
     const tick = (t: number) => {
@@ -49,12 +49,13 @@ export function CountUp({ value, duration = 1400, prefix = "", suffix = "" }: { 
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => { cancelAnimationFrame(raf); setN(null); };
   }, [inView, reduce, value, duration]);
+  const shown = n ?? value;
   return (
     <span ref={ref} className="tabular-nums">
       <span className="sr-only">{prefix}{value.toLocaleString("en-US")}{suffix}</span>
-      <span aria-hidden>{prefix}{n.toLocaleString("en-US")}{suffix}</span>
+      <span aria-hidden>{prefix}{shown.toLocaleString("en-US")}{suffix}</span>
     </span>
   );
 }
