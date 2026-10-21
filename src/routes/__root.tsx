@@ -13,6 +13,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CtaBar, ExitPopup } from "../components/site-overlays";
+import { captureAttribution } from "../lib/tracking";
+import { useRouterState } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -117,6 +119,8 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const href = useRouterState({ select: (s) => s.location.href });
+  useEffect(() => { captureAttribution(); }, [href]);
 
   return (
     <QueryClientProvider client={queryClient}>
