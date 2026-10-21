@@ -127,7 +127,7 @@ function FreeTrial() {
             </div>
           </div>
 
-          <form onSubmit={onSubmit} noValidate data-trial-form className="overflow-hidden">
+          <form onSubmit={(e) => e.preventDefault()} noValidate data-trial-form className="overflow-hidden">
             <AnimatePresence mode="wait" custom={dir} initial={false}>
               <motion.div key={step} custom={dir} initial={{ x: dir * 60, opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: dir * -60, opacity: 0 }} transition={{ duration: 0.25 }} className="space-y-4">
                 {step === 0 && (<>
@@ -210,7 +210,7 @@ function FreeTrial() {
               {step < STEPS.length - 1 ? (
                 <button key="next" type="button" onClick={next} className="flex-1 rounded-full bg-primary py-3 font-bold text-primary-foreground shadow-glow hover:bg-primary-deep">Continue →</button>
               ) : (
-                <button key="submit" type="submit" disabled={isSubmitting} className="flex-1 rounded-full bg-primary py-3 font-bold text-primary-foreground shadow-glow hover:bg-primary-deep disabled:opacity-60">
+                <button key="submit" type="button" onClick={onSubmit} disabled={isSubmitting} className="flex-1 rounded-full bg-primary py-3 font-bold text-primary-foreground shadow-glow hover:bg-primary-deep disabled:opacity-60">
                   {isSubmitting ? "Booking…" : "Book a Free Trial"}
                 </button>
               )}
