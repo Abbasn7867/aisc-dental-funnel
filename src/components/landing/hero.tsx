@@ -92,7 +92,7 @@ export function Hero() {
       }}
     >
       {/* Desktop background: subject in the right third (face ~75% 28%), heading sits on the calm left side */}
-      <img src={heroWide} alt="" aria-hidden width={1920} height={832} fetchPriority="high" className="absolute inset-0 hidden h-full w-full object-cover object-[75%_30%] lg:block" />
+      <img src={heroWide} alt="" aria-hidden width={1920} height={832} fetchPriority="high" className="absolute inset-x-0 -top-[11%] hidden h-[111%] w-full object-cover object-[75%_30%] lg:block" />
       <div className="absolute inset-0 hidden bg-gradient-to-r from-background via-background/85 to-background/0 lg:block" />
       <div className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-background to-transparent lg:block" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-6 pb-20 pt-14 lg:min-h-[720px] lg:grid-cols-[1.1fr_1fr] lg:pt-20">
