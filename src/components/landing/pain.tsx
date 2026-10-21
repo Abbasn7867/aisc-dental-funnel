@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ArrowRight, CheckCircle2, ChevronDown } from "lucide-react";
 import { AGENTS, CATEGORIES, type AgentKey, type Category } from "@/data/painPoints";
-import { AGENT_ORDER, AGENT_PHOTOS, AgentChip, CATEGORY_META, SectionHead } from "./shared";
+import { AGENT_ORDER, AGENT_PHOTOS, AgentChip, metaFor, SectionHead } from "./shared";
 
 const TOTAL = CATEGORIES.reduce((n, c) => n + c.items.length, 0);
 
@@ -38,7 +38,7 @@ function MiniCard({ item, i }: { item: Category["items"][number]; i: number }) {
 }
 
 function CategoryCard({ cat, wide, flip, index }: { cat: Category; wide: boolean; flip: boolean; index: number }) {
-  const meta = CATEGORY_META[cat.id];
+  const meta = metaFor(cat.id);
   const Icon = meta.icon;
   const [open, setOpen] = useState(index === 0);
   const sideLayout = wide;
@@ -116,9 +116,9 @@ function Infographic() {
         </div>
         <ol className="mt-4 space-y-3">
           {CATEGORIES.map((c, i) => {
-            const Icon = CATEGORY_META[c.id].icon;
+            const Icon = metaFor(c.id).icon;
             const agents = agentsFor(c);
-            const color = AGENTS[agents[0]].color;
+            const color = AGENTS[agents[0]!].color;
             return (
               <motion.li
                 key={c.id}

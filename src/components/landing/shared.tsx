@@ -31,7 +31,8 @@ export const AGENT_PHOTOS: Record<AgentKey, string> = {
 };
 export const AGENT_ORDER: AgentKey[] = ["amy", "leena", "morgan", "kim", "stephanie", "elise", "joseph", "trisha"];
 
-export const CATEGORY_META: Record<string, { icon: LucideIcon; photo: string; alt: string }> = {
+type CatMeta = { icon: LucideIcon; photo: string; alt: string };
+export const CATEGORY_META = {
   c1: { icon: CalendarCheck, photo: c1, alt: "Receptionist with a headset booking a visit at a dental front desk in the evening" },
   c2: { icon: ClipboardList, photo: c2, alt: "Patient at home completing intake forms on a tablet before a dental visit" },
   c3: { icon: FileSignature, photo: c3, alt: "Hygienist walking a patient through a consent form on a tablet" },
@@ -43,7 +44,8 @@ export const CATEGORY_META: Record<string, { icon: LucideIcon; photo: string; al
   c9: { icon: Repeat, photo: c9, alt: "Family arriving together at a dental clinic for a checkup" },
   c10: { icon: Share2, photo: c10, alt: "Dentist and assistant reviewing a referral on a tablet" },
   c11: { icon: BarChart3, photo: c11, alt: "Practice owner reviewing charts on a laptop" },
-};
+} satisfies Record<string, CatMeta>;
+export const metaFor = (id: string): CatMeta => (CATEGORY_META as Record<string, CatMeta>)[id]!;
 
 export function AgentChip({ agent, size = "sm" }: { agent: AgentKey; size?: "sm" | "md" }) {
   const a = AGENTS[agent];
@@ -116,7 +118,7 @@ export function TypedCall({ lines, outcome, playKey, loop = false, compact = fal
       const t = setTimeout(() => setCycle((c) => c + 1), 3200);
       return () => clearTimeout(t);
     }
-    const line = lines[shown.idx].text;
+    const line = lines[shown.idx]!.text;
     const t = setTimeout(
       () => setShown((s) => (s.chars >= line.length ? { idx: s.idx + 1, chars: 0 } : { idx: s.idx, chars: s.chars + 2 })),
       shown.chars >= line.length ? 650 : 22,

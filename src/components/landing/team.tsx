@@ -175,7 +175,7 @@ const SCENARIOS: { id: string; label: string; outcome: string; lines: CallLine[]
 export function CallPlayer() {
   const [active, setActive] = useState(SCENARIOS[0]!.id);
   const [run, setRun] = useState(0);
-  const sc = SCENARIOS.find((s) => s.id === active)!;
+  const sc = SCENARIOS.find((s) => s.id === active) ?? SCENARIOS[0]!;
   return (
     <section className="mx-auto max-w-6xl px-6 py-28">
       <SectionHead center eyebrow="Hear Amy in action" title={<>Real calls, <span className="text-gradient">handled warmly.</span></>} sub="Pick a call and watch how Amy handles it." />
