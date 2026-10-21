@@ -9,7 +9,7 @@ import { CATEGORIES } from "@/data/painPoints";
 import { CONSENT_MARKETING, CONSENT_SMS, LEGAL, PLANS, formatUsd } from "@/lib/funnel";
 import { trialFormSchema, type TrialForm } from "@/lib/leads.schema";
 import { submitLead } from "@/lib/leads.functions";
-import { getRef, getUtm } from "@/lib/tracking";
+import { getRef, getUtm, trackLead } from "@/lib/tracking";
 import trialBg from "@/assets/landing/band-trial.webp";
 
 type TrialSearch = { plan?: "receptionist" | "pro" | "full" | undefined; billing?: "monthly" | "yearly" | undefined; pains?: string | undefined };
@@ -98,6 +98,7 @@ function FreeTrial() {
     const utm = getUtm();
     const res = await send({ data: { ...v, pain_ids: painIds, ...utm, ref_code: getRef() } });
     if (!res.ok) { setServerError(res.error); return; }
+    trackLead();
     navigate({ to: "/thank-you" });
   });
 
