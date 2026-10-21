@@ -16,7 +16,7 @@ export function TeamSection() {
   return (
     <section id="team" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
       <SectionHead eyebrow="Meet your AI team" title={<>Eight AI employees. <span className="text-gradient">Led by Amy.</span></>} sub="Each one owns a part of your front office, so your staff can focus on the patients in front of them." />
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="-mx-6 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
         {AGENT_ORDER.map((key, i) => {
           const a = AGENTS[key];
           const { items, cats } = agentStats(key);
@@ -28,8 +28,8 @@ export function TeamSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: (i % 4) * 0.08 }}
-              className={`group relative flex flex-col overflow-hidden rounded-3xl border bg-card shadow-soft transition duration-300 hover:-translate-y-2 ${lead ? "sm:col-span-2 lg:row-span-2" : ""}`}
-              style={{ borderTop: `5px solid ${a.color}` }}
+              className={`group relative flex w-[78vw] shrink-0 snap-center flex-col overflow-hidden rounded-3xl border bg-card shadow-soft transition duration-300 hover:-translate-y-2 hover:shadow-[0_0_0_2px_var(--agent-glow),0_20px_50px_-12px_var(--agent-glow)] sm:w-auto ${lead ? "sm:col-span-2 lg:row-span-2" : ""}`}
+              style={{ borderTop: `5px solid ${a.color}`, ["--agent-glow" as string]: `${a.color}66` }}
             >
               <div className={`relative overflow-hidden ${lead ? "aspect-[4/5] lg:aspect-auto lg:h-[28rem]" : "aspect-[4/5]"}`}>
                 <img src={AGENT_PHOTOS[key]} alt={`${a.name}, ${a.role}`} loading="lazy" className="h-full w-full object-cover object-[50%_20%] transition duration-700 group-hover:scale-105" />

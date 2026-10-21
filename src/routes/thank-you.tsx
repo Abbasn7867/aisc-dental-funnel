@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Building2, CalendarClock, HelpCircle, Mic, Plug, Users, PhoneCall } from "lucide-react";
 import { DASHBOARD_URL } from "@/lib/funnel";
+import trialBg from "@/assets/landing/band-trial.webp";
 
 export const Route = createFileRoute("/thank-you")({
   head: () => ({
@@ -57,6 +58,11 @@ function ThankYou() {
 
   const r = 26, c = 2 * Math.PI * r;
   return (
+    <div className="relative isolate">
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] overflow-hidden">
+        <img src={trialBg} alt="" width={1920} height={640} className="h-full w-full object-cover object-[70%_50%] opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
+      </div>
     <main className="mx-auto max-w-3xl px-6 py-20 text-center">
       <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Your free trial is booked!</h1>
       <p className="mt-4 text-lg text-muted-foreground">Taking you to your dashboard to set up your AI front office…</p>
@@ -93,5 +99,6 @@ function ThankYou() {
         </a>
       </p>
     </main>
+    </div>
   );
 }
