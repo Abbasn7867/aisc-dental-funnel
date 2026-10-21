@@ -15,3 +15,4 @@
 - Trial leads are inserted and forwarded to the CRM from a TanStack server function (`src/lib/leads.functions.ts` → `leads.server.ts`), not an edge function — one stateless call keeps insert + webhook together; the webhook URL lives in the `GHL_WEBHOOK_URL` secret.
 - The `leads` table is insert-only for the public (no SELECT policy) — visitors must never read other leads.
 - Referral `?ref=` and UTM capture run in `__root.tsx` on every navigation via `src/lib/tracking.ts`; analytics events fire only after "Accept all" cookie consent.
+- Browser measurement uses one shared regional/consent gate in tracking.ts, versioned visitor-choice evidence, and no form-field payloads; unknown or unassessed countries fail closed to preserve the chosen no-banner restriction. Trial conversions fire only after successful persistence; no CAPI or customer matching is installed.

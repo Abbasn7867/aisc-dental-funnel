@@ -15,6 +15,7 @@ import { Route as FreeTrialRouteImport } from './routes/free-trial'
 import { Route as FrontOfficeRouteImport } from './routes/front-office'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as ThankYouRouteImport } from './routes/thank-you'
+import { Route as TrackingPrivacyRouteImport } from './routes/tracking-privacy'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const ThankYouRoute = ThankYouRouteImport.update({
   path: '/thank-you',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrackingPrivacyRoute = TrackingPrivacyRouteImport.update({
+  id: '/tracking-privacy',
+  path: '/tracking-privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/front-office': typeof FrontOfficeRoute
   '/pricing': typeof PricingRoute
   '/thank-you': typeof ThankYouRoute
+  '/tracking-privacy': typeof TrackingPrivacyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/front-office': typeof FrontOfficeRoute
   '/pricing': typeof PricingRoute
   '/thank-you': typeof ThankYouRoute
+  '/tracking-privacy': typeof TrackingPrivacyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/front-office': typeof FrontOfficeRoute
   '/pricing': typeof PricingRoute
   '/thank-you': typeof ThankYouRoute
+  '/tracking-privacy': typeof TrackingPrivacyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,6 +90,7 @@ export interface FileRouteTypes {
     | '/front-office'
     | '/pricing'
     | '/thank-you'
+    | '/tracking-privacy'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -89,6 +99,7 @@ export interface FileRouteTypes {
     | '/front-office'
     | '/pricing'
     | '/thank-you'
+    | '/tracking-privacy'
   id:
     | '__root__'
     | '/'
@@ -97,6 +108,7 @@ export interface FileRouteTypes {
     | '/front-office'
     | '/pricing'
     | '/thank-you'
+    | '/tracking-privacy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -106,6 +118,7 @@ export interface RootRouteChildren {
   FrontOfficeRoute: typeof FrontOfficeRoute
   PricingRoute: typeof PricingRoute
   ThankYouRoute: typeof ThankYouRoute
+  TrackingPrivacyRoute: typeof TrackingPrivacyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -152,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ThankYouRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tracking-privacy': {
+      id: '/tracking-privacy'
+      path: '/tracking-privacy'
+      fullPath: '/tracking-privacy'
+      preLoaderRoute: typeof TrackingPrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -162,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   FrontOfficeRoute: FrontOfficeRoute,
   PricingRoute: PricingRoute,
   ThankYouRoute: ThankYouRoute,
+  TrackingPrivacyRoute: TrackingPrivacyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
