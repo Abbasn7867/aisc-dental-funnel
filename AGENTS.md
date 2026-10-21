@@ -10,3 +10,5 @@
 <!-- LOVABLE:END -->
 
 - AI features call the Lovable AI Gateway only from server functions (`*.server.ts` helpers loaded inside `*.functions.ts` handlers) — keeps the key and prompts off the client.
+- Pain points, categories and agent identities live in `src/data/painPoints.ts`; landing components render from it and never hard-code pain points — keeps all 54 in one place.
+- The bottom offer bar and exit pop-up are mounted once in `__root.tsx` and hide themselves on /free-trial and /thank-you.
