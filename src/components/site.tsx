@@ -23,6 +23,7 @@ export function Nav() {
           <img src={logo.url} alt="AI Solution Company" className="h-9 w-auto" />
         </Link>
         <div className="hidden items-center gap-7 text-sm font-semibold text-muted-foreground md:flex">
+          <Link to="/front-office" className="font-bold text-primary hover:text-foreground">Full tour</Link>
           <a href="/#team" className="hover:text-foreground">AI team</a>
           <a href="/#how" className="hover:text-foreground">How it works</a>
           <a href="/#pricing" className="hover:text-foreground">See pricing</a>
@@ -72,10 +73,7 @@ export function Footer() {
             ))}
           </div>
           <LegalLinks className="mt-6" />
-          <p className="mt-6">18605 Kerill Rd, Triangle, VA 22172</p>
-          <p className="mt-1">
-            <a href="https://www.aisolutioncompany.com" target="_blank" rel="noopener noreferrer" className="hover:underline">aisolutioncompany.com</a>
-          </p>
+          <p className="mt-6">© AI Solution Company</p>
         </div>
       </div>
     </footer>
