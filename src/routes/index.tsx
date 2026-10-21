@@ -58,7 +58,7 @@ function Hero() {
         </div>
         <div className="relative mx-auto w-full max-w-sm">
           <div className="overflow-hidden rounded-[2rem] shadow-soft ring-8 ring-card">
-            <img src={amy.url} alt="Amy, the AI receptionist, wearing a headset at a dental front desk" className="h-[30rem] w-full object-cover" />
+            <img src={amy.url} alt="Amy, the AI receptionist, wearing a headset at a dental front desk" className="h-[30rem] w-full object-cover object-[50%_25%]" />
           </div>
           <div className="glass float-y absolute -left-10 top-10 rounded-2xl p-4 shadow-soft">
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Incoming call · 11:42 pm</p>

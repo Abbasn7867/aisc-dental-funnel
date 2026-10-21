@@ -8,10 +8,10 @@ import { CtaButton } from "@/components/site";
 import { CATEGORY_META, OfferLine, SectionHead, Strike } from "./shared";
 
 const HOW = [
-  { icon: CalendarPlus, title: "Book a Free Trial", text: "Takes about 2 minutes.", photo: CATEGORY_META.c1.photo },
-  { icon: Settings2, title: "Set up your profile", text: <>Profile, FAQs and greeting from your dashboard in about 10 minutes, or let our team do it for you (setup <Strike>$1,000</Strike> $0).</>, photo: CATEGORY_META.c2.photo },
-  { icon: PhoneCall, title: "Your number + instant test call", text: "Your own number, and a recorded test call in 3–4 minutes.", photo: CATEGORY_META.c3.photo },
-  { icon: Rocket, title: "Go live, 24/7", text: "Your AI front office starts answering, booking and following up.", photo: CATEGORY_META.c9.photo },
+  { icon: CalendarPlus, title: "Book a Free Trial", text: "Takes about 2 minutes.", photo: CATEGORY_META.c1.photo, focus: CATEGORY_META.c1.focus },
+  { icon: Settings2, title: "Set up your profile", text: <>Profile, FAQs and greeting from your dashboard in about 10 minutes, or let our team do it for you (setup <Strike>$1,000</Strike> $0).</>, photo: CATEGORY_META.c2.photo, focus: CATEGORY_META.c2.focus },
+  { icon: PhoneCall, title: "Your number + instant test call", text: "Your own number, and a recorded test call in 3–4 minutes.", photo: CATEGORY_META.c3.photo, focus: CATEGORY_META.c3.focus },
+  { icon: Rocket, title: "Go live, 24/7", text: "Your AI front office starts answering, booking and following up.", photo: CATEGORY_META.c9.photo, focus: CATEGORY_META.c9.focus },
 ];
 
 export function HowItWorks() {
@@ -36,8 +36,8 @@ export function HowItWorks() {
               transition={{ delay: 0.3 + i * 0.4 }}
               className="overflow-hidden rounded-3xl border bg-card shadow-soft"
             >
-              <div className="relative h-28">
-                <img src={s.photo} alt="" loading="lazy" className="h-full w-full object-cover" />
+              <div className="relative aspect-[4/3]">
+                <img src={s.photo} alt="" loading="lazy" className="h-full w-full object-cover" style={{ objectPosition: s.focus }} />
                 <span className="absolute -bottom-6 left-5 grid h-12 w-12 place-items-center rounded-2xl bg-primary text-lg font-extrabold text-primary-foreground shadow-glow ring-4 ring-card">{i + 1}</span>
               </div>
               <div className="p-5 pt-9">

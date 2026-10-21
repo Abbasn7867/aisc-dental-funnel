@@ -31,19 +31,20 @@ export const AGENT_PHOTOS: Record<AgentKey, string> = {
 };
 export const AGENT_ORDER: AgentKey[] = ["amy", "leena", "morgan", "kim", "stephanie", "elise", "joseph", "trisha"];
 
-type CatMeta = { icon: LucideIcon; photo: string; alt: string };
+/** focus = CSS object-position of the subject's face, so cover crops never cut it. */
+type CatMeta = { icon: LucideIcon; photo: string; alt: string; focus: string };
 export const CATEGORY_META = {
-  c1: { icon: CalendarCheck, photo: c1, alt: "Receptionist with a headset booking a visit at a dental front desk in the evening" },
-  c2: { icon: ClipboardList, photo: c2, alt: "Patient at home completing intake forms on a tablet before a dental visit" },
-  c3: { icon: FileSignature, photo: c3, alt: "Hygienist walking a patient through a consent form on a tablet" },
-  c4: { icon: ShieldCheck, photo: c4, alt: "Smiling patient at the dental checkout counter holding an insurance card" },
-  c5: { icon: RefreshCcw, photo: c5, alt: "Hygienist welcoming a patient into a dental chair" },
-  c6: { icon: MessageSquareText, photo: c6, alt: "Patient at home reading care instructions on a phone" },
-  c7: { icon: HeartPulse, photo: c7, alt: "Dental office manager reviewing coverage paperwork at a desk" },
-  c8: { icon: Star, photo: c8, alt: "Happy patient waving goodbye to the receptionist as she leaves" },
-  c9: { icon: Repeat, photo: c9, alt: "Family arriving together at a dental clinic for a checkup" },
-  c10: { icon: Share2, photo: c10, alt: "Dentist and assistant reviewing a referral on a tablet" },
-  c11: { icon: BarChart3, photo: c11, alt: "Practice owner reviewing charts on a laptop" },
+  c1: { icon: CalendarCheck, photo: c1, alt: "Receptionist with a headset booking a visit at a dental front desk in the evening", focus: "35% 35%" },
+  c2: { icon: ClipboardList, photo: c2, alt: "Patient at home completing intake forms on a tablet before a dental visit", focus: "70% 40%" },
+  c3: { icon: FileSignature, photo: c3, alt: "Hygienist walking a patient through a consent form on a tablet", focus: "40% 35%" },
+  c4: { icon: ShieldCheck, photo: c4, alt: "Smiling patient at the dental checkout counter holding an insurance card", focus: "50% 35%" },
+  c5: { icon: RefreshCcw, photo: c5, alt: "Hygienist welcoming a patient into a dental chair", focus: "50% 35%" },
+  c6: { icon: MessageSquareText, photo: c6, alt: "Patient at home reading care instructions on a phone", focus: "55% 30%" },
+  c7: { icon: HeartPulse, photo: c7, alt: "Dental office manager reviewing coverage paperwork at a desk", focus: "40% 30%" },
+  c8: { icon: Star, photo: c8, alt: "Happy patient waving goodbye to the receptionist as she leaves", focus: "50% 30%" },
+  c9: { icon: Repeat, photo: c9, alt: "Family arriving together at a dental clinic for a checkup", focus: "50% 35%" },
+  c10: { icon: Share2, photo: c10, alt: "Dentist and assistant reviewing a referral on a tablet", focus: "40% 30%" },
+  c11: { icon: BarChart3, photo: c11, alt: "Practice owner reviewing charts on a laptop", focus: "40% 30%" },
 } satisfies Record<string, CatMeta>;
 export const metaFor = (id: string): CatMeta => (CATEGORY_META as Record<string, CatMeta>)[id]!;
 
