@@ -16,3 +16,4 @@
 - The `leads` table is insert-only for the public (no SELECT policy) — visitors must never read other leads.
 - Referral `?ref=` and UTM capture run in `__root.tsx` on every navigation via `src/lib/tracking.ts`; analytics events fire only after "Accept all" cookie consent.
 - Browser measurement uses one shared regional/consent gate in tracking.ts, versioned visitor-choice evidence, and no form-field payloads; unknown or unassessed countries fail closed to preserve the chosen no-banner restriction. Trial conversions fire only after successful persistence; no CAPI or customer matching is installed.
+- The home page "/" renders the full sales page (`FullTourPage` in src/components/landing/full-page.tsx); /front-office permanently redirects to "/" — the old short home page confused visitors into thinking updates were missing.
