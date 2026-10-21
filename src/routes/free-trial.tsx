@@ -208,9 +208,9 @@ function FreeTrial() {
             <div className="mt-6 flex gap-3">
               {step > 0 && <button type="button" onClick={back} className="rounded-full border bg-card px-6 py-3 font-bold">Back</button>}
               {step < STEPS.length - 1 ? (
-                <button type="button" onClick={next} className="flex-1 rounded-full bg-primary py-3 font-bold text-primary-foreground shadow-glow hover:bg-primary-deep">Continue →</button>
+                <button key="next" type="button" onClick={next} className="flex-1 rounded-full bg-primary py-3 font-bold text-primary-foreground shadow-glow hover:bg-primary-deep">Continue →</button>
               ) : (
-                <button type="submit" disabled={isSubmitting} className="flex-1 rounded-full bg-primary py-3 font-bold text-primary-foreground shadow-glow hover:bg-primary-deep disabled:opacity-60">
+                <button key="submit" type="submit" disabled={isSubmitting} className="flex-1 rounded-full bg-primary py-3 font-bold text-primary-foreground shadow-glow hover:bg-primary-deep disabled:opacity-60">
                   {isSubmitting ? "Booking…" : "Book a Free Trial"}
                 </button>
               )}
