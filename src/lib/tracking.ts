@@ -29,12 +29,59 @@ export function getUtm(): Utm {
   try { return JSON.parse(sessionStorage.getItem(UTM_KEY) ?? "{}") as Utm; } catch { return {}; }
 }
 
-type W = Window & { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void };
+type W = Window & { dataLayer?: unknown[]; gtag?: (...a: unknown[]) => void; fbq?: (...a: unknown[]) => void; _fbq?: unknown };
 
-/** Fires an analytics event only after the visitor accepted analytics cookies. */
+// [ADD GA4 MEASUREMENT ID] e.g. "G-ABC123DEF4" — analytics stay off until this is set.
+export const GA4_ID = "";
+// [ADD META PIXEL ID] e.g. "1234567890123456" — the pixel stays off until this is set.
+export const META_PIXEL_ID = "";
+
+let analyticsLoaded = false;
+
+/** Loads GA4 and the Meta pixel. Call only after the visitor chose "Accept all". */
+export function loadAnalytics() {
+  if (typeof window === "undefined" || analyticsLoaded) return;
+  if (localStorage.getItem("aisc-cookie-choice") !== "all") return;
+  analyticsLoaded = true;
+  const w = window as W;
+
+  if (GA4_ID) {
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
+    document.head.appendChild(s);
+    w.dataLayer ??= [];
+    w.gtag = (...a: unknown[]) => w.dataLayer!.push(a);
+    w.gtag("js", new Date());
+    w.gtag("config", GA4_ID);
+  }
+
+  if (META_PIXEL_ID) {
+    const fb = (w.fbq ??= ((...a: unknown[]) => (fb.q ??= []).push(a)) as W["fbq"] & { q?: unknown[] });
+    (w as W & { _fbq?: unknown })._fbq = fb;
+    const s = document.createElement("script");
+    s.async = true;
+    s.src = "https://connect.facebook.net/en_US/fbevents.js";
+    document.head.appendChild(s);
+    w.fbq!("init", META_PIXEL_ID);
+    w.fbq!("track", "PageView");
+  }
+}
+
+/** Fires an analytics event only after the visitor accepted analytics cookies. Never pass form field values. */
 export function track(event: string, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined" || localStorage.getItem("aisc-cookie-choice") !== "all") return;
   const w = window as W;
   if (w.gtag) w.gtag("event", event, params);
   else (w.dataLayer ??= []).push({ event, ...params });
+  if (w.fbq) w.fbq("trackCustom", event, params);
+}
+
+/** Standard "Lead" conversion event for a successful free-trial submission. No form values attached. */
+export function trackLead() {
+  if (typeof window === "undefined" || localStorage.getItem("aisc-cookie-choice") !== "all") return;
+  const w = window as W;
+  if (w.gtag) w.gtag("event", "Lead");
+  else (w.dataLayer ??= []).push({ event: "Lead" });
+  if (w.fbq) w.fbq("track", "Lead");
 }

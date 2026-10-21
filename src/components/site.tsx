@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/aisc-logo.png.asset.json";
 import { LEGAL } from "@/lib/funnel";
+import { loadAnalytics } from "@/lib/tracking";
 
 export function CtaButton({ size = "md", className = "" }: { size?: "md" | "lg"; className?: string }) {
   const pad = size === "lg" ? "px-8 py-4 text-base" : "px-5 py-2.5 text-sm";
