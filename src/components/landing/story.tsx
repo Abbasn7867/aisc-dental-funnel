@@ -141,7 +141,7 @@ export function DashboardMock() {
               <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-4">
                 {AGENT_ORDER.map((k) => (
                   <div key={k} className="rounded-xl border p-2.5 text-center">
-                    <img src={AGENT_PHOTOS[k]} alt="" className="mx-auto h-10 w-10 rounded-full object-cover object-top" style={{ boxShadow: `0 0 0 2px ${AGENTS[k].color}` }} />
+                    <img src={AGENT_PHOTOS[k]} alt="" className="mx-auto h-10 w-10 rounded-full object-cover object-[50%_20%]" style={{ boxShadow: `0 0 0 2px ${AGENTS[k].color}` }} />
                     <p className="mt-1.5 text-xs font-extrabold">{AGENTS[k].name}</p>
                     <p className="text-[10px] text-muted-foreground">{AGENTS[k].role}</p>
                     <div className="mt-1.5 flex items-center justify-center gap-1">

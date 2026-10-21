@@ -30,8 +30,8 @@ export function TeamSection() {
               className={`group relative flex flex-col overflow-hidden rounded-3xl border bg-card shadow-soft transition duration-300 hover:-translate-y-2 ${lead ? "sm:col-span-2 lg:row-span-2" : ""}`}
               style={{ borderTop: `5px solid ${a.color}` }}
             >
-              <div className={`relative overflow-hidden ${lead ? "h-72 lg:h-[22rem]" : "h-44"}`}>
-                <img src={AGENT_PHOTOS[key]} alt={`${a.name}, ${a.role}`} loading="lazy" className="h-full w-full object-cover object-top transition duration-700 group-hover:scale-105" />
+              <div className={`relative overflow-hidden ${lead ? "aspect-[4/5] lg:aspect-auto lg:h-[28rem]" : "aspect-[4/5]"}`}>
+                <img src={AGENT_PHOTOS[key]} alt={`${a.name}, ${a.role}`} loading="lazy" className="h-full w-full object-cover object-[50%_20%] transition duration-700 group-hover:scale-105" />
                 {lead && <span className="absolute left-4 top-4 rounded-full bg-primary px-3 py-1 text-xs font-extrabold text-primary-foreground">Team lead</span>}
               </div>
               <div className="flex flex-1 flex-col p-5">
