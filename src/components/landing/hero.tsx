@@ -3,6 +3,8 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform } from "fram
 import { useEffect, useState } from "react";
 import { BadgeCheck, Clock, FileLock2, Lock, PhoneCall, ShieldCheck, X } from "lucide-react";
 import logo from "@/assets/aisc-logo.png.asset.json";
+import heroWide from "@/assets/landing/hero-wide.webp";
+import heroMobile from "@/assets/landing/hero-mobile.webp";
 import { CtaButton } from "@/components/site";
 import { OfferLine, Strike, TypedCall, type CallLine } from "./shared";
 
@@ -88,7 +90,11 @@ export function Hero() {
         my.set(((e.clientY - r.top) / r.height) * 2 - 1);
       }}
     >
-      <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-6 pb-20 pt-14 lg:grid-cols-[1.1fr_1fr] lg:pt-20">
+      {/* Desktop background: subject in the right third (face ~75% 28%), heading sits on the calm left side */}
+      <img src={heroWide} alt="" aria-hidden width={1920} height={832} fetchPriority="high" className="absolute inset-0 hidden h-full w-full object-cover object-[75%_30%] lg:block" />
+      <div className="absolute inset-0 hidden bg-gradient-to-r from-background via-background/85 to-background/0 lg:block" />
+      <div className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-background to-transparent lg:block" />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-16 px-6 pb-20 pt-14 lg:min-h-[720px] lg:grid-cols-[1.1fr_1fr] lg:pt-20">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
           <span className="glass inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-semibold">
             <span className="pulse-ring h-2.5 w-2.5 rounded-full bg-accent" /> Live 24/7 · nights, weekends &amp; holidays
@@ -106,9 +112,14 @@ export function Hero() {
           <p className="mt-5 text-sm font-semibold text-muted-foreground">
             14 days free · $0 setup (was <Strike>$1,000</Strike>) · $250 bonus credits
           </p>
+          {/* Mobile/tablet: 4:5 art-directed crop shown as its own block so the face is never sliced */}
+          <picture className="mt-10 block overflow-hidden rounded-[2rem] shadow-soft lg:hidden">
+            <source media="(min-width: 640px) and (max-width: 1023px)" srcSet={heroWide} />
+            <img src={heroMobile} alt="Smiling dental front-desk coordinator wearing a headset at a bright reception desk" width={1024} height={1280} className="aspect-[4/5] w-full object-cover object-[50%_35%] sm:aspect-[21/9] sm:object-[75%_30%]" />
+          </picture>
         </motion.div>
 
-        <motion.div style={{ y: scrollShift }} className="perspective relative mx-auto w-full max-w-md">
+        <motion.div style={{ y: scrollShift }} className="perspective relative mx-auto w-full max-w-md lg:mr-0 lg:mt-72 lg:max-w-sm lg:self-end">
           <motion.div style={{ rotateX: rotX, rotateY: rotY }} className="preserve-3d glass rounded-[2rem] p-5 shadow-soft">
             <div className="mb-3 flex items-center justify-between text-xs font-bold uppercase tracking-wider text-muted-foreground">
               <span className="flex items-center gap-1.5"><PhoneCall className="h-3.5 w-3.5 text-primary" /> Incoming · Your practice line</span>

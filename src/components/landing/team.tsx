@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import proofBand from "@/assets/landing/band-proof.webp";
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Hash, Mail, PhoneIncoming, Play, UserCog } from "lucide-react";
@@ -72,7 +73,9 @@ const STEPS = [
 
 export function ProofCall() {
   return (
-    <section id="proof" className="relative scroll-mt-24 overflow-hidden bg-ink py-28 text-ink-foreground">
+    <section id="proof" className="relative min-h-[420px] scroll-mt-24 overflow-hidden bg-ink py-28 text-ink-foreground md:min-h-[360px]">
+      <img src={proofBand} alt="" aria-hidden loading="lazy" width={1920} height={832} className="absolute inset-0 h-full w-full object-cover object-[80%_30%] opacity-40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-ink/60" />
       <div className="blob -left-32 top-0 h-96 w-96 bg-primary" />
       <div className="blob -right-20 bottom-0 h-80 w-80 bg-accent" />
       <div className="relative mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-2 lg:items-center">
