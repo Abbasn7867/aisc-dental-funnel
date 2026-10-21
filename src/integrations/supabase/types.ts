@@ -14,7 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          billing: string | null
+          business_name: string
+          consent_at: string | null
+          consent_marketing: boolean
+          consent_sms_account: boolean
+          consent_text: string | null
+          created_at: string
+          email: string
+          id: string
+          locations: number | null
+          name: string
+          niche: string
+          pain_ids: string[]
+          phone: string
+          plan: string | null
+          problems: string[]
+          ref_code: string | null
+          sample_questions: string[]
+          software: string | null
+          status: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          website: string | null
+        }
+        Insert: {
+          billing?: string | null
+          business_name: string
+          consent_at?: string | null
+          consent_marketing?: boolean
+          consent_sms_account?: boolean
+          consent_text?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          locations?: number | null
+          name: string
+          niche?: string
+          pain_ids?: string[]
+          phone: string
+          plan?: string | null
+          problems?: string[]
+          ref_code?: string | null
+          sample_questions?: string[]
+          software?: string | null
+          status?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          website?: string | null
+        }
+        Update: {
+          billing?: string | null
+          business_name?: string
+          consent_at?: string | null
+          consent_marketing?: boolean
+          consent_sms_account?: boolean
+          consent_text?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          locations?: number | null
+          name?: string
+          niche?: string
+          pain_ids?: string[]
+          phone?: string
+          plan?: string | null
+          problems?: string[]
+          ref_code?: string | null
+          sample_questions?: string[]
+          software?: string | null
+          status?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          website?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
