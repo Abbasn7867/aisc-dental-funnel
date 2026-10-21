@@ -12,3 +12,6 @@
 - AI features call the Lovable AI Gateway only from server functions (`*.server.ts` helpers loaded inside `*.functions.ts` handlers) — keeps the key and prompts off the client.
 - Pain points, categories and agent identities live in `src/data/painPoints.ts`; landing components render from it and never hard-code pain points — keeps all 54 in one place.
 - The bottom offer bar and exit pop-up are mounted once in `__root.tsx` and hide themselves on /free-trial and /thank-you.
+- Trial leads are inserted and forwarded to the CRM from a TanStack server function (`src/lib/leads.functions.ts` → `leads.server.ts`), not an edge function — one stateless call keeps insert + webhook together; the webhook URL lives in the `GHL_WEBHOOK_URL` secret.
+- The `leads` table is insert-only for the public (no SELECT policy) — visitors must never read other leads.
+- Referral `?ref=` and UTM capture run in `__root.tsx` on every navigation via `src/lib/tracking.ts`; analytics events fire only after "Accept all" cookie consent.
