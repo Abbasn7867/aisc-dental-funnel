@@ -51,7 +51,7 @@ export function AgentChip({ agent, size = "sm" }: { agent: AgentKey; size?: "sm"
   const a = AGENTS[agent];
   const dim = size === "md" ? "h-9 w-9" : "h-6 w-6";
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full bg-card py-0.5 pl-0.5 pr-2.5 text-xs font-bold shadow-sm" style={{ boxShadow: `inset 0 0 0 1.5px ${a.color}` }}>
+    <span className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-card py-0.5 pl-0.5 pr-2.5 text-xs font-bold shadow-sm" style={{ boxShadow: `inset 0 0 0 1.5px ${a.color}` }}>
       <img src={AGENT_PHOTOS[agent]} alt="" className={`${dim} rounded-full object-cover object-top`} />
       <span style={{ color: a.color }}>{a.name}</span>
     </span>

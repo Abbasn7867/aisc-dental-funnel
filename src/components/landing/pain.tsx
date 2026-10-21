@@ -25,14 +25,14 @@ function MiniCard({ item, i }: { item: Category["items"][number]; i: number }) {
       >
         {item.pain}
       </motion.p>
-      <div className="mt-3 flex items-start gap-2 text-sm text-muted-foreground">
+      <div className="mt-3 flex items-center gap-2">
         <AgentChip agent={item.agent} />
-        <ArrowRight className="mt-1 h-3.5 w-3.5 shrink-0" />
-        <span className="flex-1">{item.fix}</span>
-        <motion.span initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.9 + (i % 6) * 0.06, type: "spring" }}>
-          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color }} aria-label="Solved" />
+        <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+        <motion.span className="ml-auto" initial={{ scale: 0, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.9 + (i % 6) * 0.06, type: "spring" }}>
+          <CheckCircle2 className="h-4 w-4" style={{ color }} aria-label="Solved" />
         </motion.span>
       </div>
+      <p className="mt-2 text-sm text-muted-foreground">{item.fix}</p>
     </motion.li>
   );
 }
