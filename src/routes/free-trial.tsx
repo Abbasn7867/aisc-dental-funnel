@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CookieBanner, Footer, LegalLinks, Nav } from "@/components/site";
 import { CONSENT_MARKETING, CONSENT_SMS, DASHBOARD_URL, LEGAL, PLANS, formatUsd } from "@/lib/funnel";
 
-type TrialSearch = { plan?: "receptionist" | "pro" | "full"; billing?: "monthly" | "yearly" };
+type TrialSearch = { plan?: "receptionist" | "pro" | "full" | undefined; billing?: "monthly" | "yearly" | undefined };
 
 export const Route = createFileRoute("/free-trial")({
   head: () => ({
@@ -16,10 +16,14 @@ export const Route = createFileRoute("/free-trial")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  validateSearch: (s: Record<string, unknown>): TrialSearch => ({
-    plan: s.plan === "receptionist" || s.plan === "pro" || s.plan === "full" ? s.plan : undefined,
-    billing: s.billing === "yearly" || s.billing === "monthly" ? s.billing : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): TrialSearch => {
+    const plan = s["plan"];
+    const billing = s["billing"];
+    return {
+      plan: plan === "receptionist" || plan === "pro" || plan === "full" ? plan : undefined,
+      billing: billing === "yearly" || billing === "monthly" ? billing : undefined,
+    };
+  },
   component: FreeTrial,
 });
 

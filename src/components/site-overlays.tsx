@@ -132,6 +132,7 @@ export function ExitPopup() {
       if (e.key === "Tab" && el) {
         const f = Array.from(el.querySelectorAll<HTMLElement>("a,button"));
         const first = f[0], last = f[f.length - 1];
+        if (!first || !last) return;
         if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
         else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
       }
