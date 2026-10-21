@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import amy from "@/assets/amy.png.asset.json";
+import { track } from "@/lib/tracking";
 
 const HIDDEN_ROUTES = ["/free-trial", "/thank-you"];
 const POPUP_EVENT = "aisc-popup";
@@ -72,7 +73,7 @@ export function CtaBar() {
             <p className="text-muted-foreground">Amy answers and books your practice's calls 24/7.</p>
           </div>
         </div>
-        <Link to="/free-trial" tabIndex={visible ? 0 : -1} className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground sm:w-auto">
+        <Link to="/free-trial" tabIndex={visible ? 0 : -1} onClick={() => track("cta_bar_click")} className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground sm:w-auto">
           Book a Free Trial
         </Link>
       </div>
@@ -104,6 +105,7 @@ export function ExitPopup() {
     const show = () => {
       if (Date.now() - start < 8000 || sessionStorage.getItem("exitPopupShown")) return;
       sessionStorage.setItem("exitPopupShown", "1");
+      track("exit_popup_shown");
       lastFocus.current = document.activeElement as HTMLElement;
       setOpen(true);
     };
@@ -167,7 +169,7 @@ export function ExitPopup() {
             <h2 id="exit-title" className="mt-4 text-3xl font-extrabold">Before you go</h2>
             <p className="mt-3 text-muted-foreground">Try the full platform free for 14 days, and hear Amy answer your practice's questions within 3–4 minutes of setup.</p>
             <span className="mt-4 inline-block rounded-full bg-mint-soft px-4 py-1.5 text-sm font-extrabold">Setup <s>$1,000</s> $0 · +$250 bonus credits</span>
-            <Link to="/free-trial" onClick={() => setOpen(false)} className="mt-6 flex w-full items-center justify-center rounded-full bg-primary py-3.5 font-bold text-primary-foreground shadow-glow">Book a Free Trial</Link>
+            <Link to="/free-trial" onClick={() => { track("exit_popup_click"); setOpen(false); }} className="mt-6 flex w-full items-center justify-center rounded-full bg-primary py-3.5 font-bold text-primary-foreground shadow-glow">Book a Free Trial</Link>
             <button onClick={() => setOpen(false)} className="mt-3 text-sm font-semibold text-muted-foreground underline">No thanks, I'll keep browsing</button>
           </motion.div>
         </motion.div>
