@@ -44,9 +44,9 @@ function CategoryCard({ cat, wide, flip, index }: { cat: Category; wide: boolean
   const sideLayout = wide;
   return (
     <article className={`group overflow-hidden rounded-[2rem] border bg-card shadow-soft ${wide ? "lg:col-span-2" : ""}`}>
-      <div className={sideLayout ? `lg:flex ${flip ? "lg:flex-row-reverse" : ""}` : ""}>
-        <div className={`relative overflow-hidden ${sideLayout ? "h-48 lg:h-auto lg:w-[40%] lg:shrink-0" : "h-40"}`}>
-          <img src={meta.photo} alt={meta.alt} loading="lazy" width={1280} height={720} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+      <div>
+        <div className={`relative overflow-hidden ${sideLayout ? "h-48 lg:h-64" : "h-40"}`} style={{ objectPosition: flip ? "right" : "left" }}>
+          <img src={meta.photo} alt={meta.alt} loading="lazy" width={1280} height={720} className="absolute inset-0 h-full w-full object-cover transition duration-700 group-hover:scale-105" style={{ objectPosition: flip ? "70% 35%" : "30% 35%" }} />
           <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent" />
         </div>
         <div className="relative flex-1 p-6 md:p-7">

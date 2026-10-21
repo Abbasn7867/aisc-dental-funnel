@@ -63,8 +63,8 @@ const HERO_CALL: CallLine[] = [
 ];
 
 const FLOATERS = [
-  { text: "New patient booked ✓", pos: "-left-6 top-6 md:-left-16", depth: 18 },
-  { text: "Insurance checked ✓", pos: "-right-4 top-24 md:-right-14", depth: -24 },
+  { text: "New patient booked ✓", pos: "-left-6 -top-10 md:-left-16", depth: 18 },
+  { text: "Insurance checked ✓", pos: "-right-4 top-28 md:-right-16", depth: -24 },
   { text: "Reminder sent ✓", pos: "-left-4 bottom-24 md:-left-20", depth: -14 },
   { text: "Review request sent ✓", pos: "-right-2 -bottom-4 md:-right-10", depth: 22 },
 ];
