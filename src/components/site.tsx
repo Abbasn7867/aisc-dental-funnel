@@ -85,11 +85,14 @@ export function Footer() {
 export function CookieBanner() {
   const [show, setShow] = useState(false);
   useEffect(() => {
-    setShow(!localStorage.getItem("aisc-cookie-choice"));
+    const choice = localStorage.getItem("aisc-cookie-choice");
+    setShow(!choice);
+    if (choice === "all") loadAnalytics();
   }, []);
   if (!show) return null;
   const choose = (v: string) => {
     localStorage.setItem("aisc-cookie-choice", v);
+    if (v === "all") loadAnalytics();
     setShow(false);
   };
   return (

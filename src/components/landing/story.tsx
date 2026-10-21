@@ -133,7 +133,7 @@ export function DashboardMock() {
           className="rounded-[1.75rem] border-[10px] border-ink bg-background p-5 shadow-soft md:p-7">
           <div className="flex items-center justify-between">
             <p className="font-extrabold">Good morning 👋</p>
-            <span className="rounded-full bg-secondary px-3 py-1 text-xs font-bold text-muted-foreground">Sample dashboard</span>
+            <span className="rounded-full bg-secondary px-3 py-1 text-xs font-bold text-muted-foreground">Illustrative dashboard</span>
           </div>
           <div className="mt-5 grid gap-5 lg:grid-cols-[1.4fr_1fr]">
             <div className="rounded-2xl bg-card p-4">
