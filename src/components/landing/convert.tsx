@@ -7,6 +7,7 @@ import { PLANS, formatUsd, planPrice, type Billing } from "@/lib/funnel";
 import { CtaButton } from "@/components/site";
 import { CATEGORY_META, OfferLine, SectionHead, Strike } from "./shared";
 import pricingBand from "@/assets/landing/band-pricing.webp";
+import pricingBandMobile from "@/assets/landing/band-pricing-mobile.webp";
 import finalBand from "@/assets/landing/band-final.webp";
 
 const HOW = [
@@ -83,15 +84,22 @@ export function LandingPricing() {
   return (
     <section id="pricing" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
       <div className="relative flex min-h-[420px] items-center overflow-hidden rounded-[2.5rem] bg-ink p-8 text-ink-foreground shadow-soft md:min-h-[360px] md:p-14">
-        <img src={pricingBand} alt="Clean dental instruments on a tray beside a dental chair in a sunlit operatory" loading="lazy" width={1920} height={640} className="absolute inset-0 h-full w-full object-cover object-[75%_50%]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/80 to-ink/10" />
-        <div className="relative max-w-xl">
+        <picture>
+          <source media="(max-width: 767px)" srcSet={pricingBandMobile} />
+          <img src={pricingBand} alt="Clean dental instruments on a tray beside a dental chair in a sunlit operatory" loading="lazy" width={1584} height={672} className="absolute inset-0 h-full w-full object-cover object-right" />
+        </picture>
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,var(--ink)_0%,var(--ink)_35%,color-mix(in_oklab,var(--ink)_70%,transparent)_55%,transparent_75%)] md:bg-[linear-gradient(to_right,var(--ink)_0%,var(--ink)_50%,color-mix(in_oklab,var(--ink)_70%,transparent)_65%,transparent_85%)]" />
+        <div className="relative max-w-xl md:max-w-[52%]">
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">Pricing</p>
-          <h2 className="mt-3 text-4xl font-extrabold leading-[1.05] md:text-5xl">Simple plans. <span className="text-gradient">Full platform in every trial.</span></h2>
+          <h2 className="mt-3 text-4xl font-extrabold leading-[1.05] md:text-5xl">
+            <span className="text-ink-foreground">Simple plans.</span>{" "}
+            <span className="text-[#8FD0FF]">Full platform</span>{" "}
+            <span className="text-accent">in every trial.</span>
+          </h2>
         </div>
       </div>
       <div className="mt-8 flex justify-center">
-        <span className="rounded-full bg-signature px-5 py-2 text-sm font-extrabold text-primary-foreground shadow-glow"><OfferLine /></span>
+        <span className="rounded-full bg-[linear-gradient(120deg,var(--primary),oklch(0.4_0.09_200))] px-5 py-2 text-sm font-extrabold text-primary-foreground shadow-glow"><OfferLine /></span>
       </div>
       <div className="mt-8 flex justify-center">
         <div role="radiogroup" aria-label="Billing period" className="glass relative inline-flex rounded-full p-1 shadow-soft">
