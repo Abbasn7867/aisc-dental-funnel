@@ -15,7 +15,7 @@ function agentStats(key: AgentKey) {
 export function TeamSection() {
   return (
     <section id="team" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
-      <SectionHead eyebrow="Meet your AI team" title={<>Eight AI employees. <span className="text-gradient">Led by Amy.</span></>} sub="Each one owns a part of your front office, so your staff can focus on the patients in front of them." />
+      <SectionHead eyebrow="Meet your AI team" title={<>Eight AI Employees. <span className="text-gradient">Led by Amy.</span></>} sub="Each one owns a part of your front office, so your staff can focus on the patients in front of them." />
       <div className="-mx-6 mt-14 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-4 sm:mx-0 sm:grid sm:snap-none sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
         {AGENT_ORDER.map((key, i) => {
           const a = AGENTS[key];
@@ -65,15 +65,15 @@ export function TeamSection() {
 }
 
 const STEPS = [
-  { icon: UserCog, title: "Set up your profile", text: "From your dashboard, or let us do it for you." },
-  { icon: Hash, title: "Get your own number", text: "Your practice gets its own phone number." },
-  { icon: PhoneIncoming, title: "Our test caller rings Amy", text: "She answers questions from your FAQs, live." },
-  { icon: Mail, title: "Recording delivered", text: "On your dashboard and in your inbox." },
+  { icon: UserCog, title: "Set Up Your Profile", text: "With the Setup Wizard, or let us do it for you." },
+  { icon: Hash, title: "Get Your Booking Line", text: "Your practice gets its own booking line." },
+  { icon: PhoneIncoming, title: "Our Test Caller Rings Amy", text: "She answers questions from your FAQs, live." },
+  { icon: Mail, title: "Recording Delivered", text: "On your dashboard and in your inbox." },
 ];
 
 export function ProofCall() {
   return (
-    <section id="proof" className="relative min-h-[420px] scroll-mt-24 overflow-hidden bg-ink py-28 text-ink-foreground md:min-h-[360px]">
+    <section id="test-call" className="relative min-h-[420px] scroll-mt-24 overflow-hidden bg-ink py-28 text-ink-foreground md:min-h-[360px]">
       <img src={proofBand} alt="" aria-hidden loading="lazy" width={1920} height={832} className="absolute inset-0 h-full w-full object-cover object-[80%_30%] opacity-40" />
       <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/90 to-ink/60" />
       <div className="blob -left-32 top-0 h-96 w-96 bg-primary" />
@@ -81,7 +81,7 @@ export function ProofCall() {
       <div className="relative mx-auto grid max-w-6xl gap-14 px-6 lg:grid-cols-2 lg:items-center">
         <div>
           <p className="text-sm font-bold uppercase tracking-[0.2em] text-accent">Your instant test call</p>
-          <h2 className="mt-3 text-4xl font-extrabold leading-[1.05] md:text-5xl">Hear Amy answer YOUR practice's questions in 3–4 minutes.</h2>
+          <h2 className="mt-3 text-4xl font-extrabold leading-[1.05] md:text-5xl">Hear Amy Answer Your Practice's Questions in 3–4 Minutes.</h2>
           <ol className="relative mt-10 space-y-6 border-l-2 border-dashed border-accent/50 pl-8">
             {STEPS.map((s, i) => (
               <motion.li key={s.title} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.15 }} className="relative">
@@ -191,7 +191,7 @@ export function CallPlayer() {
   const sc = SCENARIOS.find((s) => s.id === active) ?? SCENARIOS[0]!;
   return (
     <section className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHead center eyebrow="Hear Amy in action" title={<>Real calls, <span className="text-gradient">handled warmly.</span></>} sub="Pick a call and watch how Amy handles it." />
+      <SectionHead center eyebrow="Hear Amy in action" title={<>Real Calls, <span className="text-gradient">Handled Warmly.</span></>} sub="Pick a call and watch how Amy handles it." />
       <div role="tablist" aria-label="Call scenarios" className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2">
         {SCENARIOS.map((s) => (
           <button

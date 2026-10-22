@@ -25,10 +25,10 @@ export function Nav() {
           <img src={logo.url} alt="AI Solution Company" className="h-9 w-auto" />
         </Link>
         <div className="hidden items-center gap-7 text-sm font-semibold text-muted-foreground md:flex">
-          <Link to="/" className="font-bold text-primary hover:text-foreground">Full tour</Link>
-          <a href="/#team" className="hover:text-foreground">AI team</a>
-          <a href="/#how" className="hover:text-foreground">How it works</a>
-          <Link to="/configure" className="hover:text-foreground">Build yours</Link>
+          <Link to="/" className="font-bold text-primary hover:text-foreground">Full Tour</Link>
+          <a href="/#team" className="hover:text-foreground">AI Team</a>
+          <a href="/#how" className="hover:text-foreground">How It Works</a>
+          <Link to="/configure" className="hover:text-foreground">Build Yours</Link>
           <Link to="/pricing" className="hover:text-foreground">Pricing</Link>
           <a href="/#faq" className="hover:text-foreground">FAQ</a>
         </div>

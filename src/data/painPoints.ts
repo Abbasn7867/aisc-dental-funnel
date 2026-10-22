@@ -83,7 +83,7 @@ export const CATEGORIES: Category[] = [
   ]},
   { id: "c11", title: "Practice Intelligence & Reporting", outcome: "See the whole practice at a glance", items: [
     { id: "p49", pain: "Staff or owners can't see at a glance how many active leads, booked appointments, and stalled deals exist right now", agent: "trisha", fix: "Real-time view of active leads, booked appointments, and stalled opportunities" },
-    { id: "p50", pain: "Opportunities sit in \"contacted\" or \"in progress\" for weeks with no automatic alert or escalation", agent: "trisha", fix: "Automatically flags opportunities sitting idle with no escalation" },
+    { id: "p50", pain: "Opportunities sit in \"contacted\" or \"in progress\" for weeks with no automatic alert or hand-off to your team", agent: "trisha", fix: "Automatically flags opportunities sitting idle with no hand-off to your team" },
     { id: "p51", pain: "There's no standing report on calls answered, leads contacted, appointments set, show rates, or closed business", agent: "trisha", fix: "Standing weekly report on calls answered, appointments set, show rates, and revenue" },
     { id: "p52", pain: "Without a codified system, the business cannot be run — or even monitored — without the owner personally involved every day", agent: "trisha", fix: "Codifies practice operations so nothing depends on one person remembering" },
     { id: "p53", pain: "Owners have no simple, quantified score for how much revenue is leaking each month across speed-to-lead, no-shows, and follow-up gaps", agent: "trisha", fix: "Quantifies monthly revenue leaking from missed calls, no-shows, and follow-up gaps" },
