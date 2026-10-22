@@ -66,16 +66,15 @@ export function IntroVideoSection() {
   const inView = useInView(ref, { once: true, margin: "200px" });
   const [playing, setPlaying] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
-  if (!INTRO_VIDEO_ENABLED) return null;
   return (
     <section className="mx-auto max-w-6xl px-6 py-28">
       <SectionHead center eyebrow="Watch the intro" title={<>Meet Your AI Front Office in <span className="text-gradient">60 Seconds</span></>} sub="A quick tour of Amy and the team, and how they work for your practice." />
       <div ref={ref} className="relative mx-auto mt-12 aspect-video max-w-5xl overflow-hidden rounded-[2rem] shadow-soft">
-        {inView && playing ? (
+        {INTRO_VIDEO_ENABLED && inView && playing ? (
           <video src={INTRO_VIDEO_URL} poster={heroPoster} autoPlay controls playsInline className="h-full w-full object-cover">
             <track kind="captions" label="English" srcLang="en" src="/captions/intro.vtt" default />
           </video>
-        ) : (
+        ) : INTRO_VIDEO_ENABLED ? (
           <button onClick={() => setPlaying(true)} aria-label="Play the intro video" className="group relative block h-full w-full">
             <img src={heroPoster} alt="Amy, your AI receptionist, at the dental reception desk" loading="lazy" className="h-full w-full object-cover object-[75%_30%]" />
             <span className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
@@ -86,7 +85,17 @@ export function IntroVideoSection() {
               <Captions className="h-4 w-4 text-primary" /> Captions available
             </span>
           </button>
+        ) : (
+          <div className="relative h-full w-full">
+            <img src={heroPoster} alt="Amy, your AI receptionist, at the dental reception desk" loading="lazy" className="h-full w-full object-cover object-[75%_30%]" />
+            <span className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/30 to-ink/10" />
+            <span className="absolute inset-0 flex flex-col items-center justify-center gap-3 px-6 text-center">
+              <span className="rounded-full bg-card/95 px-6 py-3 text-base font-extrabold text-primary shadow-soft">Video coming shortly</span>
+              <span className="max-w-md text-sm font-semibold text-primary-foreground/90">We're adding the intro video now. Once it's in, it plays right here with captions.</span>
+            </span>
+          </div>
         )}
+
       </div>
       <div className="mx-auto mt-6 max-w-5xl text-center">
         <button onClick={() => setShowTranscript((s) => !s)} aria-expanded={showTranscript} className="rounded-full border bg-card px-5 py-2 text-sm font-bold text-primary shadow-sm hover:bg-secondary">
