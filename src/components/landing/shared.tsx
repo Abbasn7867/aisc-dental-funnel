@@ -22,7 +22,7 @@ import c6 from "@/assets/landing/cat-clinical.jpg";
 import c7 from "@/assets/landing/cat-coverage.jpg";
 import c8 from "@/assets/landing/cat-reviews-fixed.jpg";
 import c9 from "@/assets/landing/cat-recall.jpg";
-import c10 from "@/assets/landing/cat-referral.jpg";
+import c10 from "@/assets/landing/cat-referral-distinct.jpg";
 import c11 from "@/assets/landing/cat-reporting.jpg";
 
 export const AGENT_PHOTOS: Record<AgentKey, string> = {
