@@ -11,10 +11,10 @@ import pricingBandMobile from "@/assets/landing/band-pricing-mobile.webp";
 import finalBand from "@/assets/landing/band-final.webp";
 
 const HOW = [
-  { icon: CalendarPlus, title: "Book a Free Trial", text: "Takes about 2 minutes.", photo: CATEGORY_META.c1.photo, focus: CATEGORY_META.c1.focus },
-  { icon: Settings2, title: "Set up your profile", text: <>Profile, FAQs and greeting from your dashboard in about 10 minutes, or let our team do it for you (setup <Strike>$1,000</Strike> $0).</>, photo: CATEGORY_META.c2.photo, focus: CATEGORY_META.c2.focus },
-  { icon: PhoneCall, title: "Your number + instant test call", text: "Your own number, and a recorded test call in 3–4 minutes.", photo: CATEGORY_META.c3.photo, focus: CATEGORY_META.c3.focus },
-  { icon: Rocket, title: "Go live, 24/7", text: "Your AI front office starts answering, booking and following up.", photo: CATEGORY_META.c9.photo, focus: CATEGORY_META.c9.focus },
+  { icon: CalendarPlus, title: "Book a Free Trial", text: "Pick your plan and tell us about your practice.", photo: CATEGORY_META.c1.photo, focus: CATEGORY_META.c1.focus },
+  { icon: Settings2, title: "Set Up Your Profile", text: <>Get set up in minutes with the Setup Wizard, or let our team do it for you (setup <Strike>$1,000</Strike> $0).</>, photo: CATEGORY_META.c2.photo, focus: CATEGORY_META.c2.focus },
+  { icon: PhoneCall, title: "Your Booking Line + Instant Test Call", text: "Your own booking line, and a recorded test call in 3–4 minutes.", photo: CATEGORY_META.c3.photo, focus: CATEGORY_META.c3.focus },
+  { icon: Rocket, title: "Go Live, 24/7", text: "Your AI front office starts answering, booking and following up.", photo: CATEGORY_META.c9.photo, focus: CATEGORY_META.c9.focus },
 ];
 
 export function HowItWorks() {
@@ -22,7 +22,7 @@ export function HowItWorks() {
   const inView = useInView(ref, { once: true, margin: "-150px" });
   return (
     <section id="how" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-28">
-      <SectionHead center eyebrow="How it works" title={<>Four steps to <span className="text-gradient">always answering.</span></>} />
+      <SectionHead center eyebrow="How it works" title={<>Four Steps to <span className="text-gradient">Always Answering.</span></>} />
       <div ref={ref} className="relative mt-16">
         <svg className="absolute left-0 right-0 top-[5.5rem] hidden h-2 w-full lg:block" preserveAspectRatio="none" viewBox="0 0 100 2" aria-hidden>
           <motion.line x1="10" y1="1" x2="90" y2="1" stroke="var(--primary)" strokeWidth="0.4" strokeDasharray="1.5 1.2" initial={{ pathLength: 0 }} animate={{ pathLength: inView ? 1 : 0 }} transition={{ duration: 1.8, ease: "easeInOut" }} />
@@ -57,7 +57,7 @@ export function HowItWorks() {
 }
 
 const VAS = [
-  ["Instant proof call", "Your own number and a live test call where Amy answers your FAQs, with the recording in 3–4 minutes."],
+  ["Instant Test Call", "Your own booking line and a live test call where Amy answers your FAQs, with the recording in 3–4 minutes."],
   ["Self-serve or done-for-you setup", "Set up in minutes from your dashboard, or share your information and we configure it (normally $1,000, waived during launch)."],
   ["Trisha's real-time performance view", "Calls answered, bookings, follow-ups and every agent's results in one dashboard."],
   ["Add-on services", "Billing, Credentialing, Payor Negotiation, Utilization Management, Eligibility Verification, Claims Follow-up, A/R Recovery, Payor Contract Audit and Fee Benchmarking, quoted separately."],
@@ -66,7 +66,7 @@ const VAS = [
 export function ValueServices() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
-      <SectionHead eyebrow="Value-added services" title="More than an answering service." />
+      <SectionHead eyebrow="Value-added services" title="More Than an Answering Service." />
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {VAS.map(([t, d]) => (
           <div key={t} className="rounded-3xl border bg-card p-6 shadow-soft transition hover:-translate-y-1">
@@ -150,7 +150,7 @@ export function LandingPricing() {
 }
 
 const FAQ = [
-  ["How fast can we go live?", "Most practices finish the Quick Start checklist in about 10 minutes, and your instant test call arrives 3–4 minutes after setup. Prefer not to do it yourself? Our team will set everything up at no cost during launch."],
+  ["How fast can we go live?", "Most practices finish the Setup Wizard in minutes, and your instant test call arrives 3–4 minutes after setup. Prefer not to do it yourself? Our team will set everything up at no cost during launch."],
   ["What is the instant test call?", "Right after setup we give your practice its own phone number. Our test caller rings it and asks real questions from your FAQs, Amy answers live, and the recording lands on your dashboard and in your inbox."],
   ["Which calendars and software does it work with?", "Amy works with the calendar and practice-management software you already use; we connect it during setup. Ask us about yours."],
   ["What happens after the 14-day trial?", "You choose the plan that fits, monthly or yearly. Nothing is locked during the trial, so you'll know exactly what you're getting."],
@@ -165,7 +165,7 @@ const FAQ = [
 export function LandingFaq() {
   return (
     <section id="faq" className="mx-auto max-w-3xl scroll-mt-24 px-6 py-28">
-      <SectionHead center eyebrow="FAQ" title="Questions practice owners ask" />
+      <SectionHead center eyebrow="FAQ" title="Questions Practice Owners Ask" />
       <Accordion type="single" collapsible className="mt-10 space-y-3">
         {FAQ.map(([q, a], i) => (
           <AccordionItem key={q} value={`q${i}`} className="rounded-2xl border bg-card px-5 shadow-soft">
@@ -185,7 +185,7 @@ export function FinalBand() {
         {/* People sit in the left third, so the text and the dark side of the overlay go right */}
         <img src={finalBand} alt="A family checking in at a bright, calm dental reception desk" loading="lazy" width={1920} height={832} className="absolute inset-0 h-full w-full object-cover object-[20%_35%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20 md:bg-gradient-to-l md:from-ink md:via-ink/85 md:to-ink/0" />
-        <h2 className="relative max-w-xl text-4xl font-extrabold md:text-6xl">Your patients are calling. Let Amy answer.</h2>
+        <h2 className="relative max-w-xl text-4xl font-extrabold md:text-6xl">Your Patients Are Calling. Let Amy Answer.</h2>
         <CtaButton size="lg" className="relative mt-8 bg-ink hover:bg-ink" />
         <p className="relative mt-5 max-w-xl font-semibold opacity-95"><OfferLine /></p>
       </div>
