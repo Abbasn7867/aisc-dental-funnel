@@ -18,3 +18,5 @@
 - [ ] Verify published pixel delivery and Meta receipt — no public deployment yet; SDK loaded in preview but no event transmission observed (synthetic signup saved, withdrawal and blocked-region checks passed)
 - [ ] Connect GA4 — connection declined; measurement ID unavailable
 - [ ] Final funnel domain — confirm, then update SITE_URL in src/lib/funnel.ts (canonical, OG URLs, sitemap, robots)
+- [x] Setup Wizard alignment: time estimates removed, thank-you redirects to /practice/setup ("Start Setup Now"), 10 real wizard steps on thank-you + dashboard checklist, "How Should Amy Answer?" sample preview (greetings, counter, caller bubble, voice chips), "proof call"→"test call", "escalation"→"hand-off to your team", Title Case headings/nav
+- [ ] Intro video URL — waiting on user; "Watch the Intro" hero button + 60-second video section (lightbox, captions, transcript) are built and appear once INTRO_VIDEO_URL is set in src/lib/funnel.ts
