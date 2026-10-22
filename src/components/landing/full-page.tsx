@@ -3,6 +3,7 @@ import { AnnouncementBar, Hero, LandingNav, TrustStrip } from "@/components/land
 import { Configurator } from "@/components/landing/configurator";
 import { PainSection } from "@/components/landing/pain";
 import { CallPlayer, ProofCall, TeamSection } from "@/components/landing/team";
+import { IntroVideoSection } from "@/components/landing/intro-video";
 import { CompareSlider, DashboardMock, DayTimeline, FlipCards } from "@/components/landing/story";
 import { FinalBand, HowItWorks, LandingFaq, LandingPricing, ValueServices } from "@/components/landing/convert";
 import { Recommender } from "@/components/recommender";
@@ -19,6 +20,7 @@ export function FullTourPage() {
         <PainSection />
         <Configurator />
         <TeamSection />
+        <IntroVideoSection />
         <Recommender />
         <ProofCall />
         <CallPlayer />

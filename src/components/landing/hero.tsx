@@ -6,6 +6,7 @@ import logo from "@/assets/aisc-logo.png.asset.json";
 import heroWide from "@/assets/landing/hero-amy-wide.webp";
 import heroMobile from "@/assets/landing/hero-amy-mobile.webp";
 import { CtaButton } from "@/components/site";
+import { WatchIntroButton } from "./intro-video";
 import { OfferLine, Strike, TypedCall, type CallLine } from "./shared";
 import { CountUp, WordReveal } from "./motion-text";
 
@@ -31,7 +32,7 @@ export function AnnouncementBar() {
 }
 
 const NAV = [
-  ["Problems", "#problems"], ["AI Team", "#team"], ["Proof Call", "#proof"], ["Pricing", "#pricing"], ["FAQ", "#faq"],
+  ["Problems", "#problems"], ["AI Team", "#team"], ["Test Call", "#test-call"], ["Pricing", "#pricing"], ["FAQ", "#faq"],
 ] as const;
 
 export function LandingNav() {
@@ -108,7 +109,8 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <CtaButton size="lg" />
-            <a href="#pricing" className="rounded-full border bg-card px-6 py-3.5 font-bold text-primary shadow-sm hover:-translate-y-0.5 transition">See pricing</a>
+            <WatchIntroButton />
+            <a href="#pricing" className="rounded-full border bg-card px-6 py-3.5 font-bold text-primary shadow-sm hover:-translate-y-0.5 transition">See Pricing</a>
           </div>
           <p className="mt-5 text-sm font-semibold text-muted-foreground">
             <CountUp value={14} /> days free · $0 setup (was <Strike>$1,000</Strike>) · <CountUp value={250} prefix="$" /> bonus credits
