@@ -26,7 +26,7 @@ const has = (p: PlanId, a: AgentKey) => PLAN_AGENTS[p].includes(a);
 const CAPS: { label: string; agent: AgentKey | null; plans: PlanId[] }[] = [
   { label: "24/7 answering", agent: "amy", plans: PLAN_IDS },
   { label: "Booking", agent: "amy", plans: PLAN_IDS },
-  { label: "Instant proof call", agent: "amy", plans: PLAN_IDS },
+  { label: "Instant test call", agent: "amy", plans: PLAN_IDS },
   { label: "Intake", agent: "morgan", plans: PLAN_IDS.filter((p) => has(p, "morgan")) },
   { label: "Follow-up", agent: "stephanie", plans: PLAN_IDS.filter((p) => has(p, "stephanie")) },
   { label: "Reviews", agent: "elise", plans: PLAN_IDS.filter((p) => has(p, "elise")) },

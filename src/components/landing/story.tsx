@@ -5,6 +5,7 @@ import { AGENTS, type AgentKey } from "@/data/painPoints";
 import withImg from "@/assets/landing/with.jpg";
 import withoutImg from "@/assets/landing/without.jpg";
 import { AGENT_ORDER, AGENT_PHOTOS, AgentChip, CATEGORY_META, SectionHead } from "./shared";
+import { GreetingPreview } from "./greeting-preview";
 
 const DAY: { time: string; moment: string; agent: AgentKey; photo: string; alt: string; focus: string }[] = [
   { time: "7:00 AM", moment: "Your morning report is waiting: calls answered, visits booked and show rates from yesterday.", agent: "trisha", photo: CATEGORY_META.c11.photo, alt: CATEGORY_META.c11.alt, focus: CATEGORY_META.c11.focus },
@@ -48,7 +49,7 @@ export function DayTimeline() {
   return (
     <section className="bg-stripes py-28">
       <div className="mx-auto max-w-6xl px-6">
-        <SectionHead eyebrow="A day at your practice" title={<>From first call to last, <span className="text-gradient">covered.</span></>} />
+        <SectionHead eyebrow="A day at your practice" title={<>From First Call to Last, <span className="text-gradient">Covered.</span></>} />
         <div className="mt-14 grid gap-10 lg:grid-cols-[280px_1fr]">
           <div className="lg:sticky lg:top-28 lg:self-start">
             <div className="glass rounded-[2rem] p-8 text-center shadow-soft">
@@ -75,7 +76,7 @@ export function CompareSlider() {
   const [pos, setPos] = useState(50);
   return (
     <section className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHead center eyebrow="Without vs with AISC" title={<>Same desk. <span className="text-gradient">Different day.</span></>} sub="Drag the handle to compare." />
+      <SectionHead center eyebrow="Without vs with AISC" title={<>Same Desk. <span className="text-gradient">Different Day.</span></>} sub="Drag the handle to compare." />
       <div className="relative mx-auto mt-12 aspect-video max-w-5xl overflow-hidden rounded-[2rem] shadow-soft select-none">
         <img src={withImg} alt="Calm front desk, receptionist focused on one patient" className="absolute inset-0 h-full w-full object-cover object-[50%_35%]" width={1280} height={720} loading="lazy" />
         <div className="absolute inset-0 overflow-hidden" style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}>
@@ -112,8 +113,9 @@ export function CompareSlider() {
 }
 
 const CHECKLIST = [
-  ["Confirm your practice details", "2 min"], ["Set your opening hours", "2 min"], ["Add services and FAQs", "3 min"],
-  ["Personalize your receptionist's greeting", "1 min"], ["Connect your scheduling software", "3 min"], ["Invite your team", "1 min"],
+  "Your Practice Details", "Who Sees Patients?", "When Are You Open?", "Which Services Do You Offer?",
+  "Your Treatment Rooms", "Insurance and Payments", "How Should Amy Answer?", "Invite Your Team (Optional)",
+  "Connect Your Scheduling Software (Optional)", "You're All Set",
 ];
 
 export function DashboardMock() {
@@ -156,13 +158,12 @@ export function DashboardMock() {
               <div className="rounded-2xl bg-card p-4">
                 <p className="text-sm font-extrabold">Quick Start — Get Set Up in Minutes</p>
                 <ul className="mt-3 space-y-2">
-                  {CHECKLIST.map(([t, m], i) => (
+                  {CHECKLIST.map((t, i) => (
                     <li key={t} className="flex items-center gap-2.5 text-sm">
                       <span className={`grid h-5 w-5 shrink-0 place-items-center rounded-md border-2 transition ${i < ticked ? "border-accent bg-accent" : "border-input"}`}>
                         {i < ticked && <Check className="h-3.5 w-3.5 text-accent-foreground" />}
                       </span>
                       <span className={i < ticked ? "text-muted-foreground line-through" : ""}>{t}</span>
-                      <span className="ml-auto text-xs text-muted-foreground">{m}</span>
                     </li>
                   ))}
                 </ul>
@@ -176,6 +177,7 @@ export function DashboardMock() {
           </div>
         </motion.div>
       </div>
+      <GreetingPreview />
     </section>
   );
 }
@@ -190,7 +192,7 @@ export function FlipCards() {
   const [flipped, setFlipped] = useState<number | null>(null);
   return (
     <section className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHead center eyebrow="Compliance & security" title={<>Built for the way <span className="text-gradient">healthcare works.</span></>} sub="Tap a card to see what it means for your practice." />
+      <SectionHead center eyebrow="Compliance & security" title={<>Built for the Way <span className="text-gradient">Healthcare Works.</span></>} sub="Tap a card to see what it means for your practice." />
       <div className="mt-12 grid gap-6 md:grid-cols-3">
         {FLIPS.map((f, i) => (
           <button
