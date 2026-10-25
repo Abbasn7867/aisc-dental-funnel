@@ -18,9 +18,9 @@ const JSON_LD = {
       brand: { "@type": "Organization", name: "AI Solution Company" },
       description: "8 AI employees, led by Amy the AI receptionist, that answer calls 24/7, book appointments and follow up with patients for dental practices.",
       offers: [
-        { "@type": "Offer", name: "Receptionist", price: "497", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Pro", price: "1497", priceCurrency: "USD" },
-        { "@type": "Offer", name: "Full Team", price: "1997", priceCurrency: "USD" },
+        { "@type": "Offer", name: "Receptionist" },
+        { "@type": "Offer", name: "Pro" },
+        { "@type": "Offer", name: "Full Team" },
       ],
     },
   ],

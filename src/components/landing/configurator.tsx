@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useMemo, useRef, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { AGENTS, CATEGORIES, type AgentKey } from "@/data/painPoints";
-import { PLANS, formatUsd } from "@/lib/funnel";
+import { PLANS, SHOW_PRICES, formatUsd } from "@/lib/funnel";
 import { ALL_PAIN_IDS, PLAN_AGENTS, idsForAgents, recommendPlan } from "@/lib/configurator";
 import { AGENT_ORDER, AgentChip, SectionHead } from "./shared";
 
@@ -59,16 +59,22 @@ function Summary({ enabled }: { enabled: Set<string> }) {
       <div>
         <div className="mb-2 flex items-center justify-between">
           <h3 className="text-sm font-extrabold uppercase tracking-wider text-muted-foreground">Recommended plan</h3>
-          <div role="radiogroup" aria-label="Billing period" className="inline-flex rounded-full bg-muted p-0.5 text-xs font-bold">
-            {(["monthly", "yearly"] as const).map((b) => (
-              <button key={b} role="radio" aria-checked={billing === b} onClick={() => setBilling(b)} className={`rounded-full px-3 py-1 ${billing === b ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}>{b === "monthly" ? "Monthly" : "Yearly"}</button>
-            ))}
-          </div>
+          {SHOW_PRICES && (
+            <div role="radiogroup" aria-label="Billing period" className="inline-flex rounded-full bg-muted p-0.5 text-xs font-bold">
+              {(["monthly", "yearly"] as const).map((b) => (
+                <button key={b} role="radio" aria-checked={billing === b} onClick={() => setBilling(b)} className={`rounded-full px-3 py-1 ${billing === b ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}>{b === "monthly" ? "Monthly" : "Yearly"}</button>
+              ))}
+            </div>
+          )}
         </div>
         <AnimatePresence mode="wait">
           <motion.div key={planId} initial={{ opacity: 0, scale: 0.92, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: -10 }} transition={spring} className="rounded-2xl bg-ink p-5 text-ink-foreground ring-2 ring-accent">
             <p className="text-lg font-extrabold">{plan.name}</p>
-            <p className="mt-1"><span className="text-3xl font-extrabold tabular-nums">{formatUsd(price)}</span><span className="text-sm opacity-80">/mo{billing === "yearly" ? ", billed yearly" : ""}</span></p>
+            {SHOW_PRICES ? (
+              <p className="mt-1"><span className="text-3xl font-extrabold tabular-nums">{formatUsd(price)}</span><span className="text-sm opacity-80">/mo{billing === "yearly" ? ", billed yearly" : ""}</span></p>
+            ) : (
+              <p className="mt-1"><span className="text-3xl font-extrabold tabular-nums">$0</span><span className="text-sm opacity-80"> for 14 days · No credit card required</span></p>
+            )}
             <p className="mt-2 text-xs opacity-80">{plan.blurb}</p>
           </motion.div>
         </AnimatePresence>
