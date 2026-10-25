@@ -69,7 +69,7 @@ export function CtaBar() {
             <span className="pulse-ring absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-card bg-accent" />
           </span>
           <div className="text-sm leading-snug">
-            <p className="font-extrabold">14-day free trial · Setup <s>$1,000</s> $0 · +$250 bonus credits</p>
+            <p className="font-extrabold">14-day free trial · No credit card · Setup <s>$1,000</s> $0 · +$250 bonus credits</p>
             <p className="text-muted-foreground">Amy answers and books your practice's calls 24/7.</p>
           </div>
         </div>

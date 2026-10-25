@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Footer, Nav } from "@/components/site";
 import { CATEGORIES } from "@/data/painPoints";
-import { CONSENT_MARKETING, CONSENT_SMS, LEGAL, PLANS, formatUsd } from "@/lib/funnel";
+import { CONSENT_MARKETING, CONSENT_SMS, LEGAL, PLANS, SHOW_PRICES, formatUsd } from "@/lib/funnel";
 import { trialFormSchema, type TrialForm } from "@/lib/leads.schema";
 import { submitLead } from "@/lib/leads.functions";
 import { getRef, getUtm, trackLead } from "@/lib/tracking";
@@ -182,13 +182,19 @@ function FreeTrial() {
                           <button key={p.id} type="button" role="radio" aria-checked={plan === p.id} onClick={() => setValue("plan", p.id)} className={`rounded-full px-3 py-1.5 ${plan === p.id ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}>{p.name}</button>
                         ))}
                       </div>
-                      <div role="radiogroup" aria-label="Billing period" className="inline-flex rounded-full bg-muted p-0.5 text-xs font-bold">
-                        {(["monthly", "yearly"] as const).map((b) => (
-                          <button key={b} type="button" role="radio" aria-checked={billing === b} onClick={() => setValue("billing", b)} className={`rounded-full px-3 py-1.5 ${billing === b ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}>{b === "monthly" ? "Monthly" : "Yearly"}</button>
-                        ))}
-                      </div>
+                      {SHOW_PRICES && (
+                        <div role="radiogroup" aria-label="Billing period" className="inline-flex rounded-full bg-muted p-0.5 text-xs font-bold">
+                          {(["monthly", "yearly"] as const).map((b) => (
+                            <button key={b} type="button" role="radio" aria-checked={billing === b} onClick={() => setValue("billing", b)} className={`rounded-full px-3 py-1.5 ${billing === b ? "bg-primary text-primary-foreground" : "text-muted-foreground"}`}>{b === "monthly" ? "Monthly" : "Yearly"}</button>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <p className="mt-3 text-sm"><b className="text-2xl tabular-nums">{formatUsd(billing === "yearly" ? chosen.yearly : chosen.monthly)}</b>/month · billed {billing} · after your 14-day free trial</p>
+                    {SHOW_PRICES ? (
+                      <p className="mt-3 text-sm"><b className="text-2xl tabular-nums">{formatUsd(billing === "yearly" ? chosen.yearly : chosen.monthly)}</b>/month · billed {billing} · after your 14-day free trial</p>
+                    ) : (
+                      <p className="mt-3 text-sm"><b className="text-2xl tabular-nums">$0</b> for 14 days · <b>No credit card required</b> · Full version · Setup <s>$1,000</s> $0</p>
+                    )}
                   </div>
                   <label className="flex gap-3 text-xs text-muted-foreground">
                     <input type="checkbox" {...register("consent_sms_account")} className="mt-0.5 h-4 w-4 shrink-0 accent-primary" />

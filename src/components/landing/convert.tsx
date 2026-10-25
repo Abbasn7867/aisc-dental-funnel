@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { CalendarPlus, PhoneCall, Rocket, Settings2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { PLANS, formatUsd, planPrice, type Billing } from "@/lib/funnel";
+import { PLANS, SHOW_PRICES, formatUsd, planPrice, type Billing } from "@/lib/funnel";
 import { CtaButton } from "@/components/site";
 import { CATEGORY_META, OfferLine, SectionHead, Strike } from "./shared";
 import pricingBand from "@/assets/landing/band-pricing.webp";
@@ -102,14 +102,18 @@ export function LandingPricing() {
         <span className="rounded-full bg-[linear-gradient(120deg,var(--primary),oklch(0.4_0.09_200))] px-5 py-2 text-sm font-extrabold text-primary-foreground shadow-glow"><OfferLine /></span>
       </div>
       <div className="mt-8 flex justify-center">
-        <div role="radiogroup" aria-label="Billing period" className="glass relative inline-flex rounded-full p-1 shadow-soft">
-          {(["monthly", "yearly"] as const).map((b) => (
-            <button key={b} role="radio" aria-checked={billing === b} onClick={() => setBilling(b)} className="relative z-10 rounded-full px-7 py-2 text-sm font-bold">
-              {billing === b && <motion.span layoutId="bill-pill" className="absolute inset-0 -z-10 rounded-full bg-primary" transition={{ type: "spring", stiffness: 300, damping: 26 }} />}
-              <span className={billing === b ? "text-primary-foreground" : "text-muted-foreground"}>{b === "monthly" ? "Monthly" : "Yearly"}</span>
-            </button>
-          ))}
-        </div>
+        {SHOW_PRICES ? (
+          <div role="radiogroup" aria-label="Billing period" className="glass relative inline-flex rounded-full p-1 shadow-soft">
+            {(["monthly", "yearly"] as const).map((b) => (
+              <button key={b} role="radio" aria-checked={billing === b} onClick={() => setBilling(b)} className="relative z-10 rounded-full px-7 py-2 text-sm font-bold">
+                {billing === b && <motion.span layoutId="bill-pill" className="absolute inset-0 -z-10 rounded-full bg-primary" transition={{ type: "spring", stiffness: 300, damping: 26 }} />}
+                <span className={billing === b ? "text-primary-foreground" : "text-muted-foreground"}>{b === "monthly" ? "Monthly" : "Yearly"}</span>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-muted-foreground">Choose your plan after the trial — monthly or yearly (yearly saves 12%).</p>
+        )}
       </div>
       <div className="mt-12 grid gap-6 lg:grid-cols-3">
         {PLANS.map((p) => (
@@ -117,14 +121,27 @@ export function LandingPricing() {
             {p.popular && <span className="absolute -top-3 left-8 rounded-full bg-accent px-3 py-1 text-xs font-extrabold text-accent-foreground">Most Popular</span>}
             <h3 className="text-2xl font-extrabold">{p.name}</h3>
             <p className={`mt-2 text-sm ${p.popular ? "opacity-80" : "text-muted-foreground"}`}>{p.blurb}</p>
-            <div className="mt-6 flex items-end gap-2">
-              <motion.span key={`${p.id}-${billing}`} initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="text-5xl font-extrabold tracking-tight tabular-nums">
-                {formatUsd(planPrice(p, billing))}
-              </motion.span>
-              <span className="pb-2 text-sm opacity-80">/month</span>
-              {billing === "yearly" && <span className="mb-2 rounded-full bg-mint-soft px-2 py-0.5 text-xs font-extrabold text-foreground">Save 12%</span>}
-            </div>
-            <p className="mt-1 text-sm opacity-80">billed {billing}</p>
+            {SHOW_PRICES ? (
+              <>
+                <div className="mt-6 flex items-end gap-2">
+                  <motion.span key={`${p.id}-${billing}`} initial={{ opacity: 0, y: -12 }} animate={{ opacity: 1, y: 0 }} className="text-5xl font-extrabold tracking-tight tabular-nums">
+                    {formatUsd(planPrice(p, billing))}
+                  </motion.span>
+                  <span className="pb-2 text-sm opacity-80">/month</span>
+                  {billing === "yearly" && <span className="mb-2 rounded-full bg-mint-soft px-2 py-0.5 text-xs font-extrabold text-foreground">Save 12%</span>}
+                </div>
+                <p className="mt-1 text-sm opacity-80">billed {billing}</p>
+              </>
+            ) : (
+              <>
+                <div className="mt-6 flex items-end gap-2">
+                  <span className="text-5xl font-extrabold tracking-tight tabular-nums">$0</span>
+                  <span className="pb-2 text-sm opacity-80">for 14 days</span>
+                </div>
+                <p className="mt-1 text-sm font-bold">No credit card required</p>
+                <p className="mt-0.5 text-xs opacity-80">Full version · Setup <Strike>$1,000</Strike> $0</p>
+              </>
+            )}
             <ul className="mt-6 flex-1 space-y-2 text-sm">
               {p.features.map((f) => <li key={f}>✓ {f}</li>)}
               <li>✓ 14-day free trial · Setup <Strike>$1,000</Strike> $0 · $250 bonus credits</li>
@@ -136,6 +153,7 @@ export function LandingPricing() {
             >
               Book a Free Trial →
             </Link>
+            {!SHOW_PRICES && <p className="mt-2 text-center text-xs opacity-80">Full version. No credit card. Ready in minutes.</p>}
           </article>
         ))}
       </div>
@@ -143,7 +161,9 @@ export function LandingPricing() {
         Need Billing, Credentialing, Payor Negotiation and more? <Link to="/free-trial" className="font-bold text-primary underline">Talk to our team</Link>
       </p>
       <p className="mx-auto mt-3 max-w-3xl text-center text-xs text-muted-foreground">
-        Choose monthly or yearly billing. Monthly plans are month-to-month with no long-term contract — cancel anytime before your next billing date. Prefer yearly? Pay annually and save 12% on any plan.
+        {SHOW_PRICES
+          ? "Choose monthly or yearly billing. Monthly plans are month-to-month with no long-term contract — cancel anytime before your next billing date. Prefer yearly? Pay annually and save 12% on any plan."
+          : "Your free trial is the full version and needs no credit card. When it ends, choose a monthly plan (month-to-month, cancel anytime) or a yearly plan to save 12%. Bonus credits expire 90 days after sign-up."}
       </p>
     </section>
   );
@@ -157,7 +177,7 @@ const FAQ = [
   ["Can calls transfer to my staff?", "Yes. When a caller asks for a person, Amy routes them to the right staff member and logs the reason so nothing gets lost."],
   ["Does Amy give dental advice?", "No. Amy handles front-office tasks and routes clinical questions to your staff. Dental emergencies follow your practice's urgent protocol."],
   ["Is our data secure?", "Yes. We're HIPAA compliant and SOC 2 compliant, and a BAA is available on request. Everything runs on secure, enterprise-grade cloud infrastructure."],
-  ["Is there a contract?", "Choose monthly or yearly billing. Monthly plans are month-to-month with no long-term contract — cancel anytime before your next billing date. Prefer yearly? Pay annually and save 12% on any plan."],
+  ["Is there a contract?", "Your free trial is the full version and needs no credit card. When it ends, choose a monthly plan (month-to-month, cancel anytime) or a yearly plan to save 12%. Bonus credits expire 90 days after sign-up."],
   ["What do the $250 bonus credits cover?", "Your $250 bonus credits are applied to call minutes, roughly 250 minutes of live calls handled by your AI team."],
   ["Will this replace my front desk team?", "No. Your AI team takes the phones, paperwork and follow-up so your staff can focus on the patients in front of them."],
 ];

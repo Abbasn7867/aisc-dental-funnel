@@ -9,6 +9,9 @@ import josephPhoto from "@/assets/joseph.jpg.asset.json";
 
 export type Billing = "monthly" | "yearly";
 
+// Launch mode: plan prices are hidden site-wide. Flip to true to show them again.
+export const SHOW_PRICES = false;
+
 export const PLANS = [
   {
     id: "receptionist",

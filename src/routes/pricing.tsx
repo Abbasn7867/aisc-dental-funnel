@@ -35,10 +35,10 @@ const CAPS: { label: string; agent: AgentKey | null; plans: PlanId[] }[] = [
 ];
 
 const BILLING_TERMS =
-  "Choose monthly or yearly billing. Monthly plans are month-to-month with no long-term contract — cancel anytime before your next billing date. Prefer yearly? Pay annually and save 12% on any plan.";
+  "Your free trial is the full version and needs no credit card. When it ends, choose a monthly plan (month-to-month, cancel anytime) or a yearly plan to save 12%. Bonus credits expire 90 days after sign-up.";
 
 const FAQ: [string, string][] = [
-  ["What happens after the 14-day trial?", "You choose the plan that fits, monthly or yearly. Nothing is locked during the trial, so you'll know exactly what you're getting."],
+  ["What happens after the 14-day trial?", "You choose the plan that fits, monthly or yearly (yearly saves 12%). Nothing is locked during the trial, so you'll know exactly what you're getting."],
   ["What are the billing terms?", BILLING_TERMS],
   ["What do the $250 bonus credits cover?", "Your $250 bonus credits are applied to call minutes, roughly 250 minutes of live calls handled by your AI team."],
   ["Is there a setup fee?", "Setup is normally $1,000. It's waived during launch, so you pay $0."],
