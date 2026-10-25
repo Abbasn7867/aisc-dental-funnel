@@ -6,8 +6,9 @@ import logo from "@/assets/aisc-logo.png.asset.json";
 import heroWide from "@/assets/landing/hero-amy-wide.webp";
 import heroMobile from "@/assets/landing/hero-amy-mobile.webp";
 import { CtaButton } from "@/components/site";
+import { TRIAL_OFFER_SHORT } from "@/lib/funnel";
 import { WatchIntroButton } from "./intro-video";
-import { OfferLine, Strike, TypedCall, type CallLine } from "./shared";
+import { NoCardNote, OfferLine, Strike, TypedCall, type CallLine } from "./shared";
 import { CountUp, WordReveal } from "./motion-text";
 
 export function AnnouncementBar() {
@@ -52,7 +53,11 @@ export function LandingNav() {
         <div className="hidden items-center gap-6 text-sm font-semibold text-muted-foreground lg:flex">
           {NAV.map(([l, h]) => <a key={h} href={h} className="hover:text-foreground">{l}</a>)}
         </div>
-        <CtaButton />
+        <span className="flex flex-col items-center">
+          <CtaButton />
+          <span className="mt-0.5 text-[10px] font-semibold leading-tight text-muted-foreground sm:hidden">{TRIAL_OFFER_SHORT}</span>
+          <span className="mt-0.5 hidden text-[10px] font-semibold leading-tight text-muted-foreground sm:block">✓ No credit card required</span>
+        </span>
       </nav>
     </header>
   );
@@ -112,8 +117,9 @@ export function Hero() {
             <WatchIntroButton />
             <a href="#pricing" className="rounded-full border bg-card px-6 py-3.5 font-bold text-primary shadow-sm hover:-translate-y-0.5 transition">See Pricing</a>
           </div>
-          <p className="mt-5 text-sm font-semibold text-muted-foreground">
-            <CountUp value={14} /> days free · $0 setup (was <Strike>$1,000</Strike>) · <CountUp value={250} prefix="$" /> bonus credits
+          <p className="mt-3 text-sm font-semibold text-muted-foreground">✓ No credit card required · Ready in minutes</p>
+          <p className="mt-3 text-sm font-semibold text-muted-foreground">
+            <CountUp value={14} /> days free · No credit card required · $0 setup (was <Strike>$1,000</Strike>) · <CountUp value={250} prefix="$" /> bonus credits
           </p>
           {/* Mobile/tablet: 4:5 art-directed crop shown as its own block so the face is never sliced */}
           <picture className="mt-10 block overflow-hidden rounded-[2rem] shadow-soft lg:hidden">

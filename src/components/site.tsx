@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import logo from "@/assets/aisc-logo.png.asset.json";
-import { LEGAL } from "@/lib/funnel";
+import { LEGAL, TRIAL_OFFER_SHORT } from "@/lib/funnel";
 import { loadAnalytics, readConsent, saveConsent, syncAnalyticsConsent, NOTICE_TEXT } from "@/lib/tracking";
 import { Button } from "@/components/ui/button";
 
@@ -32,7 +32,11 @@ export function Nav() {
           <Link to="/pricing" className="hover:text-foreground">Pricing</Link>
           <a href="/#faq" className="hover:text-foreground">FAQ</a>
         </div>
-        <CtaButton />
+        <span className="flex flex-col items-center">
+          <CtaButton />
+          <span className="mt-0.5 text-[10px] font-semibold leading-tight text-muted-foreground sm:hidden">{TRIAL_OFFER_SHORT}</span>
+          <span className="mt-0.5 hidden text-[10px] font-semibold leading-tight text-muted-foreground sm:block">✓ No credit card required</span>
+        </span>
       </nav>
     </header>
   );
@@ -77,7 +81,8 @@ export function Footer() {
           </div>
           <LegalLinks className="mt-6" />
           <Link to="/tracking-privacy" className="mt-3 inline-block underline">Website measurement privacy</Link>
-          <p className="mt-6">© AI Solution Company</p>
+          <p className="mt-6 text-sm font-semibold text-foreground">14-day free trial · +$250 in free credits · No credit card required</p>
+          <p className="mt-2">© AI Solution Company</p>
         </div>
       </div>
     </footer>
