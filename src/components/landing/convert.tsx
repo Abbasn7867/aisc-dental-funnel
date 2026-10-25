@@ -171,15 +171,17 @@ export function LandingPricing() {
 }
 
 const FAQ = [
+  ["How long is the free trial?", "Your free trial lasts 14 days or until your $250 in free credits are used."],
+  ["What are the free credits?", "$250 in credits that cover your AI team's work during the trial."],
+  ["Do I need a credit card?", "No. Start your trial without a credit card."],
+  ["What happens when the trial ends?", "Nothing is charged. Your account pauses until you pick a plan, and you get a new booking line when you activate."],
+  ["Can I cancel?", "Monthly plans are month-to-month. Yearly plans are a 12-month commitment and save 12%."],
   ["How fast can we go live?", "Most practices finish the Setup Wizard in minutes, and your instant test call arrives 3–4 minutes after setup. Prefer not to do it yourself? Our team will set everything up at no cost during launch."],
   ["What is the instant test call?", "Right after setup we give your practice its own phone number. Our test caller rings it and asks real questions from your FAQs, Amy answers live, and the recording lands on your dashboard and in your inbox."],
   ["Which calendars and software does it work with?", "Amy works with the calendar and practice-management software you already use; we connect it during setup. Ask us about yours."],
-  ["What happens after the 14-day trial?", "You choose the plan that fits, monthly or yearly. Nothing is locked during the trial, so you'll know exactly what you're getting."],
   ["Can calls transfer to my staff?", "Yes. When a caller asks for a person, Amy routes them to the right staff member and logs the reason so nothing gets lost."],
   ["Does Amy give dental advice?", "No. Amy handles front-office tasks and routes clinical questions to your staff. Dental emergencies follow your practice's urgent protocol."],
   ["Is our data secure?", "Yes. We're HIPAA compliant and SOC 2 compliant, and a BAA is available on request. Everything runs on secure, enterprise-grade cloud infrastructure."],
-  ["Is there a contract?", "Your free trial is the full version and needs no credit card. When it ends, choose a monthly plan (month-to-month, cancel anytime) or a yearly plan to save 12%. Bonus credits expire 90 days after sign-up."],
-  ["What do the $250 bonus credits cover?", "Your $250 bonus credits are applied to call minutes, roughly 250 minutes of live calls handled by your AI team."],
   ["Will this replace my front desk team?", "No. Your AI team takes the phones, paperwork and follow-up so your staff can focus on the patients in front of them."],
 ];
 
@@ -208,7 +210,8 @@ export function FinalBand() {
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20 md:bg-gradient-to-l md:from-ink md:via-ink/85 md:to-ink/0" />
         <h2 className="relative max-w-xl text-4xl font-extrabold md:text-6xl">Your Patients Are Calling. Let Amy Answer.</h2>
         <CtaButton size="lg" className="relative mt-8 bg-ink hover:bg-ink" />
-        <p className="relative mt-5 max-w-xl font-semibold opacity-95"><OfferLine /></p>
+        <NoCardNote dark className="relative mt-3" />
+        <p className="relative mt-4 max-w-xl font-semibold opacity-95"><OfferLine /></p>
       </div>
     </section>
   );
