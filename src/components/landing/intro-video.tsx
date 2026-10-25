@@ -15,7 +15,7 @@ const TRANSCRIPT: { t: string; line: string }[] = [
   { t: "0:33", line: "Kim follows up on unscheduled treatment plans, and Trisha reports on all of it, every morning." },
   { t: "0:41", line: "Setup takes minutes with the Setup Wizard, and your recorded test call arrives right after." },
   { t: "0:49", line: "Your team focuses on the patients in the chair. Your AI front office handles the rest." },
-  { t: "0:55", line: "Book a free trial today and hear Amy answer for your practice." },
+  { t: "0:55", line: "Book a free trial today — no credit card required — and hear Amy answer for your practice." },
 ];
 
 function IntroLightbox({ onClose }: { onClose: () => void }) {
