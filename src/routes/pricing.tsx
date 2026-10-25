@@ -7,7 +7,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { AGENTS, type AgentKey } from "@/data/painPoints";
 import { PLANS } from "@/lib/funnel";
 import { PLAN_AGENTS, type PlanId } from "@/lib/configurator";
-import { AGENT_ORDER } from "@/components/landing/shared";
+import { AGENT_ORDER, NoCardNote } from "@/components/landing/shared";
 import { seoMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/pricing")({
@@ -15,7 +15,7 @@ export const Route = createFileRoute("/pricing")({
     seoMeta(
       "/pricing",
       "Pricing | AI Front Office for Dental Practices | AI Solution Company",
-      "Receptionist, Pro and Full Team plans. The full platform free for 14 days, $0 setup during launch and $250 bonus credits.",
+      "Receptionist, Pro and Elite plans. The full platform free for 14 days — no credit card required — with $0 setup during launch and $250 bonus credits.",
     ),
   component: PricingPage,
 });
@@ -35,12 +35,15 @@ const CAPS: { label: string; agent: AgentKey | null; plans: PlanId[] }[] = [
 ];
 
 const BILLING_TERMS =
-  "Your free trial is the full version and needs no credit card. When it ends, choose a monthly plan (month-to-month, cancel anytime) or a yearly plan to save 12%. Bonus credits expire 90 days after sign-up.";
+  "Your free trial lasts 14 days or until your $250 in free credits are used.";
 
 const FAQ: [string, string][] = [
-  ["What happens after the 14-day trial?", "You choose the plan that fits, monthly or yearly (yearly saves 12%). Nothing is locked during the trial, so you'll know exactly what you're getting."],
+  ["How long is the free trial?", BILLING_TERMS],
+  ["What are the free credits?", "$250 in credits that cover your AI team's work during the trial."],
+  ["Do I need a credit card?", "No. Start your trial without a credit card."],
+  ["What happens when the trial ends?", "Nothing is charged. Your account pauses until you pick a plan, and you get a new booking line when you activate."],
+  ["Can I cancel?", "Monthly plans are month-to-month. Yearly plans are a 12-month commitment and save 12%."],
   ["What are the billing terms?", BILLING_TERMS],
-  ["What do the $250 bonus credits cover?", "Your $250 bonus credits are applied to call minutes, roughly 250 minutes of live calls handled by your AI team."],
   ["Is there a setup fee?", "Setup is normally $1,000. It's waived during launch, so you pay $0."],
   ["Can I switch plans later?", "Yes. Upgrade or downgrade anytime; the change applies from your next billing date."],
 ];
@@ -58,7 +61,7 @@ function PricingPage() {
           <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-4xl font-extrabold tracking-tight sm:text-6xl">
             Simple pricing. <span className="text-gradient">The full platform, free for 14 days.</span>
           </motion.h1>
-          <div className="mt-8"><CtaButton size="lg" /></div>
+          <div className="mt-8"><CtaButton size="lg" /><NoCardNote className="mt-2" /></div>
         </section>
 
         <LandingPricing />
@@ -112,8 +115,8 @@ function PricingPage() {
             <div>
               <p className="text-sm font-extrabold uppercase tracking-wider opacity-70">Plus</p>
               <p className="mt-3 text-2xl font-extrabold">$250 bonus credits</p>
-              <p className="mt-1 opacity-80">Applied to call minutes, roughly 250 minutes of live calls.</p>
-              <div className="mt-6"><CtaButton /></div>
+              <p className="mt-1 opacity-80">Covers your AI team's work during the trial.</p>
+              <div className="mt-6"><CtaButton /><NoCardNote dark className="mt-2" /></div>
             </div>
           </div>
         </section>

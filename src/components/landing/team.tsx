@@ -5,7 +5,7 @@ import { Link } from "@tanstack/react-router";
 import { Hash, Mail, PhoneIncoming, Play, UserCog } from "lucide-react";
 import { AGENTS, CATEGORIES, type AgentKey } from "@/data/painPoints";
 import { CtaButton } from "@/components/site";
-import { AGENT_ORDER, AGENT_PHOTOS, SectionHead, TypedCall, Waveform, type CallLine } from "./shared";
+import { AGENT_ORDER, AGENT_PHOTOS, NoCardNote, SectionHead, TypedCall, Waveform, type CallLine } from "./shared";
 
 function agentStats(key: AgentKey) {
   const items = CATEGORIES.flatMap((c) => c.items.filter((i) => i.agent === key).map((i) => ({ ...i, cat: c.title })));
@@ -58,6 +58,7 @@ export function TeamSection() {
           <p className="text-2xl font-extrabold">All 8, working together.</p>
           <p className="mt-2 text-sm opacity-90">Every one is included in your 14-day free trial.</p>
           <CtaButton className="mt-5 bg-ink hover:bg-ink" />
+          <NoCardNote dark className="mt-2" />
         </div>
       </div>
     </section>
@@ -92,6 +93,7 @@ export function ProofCall() {
             ))}
           </ol>
           <CtaButton size="lg" className="mt-10" />
+          <NoCardNote dark className="mt-2" />
           <p className="mt-3 text-sm opacity-80">Your test call recording arrives within 3–4 minutes of setup. The test call is recorded and sent to the email you provide.</p>
         </div>
 

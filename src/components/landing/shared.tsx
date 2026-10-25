@@ -63,11 +63,21 @@ export function Strike({ children }: { children: React.ReactNode }) {
   return <s className="opacity-75 decoration-2">{children}</s>;
 }
 
+/** Shared long offer line (TRIAL_OFFER_LONG) with the $1,000 strikethrough. */
 export function OfferLine({ className = "" }: { className?: string }) {
   return (
     <span className={className}>
-      14-day free trial · Setup <Strike>$1,000</Strike> $0 · +$250 bonus credits
+      14-day free trial · +$250 in free credits · No credit card required · Setup <Strike>$1,000</Strike> $0
     </span>
+  );
+}
+
+/** The standard small "✓ No credit card required" line shown under every trial button. */
+export function NoCardNote({ dark = false, className = "" }: { dark?: boolean; className?: string }) {
+  return (
+    <p className={`text-xs font-semibold ${dark ? "text-ink-foreground/80" : "text-muted-foreground"} ${className}`}>
+      ✓ No credit card required
+    </p>
   );
 }
 

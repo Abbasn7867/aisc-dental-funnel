@@ -8,7 +8,7 @@ export const Route = createFileRoute("/thank-you")({
   head: () => ({
     meta: [
       { title: "Your Free Trial Is Booked! | AI Solution Company" },
-      { name: "description", content: "Your 14-day free trial is booked. Taking you to the Setup Wizard to get your AI front office live." },
+      { name: "description", content: "Your 14-day free trial is booked — no credit card required. Taking you to the Setup Wizard to get your AI front office live." },
       { property: "og:title", content: "Your Free Trial Is Booked!" },
       { property: "og:description", content: "Set up your AI front office in minutes." },
       { property: "og:type", content: "website" },
@@ -69,7 +69,8 @@ function ThankYou() {
       </div>
     <main className="mx-auto max-w-3xl px-6 py-20 text-center">
       <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl">Your Free Trial Is Booked!</h1>
-      <p className="mt-4 text-lg text-muted-foreground">Taking you to the Setup Wizard to get your AI front office live…</p>
+      <p className="mt-4 text-lg font-semibold">You're in! No credit card needed — your 14-day trial has started.</p>
+      <p className="mt-2 text-lg text-muted-foreground">Taking you to the Setup Wizard to get your AI front office live…</p>
       <div className="mt-8 flex flex-col items-center gap-5">
         <svg width="64" height="64" viewBox="0 0 64 64" aria-label={paused ? "Redirect paused" : `Redirecting in ${left} seconds`} role="img">
           <circle cx="32" cy="32" r={r} fill="none" stroke="var(--muted)" strokeWidth="6" />

@@ -20,7 +20,7 @@ const JSON_LD = {
       offers: [
         { "@type": "Offer", name: "Receptionist" },
         { "@type": "Offer", name: "Pro" },
-        { "@type": "Offer", name: "Full Team" },
+        { "@type": "Offer", name: "Elite" },
       ],
     },
   ],
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
     ...seoMeta(
       "/",
       "AI Receptionist & Front Office for Dental Practices | AI Solution Company",
-      "Amy and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform.",
+      "Amy and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform — no credit card required.",
     ),
     scripts: [{ type: "application/ld+json", children: JSON.stringify(JSON_LD) }],
   }),

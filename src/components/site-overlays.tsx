@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
 import amy from "@/assets/amy.png.asset.json";
+import { TRIAL_OFFER_SHORT } from "@/lib/funnel";
 import { track } from "@/lib/tracking";
+import { NoCardNote, OfferLine } from "@/components/landing/shared";
 
 const HIDDEN_ROUTES = ["/free-trial", "/thank-you"];
 const POPUP_EVENT = "aisc-popup";
@@ -69,7 +71,8 @@ export function CtaBar() {
             <span className="pulse-ring absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-card bg-accent" />
           </span>
           <div className="text-sm leading-snug">
-            <p className="font-extrabold">14-day free trial · No credit card · Setup <s>$1,000</s> $0 · +$250 bonus credits</p>
+            <p className="hidden font-extrabold sm:block"><OfferLine /></p>
+            <p className="font-extrabold sm:hidden">{TRIAL_OFFER_SHORT}</p>
             <p className="text-muted-foreground">Amy answers and books your practice's calls 24/7.</p>
           </div>
         </div>
@@ -168,8 +171,9 @@ export function ExitPopup() {
             </div>
             <h2 id="exit-title" className="mt-4 text-3xl font-extrabold">Before you go</h2>
             <p className="mt-3 text-muted-foreground">Try the full platform free for 14 days, and hear Amy answer your practice's questions within 3–4 minutes of setup.</p>
-            <span className="mt-4 inline-block rounded-full bg-mint-soft px-4 py-1.5 text-sm font-extrabold">Setup <s>$1,000</s> $0 · +$250 bonus credits</span>
+            <span className="mt-4 inline-block rounded-full bg-mint-soft px-4 py-1.5 text-sm font-extrabold"><OfferLine /></span>
             <Link to="/free-trial" onClick={() => { track("exit_popup_click"); setOpen(false); }} className="mt-6 flex w-full items-center justify-center rounded-full bg-primary py-3.5 font-bold text-primary-foreground shadow-glow">Book a Free Trial</Link>
+            <NoCardNote className="mt-2" />
             <button onClick={() => setOpen(false)} className="mt-3 text-sm font-semibold text-muted-foreground underline">No thanks, I'll keep browsing</button>
           </motion.div>
         </motion.div>

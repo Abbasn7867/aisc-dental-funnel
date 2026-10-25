@@ -8,10 +8,10 @@ describe("configurator plan recommendation", () => {
   it("only Amy, Leena, Stephanie, Trisha items → Pro", () => {
     expect(recommendPlan(idsForAgents(PLAN_AGENTS.pro))).toBe("pro");
   });
-  it("any Morgan item → Full Team", () => {
+  it("any Morgan item → Elite", () => {
     expect(recommendPlan([...idsForAgents(["amy"]), ...idsForAgents(["morgan"]).slice(0, 1)])).toBe("full");
   });
-  it("everything on → Full Team", () => {
+  it("everything on → Elite", () => {
     expect(ALL_PAIN_IDS).toHaveLength(54);
     expect(recommendPlan(ALL_PAIN_IDS)).toBe("full");
   });
