@@ -12,6 +12,11 @@ export type Billing = "monthly" | "yearly";
 // Launch mode: plan prices are hidden site-wide. Flip to true to show them again.
 export const SHOW_PRICES = false;
 
+// Shared free-trial offer wording — the one source of truth used site-wide.
+export const TRIAL_OFFER_LONG = "14-day free trial · +$250 in free credits · No credit card required · Setup $1,000 $0";
+export const TRIAL_OFFER_SHORT = "14-day free trial · No credit card";
+export const NO_CARD_NOTE = "No credit card required";
+
 export const PLANS = [
   {
     id: "receptionist",
@@ -38,12 +43,21 @@ export const PLANS = [
   },
   {
     id: "full",
-    name: "Full Team",
+    name: "Elite",
     monthly: 1997,
     yearly: 1757,
     popular: false,
-    blurb: "All 8 AI employees covering every front-office pain point.",
-    features: ["All 8 AI employees", "Every pain point covered", "Dedicated onboarding"],
+    blurb: "All 8 AI employees running your front office — every call, booking, form, follow-up and review.",
+    features: [
+      "Everything in Pro",
+      "All 8 AI employees — Amy, Leena, Morgan, Kim, Stephanie, Elise, Joseph and Trisha",
+      "Morgan — Patient Intake",
+      "Kim — Case Acceptance",
+      "Elise — Patient Experience",
+      "Joseph — Fax Management",
+      "Every front-office pain point covered",
+      "Dedicated onboarding",
+    ],
   },
 ] as const;
 
