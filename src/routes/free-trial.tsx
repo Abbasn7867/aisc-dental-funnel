@@ -20,7 +20,7 @@ export const Route = createFileRoute("/free-trial")({
     seoMeta(
       "/free-trial",
       "Book a Free Trial | AI Solution Company for Dental Practices",
-      "Start your 14-day free trial of the full platform. $0 setup (was $1,000), $250 bonus credits and an instant test call in 3–4 minutes.",
+      "Start your 14-day free trial of the full platform — no credit card required. $0 setup (was $1,000), $250 bonus credits and an instant test call in 3–4 minutes.",
     ),
   validateSearch: (s: Record<string, unknown>): TrialSearch => {
     const plan = s["plan"];
@@ -115,6 +115,7 @@ function FreeTrial() {
           <h1 className="mt-3 text-4xl font-extrabold leading-tight sm:text-5xl">Start your 14-day free trial of <span className="text-gradient">the full platform</span></h1>
           <div className="mt-8 rounded-3xl bg-ink p-6 text-ink-foreground shadow-glow">
             <ul className="space-y-3 text-lg font-semibold">
+              <li>✓ No credit card required</li>
               <li>✓ $0 setup <span className="opacity-70">(was <s>$1,000</s>)</span></li>
               <li>✓ $250 bonus credits</li>
               <li>✓ Instant test call in 3–4 minutes</li>
@@ -214,6 +215,9 @@ function FreeTrial() {
               </motion.div>
             </AnimatePresence>
 
+            {step === STEPS.length - 1 && (
+              <p className="mt-6 text-center text-xs font-semibold text-muted-foreground">No credit card required — the full version for 14 days.</p>
+            )}
             <div className="mt-6 flex gap-3">
               {step > 0 && <button type="button" onClick={back} className="rounded-full border bg-card px-6 py-3 font-bold">Back</button>}
               {step < STEPS.length - 1 ? (
