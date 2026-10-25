@@ -58,6 +58,7 @@ export function TeamSection() {
           <p className="text-2xl font-extrabold">All 8, working together.</p>
           <p className="mt-2 text-sm opacity-90">Every one is included in your 14-day free trial.</p>
           <CtaButton className="mt-5 bg-ink hover:bg-ink" />
+          <NoCardNote dark className="mt-2" />
         </div>
       </div>
     </section>
@@ -92,6 +93,7 @@ export function ProofCall() {
             ))}
           </ol>
           <CtaButton size="lg" className="mt-10" />
+          <NoCardNote dark className="mt-2" />
           <p className="mt-3 text-sm opacity-80">Your test call recording arrives within 3–4 minutes of setup. The test call is recorded and sent to the email you provide.</p>
         </div>
 
