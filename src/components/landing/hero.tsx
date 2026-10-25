@@ -8,7 +8,7 @@ import heroMobile from "@/assets/landing/hero-amy-mobile.webp";
 import { CtaButton } from "@/components/site";
 import { TRIAL_OFFER_SHORT } from "@/lib/funnel";
 import { WatchIntroButton } from "./intro-video";
-import { NoCardNote, OfferLine, Strike, TypedCall, type CallLine } from "./shared";
+import { OfferLine, Strike, TypedCall, type CallLine } from "./shared";
 import { CountUp, WordReveal } from "./motion-text";
 
 export function AnnouncementBar() {

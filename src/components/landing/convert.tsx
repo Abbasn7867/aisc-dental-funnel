@@ -5,7 +5,7 @@ import { CalendarPlus, PhoneCall, Rocket, Settings2 } from "lucide-react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { PLANS, SHOW_PRICES, formatUsd, planPrice, type Billing } from "@/lib/funnel";
 import { CtaButton } from "@/components/site";
-import { CATEGORY_META, OfferLine, SectionHead, Strike } from "./shared";
+import { CATEGORY_META, NoCardNote, OfferLine, SectionHead, Strike } from "./shared";
 import pricingBand from "@/assets/landing/band-pricing.webp";
 import pricingBandMobile from "@/assets/landing/band-pricing-mobile.webp";
 import finalBand from "@/assets/landing/band-final.webp";
@@ -119,6 +119,7 @@ export function LandingPricing() {
         {PLANS.map((p) => (
           <article key={p.id} className={`relative flex flex-col rounded-3xl p-8 ${p.popular ? "bg-ink text-ink-foreground shadow-glow ring-2 ring-accent lg:-translate-y-4" : "border bg-card shadow-soft"}`}>
             {p.popular && <span className="absolute -top-3 left-8 rounded-full bg-accent px-3 py-1 text-xs font-extrabold text-accent-foreground">Most Popular</span>}
+            {p.id === "full" && <span className="absolute -top-3 left-8 rounded-full bg-primary px-3 py-1 text-xs font-extrabold text-primary-foreground">Complete Front Office</span>}
             <h3 className="text-2xl font-extrabold">{p.name}</h3>
             <p className={`mt-2 text-sm ${p.popular ? "opacity-80" : "text-muted-foreground"}`}>{p.blurb}</p>
             {SHOW_PRICES ? (
@@ -144,7 +145,7 @@ export function LandingPricing() {
             )}
             <ul className="mt-6 flex-1 space-y-2 text-sm">
               {p.features.map((f) => <li key={f}>✓ {f}</li>)}
-              <li>✓ 14-day free trial · Setup <Strike>$1,000</Strike> $0 · $250 bonus credits</li>
+              <li>✓ 14-day free trial · No credit card required · Setup <Strike>$1,000</Strike> $0 · +$250 in free credits</li>
             </ul>
             <Link
               to="/free-trial"
@@ -153,7 +154,7 @@ export function LandingPricing() {
             >
               Book a Free Trial →
             </Link>
-            {!SHOW_PRICES && <p className="mt-2 text-center text-xs opacity-80">Full version. No credit card. Ready in minutes.</p>}
+            {!SHOW_PRICES && <NoCardNote dark={p.popular} className="mt-2 text-center" />}
           </article>
         ))}
       </div>
@@ -163,7 +164,7 @@ export function LandingPricing() {
       <p className="mx-auto mt-3 max-w-3xl text-center text-xs text-muted-foreground">
         {SHOW_PRICES
           ? "Choose monthly or yearly billing. Monthly plans are month-to-month with no long-term contract — cancel anytime before your next billing date. Prefer yearly? Pay annually and save 12% on any plan."
-          : "Your free trial is the full version and needs no credit card. When it ends, choose a monthly plan (month-to-month, cancel anytime) or a yearly plan to save 12%. Bonus credits expire 90 days after sign-up."}
+          : "Your free trial lasts 14 days or until your $250 in free credits are used."}
       </p>
     </section>
   );
