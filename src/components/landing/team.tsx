@@ -5,7 +5,7 @@ import { Link } from "@tanstack/react-router";
 import { Hash, Mail, PhoneIncoming, Play, UserCog } from "lucide-react";
 import { AGENTS, CATEGORIES, type AgentKey } from "@/data/painPoints";
 import { CtaButton } from "@/components/site";
-import { AGENT_ORDER, AGENT_PHOTOS, SectionHead, TypedCall, Waveform, type CallLine } from "./shared";
+import { AGENT_ORDER, AGENT_PHOTOS, NoCardNote, SectionHead, TypedCall, Waveform, type CallLine } from "./shared";
 
 function agentStats(key: AgentKey) {
   const items = CATEGORIES.flatMap((c) => c.items.filter((i) => i.agent === key).map((i) => ({ ...i, cat: c.title })));

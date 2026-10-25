@@ -5,7 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { AGENTS, CATEGORIES, type AgentKey } from "@/data/painPoints";
 import { PLANS, SHOW_PRICES, formatUsd } from "@/lib/funnel";
 import { ALL_PAIN_IDS, PLAN_AGENTS, idsForAgents, recommendPlan } from "@/lib/configurator";
-import { AGENT_ORDER, AgentChip, SectionHead } from "./shared";
+import { AGENT_ORDER, AgentChip, NoCardNote, SectionHead } from "./shared";
 
 const spring = { type: "spring" as const, stiffness: 380, damping: 28 };
 
@@ -86,6 +86,7 @@ function Summary({ enabled }: { enabled: Set<string> }) {
       >
         Book a Free Trial with this setup →
       </Link>
+      <NoCardNote className="text-center" />
     </div>
   );
 }

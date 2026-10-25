@@ -1,6 +1,7 @@
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { CtaButton } from "@/components/site";
+import { NoCardNote } from "@/components/landing/shared";
 import { AGENTS } from "@/lib/funnel";
 import { getRecommendations } from "@/lib/recommend.functions";
 
@@ -93,7 +94,7 @@ export function Recommender() {
                     );
                   })}
                 </div>
-                {recs.length > 0 && <CtaButton size="lg" className="mt-8" />}
+                {recs.length > 0 && (<><CtaButton size="lg" className="mt-8" /><NoCardNote className="mt-2" /></>)}
               </div>
             )}
           </div>
