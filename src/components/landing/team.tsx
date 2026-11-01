@@ -170,10 +170,19 @@ export function CallPlayer() {
   const [failed, setFailed] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
   const inView = useInView(cardRef, { margin: "-60px" });
+  const wasInView = useRef(false);
 
-  // Pause when the card scrolls out of view.
+  // Pause only when the card leaves the screen after having been visible,
+  // so a tap while it scrolls into place isn't instantly paused.
   useEffect(() => {
-    if (!inView && playing) audioRef.current?.pause();
+    if (inView) {
+      wasInView.current = true;
+      return;
+    }
+    if (wasInView.current && playing) {
+      audioRef.current?.pause();
+      wasInView.current = false;
+    }
   }, [inView, playing]);
 
   const toggle = () => {
