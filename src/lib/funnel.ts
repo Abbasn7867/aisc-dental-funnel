@@ -88,8 +88,8 @@ export const LEGAL = {
 export const DASHBOARD_URL = "https://aisolutioncompany.com/practice/dashboard";
 export const SETUP_URL = "https://aisolutioncompany.com/practice/setup";
 
-// Intro video (YouTube embed). The "Watch the Intro" button and the video section appear while this is set.
-export const INTRO_VIDEO_URL = "https://www.youtube.com/embed/Bc2ZzYFr9BU";
+// Intro video (YouTube privacy-mode embed). The "Watch the Intro" button and the video section appear while this is set.
+export const INTRO_VIDEO_URL = "https://www.youtube-nocookie.com/embed/Bc2ZzYFr9BU";
 
 // [ADD FINAL DOMAIN] Canonical/OG base URL for this funnel. Update when the funnel's domain is confirmed.
 export const SITE_URL = "https://aisolutioncompany.com";
