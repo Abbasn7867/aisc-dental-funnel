@@ -135,85 +135,170 @@ export function ProofCall() {
   );
 }
 
-const OPEN = "Thanks for calling. All calls are recorded for quality and training purposes.";
-const SCENARIOS: { id: string; label: string; outcome: string; lines: CallLine[] }[] = [
-  {
-    id: "new", label: "New patient cleaning", outcome: "Booked · Thu 9:00 AM",
-    lines: [
-      { who: "amy", text: `${OPEN} This is Amy. How can I help?` },
-      { who: "caller", text: "Hi! Are you taking new patients?" },
-      { who: "amy", text: "We are, and we'd love to see you. Are you looking for a cleaning and exam?" },
-      { who: "caller", text: "Yes, ideally a morning this week." },
-      { who: "amy", text: "I have Thursday at 9:00 or 10:30 AM. Which suits you?" },
-      { who: "caller", text: "9:00 is perfect." },
-      { who: "amy", text: "You're booked for Thursday at 9:00. I'll text your new patient forms so you can finish them at home." },
-    ],
-  },
-  {
-    id: "urgent", label: "Toothache after hours", outcome: "First slot tomorrow · on-call team alerted",
-    lines: [
-      { who: "amy", text: `${OPEN} This is Amy. How can I help?` },
-      { who: "caller", text: "It's late, I know, but I have a really bad toothache." },
-      { who: "amy", text: "I'm sorry you're in pain. Is there any swelling, injury or bleeding that won't stop?" },
-      { who: "caller", text: "A little swelling on one side." },
-      { who: "amy", text: "Thank you. I'm following the practice's urgent protocol and alerting the on-call team now." },
-      { who: "amy", text: "I've also held our first emergency slot tomorrow at 8:00 AM for you. Shall I confirm it?" },
-      { who: "caller", text: "Yes, please. Thank you." },
-    ],
-  },
-  {
-    id: "insurance", label: "Insurance question", outcome: "In network · visit booked",
-    lines: [
-      { who: "amy", text: `${OPEN} This is Amy. How can I help?` },
-      { who: "caller", text: "Do you take my dental plan? It's through my employer." },
-      { who: "amy", text: "Happy to check. What's the name of the plan on your card?" },
-      { who: "caller", text: "It's the PPO plan from my work insurance." },
-      { who: "amy", text: "That plan is on the practice's approved in-network list. Would you like to book a visit?" },
-      { who: "caller", text: "Great, next Monday afternoon if possible." },
-      { who: "amy", text: "Done: Monday at 2:30 PM. Please bring your insurance card with you." },
-    ],
-  },
-  {
-    id: "resched", label: "Reschedule", outcome: "Moved to Friday · slot offered to waitlist",
-    lines: [
-      { who: "amy", text: `${OPEN} This is Amy. How can I help?` },
-      { who: "caller", text: "I can't make my Tuesday appointment anymore." },
-      { who: "amy", text: "No problem. Would later this week work for you?" },
-      { who: "caller", text: "Friday would be great." },
-      { who: "amy", text: "I can move you to Friday at 11:00 AM. Does that work?" },
-      { who: "caller", text: "Perfect, thank you." },
-      { who: "amy", text: "All set for Friday. I've offered your Tuesday time to a patient on the waitlist." },
-    ],
-  },
+const CALL_AUDIO = "/audio/dental-new-patient-call.mp3";
+
+const TRANSCRIPT: CallLine[] = [
+  { who: "amy", text: "Thank you for calling Brightwater Family Dentistry. This is Amy. How can I help you today?" },
+  { who: "caller", text: "Hey there. So, it's been a few years since my last cleaning. I'm a little overdue. First off, do you take Cigna?" },
+  { who: "amy", text: "Yes. We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. We will check your benefits before your visit." },
+  { who: "caller", text: "Oh nice, that's good to hear. Also, how much is a cleaning and exam for a new patient?" },
+  { who: "amy", text: "Our new patient special is $129. It includes an exam, X-rays and a cleaning." },
+  { who: "caller", text: "Okay, that's reasonable. Quick one, it's been about five years. Is that a problem?" },
+  { who: "amy", text: "Not at all. The dentist and hygienist will check everything and recommend the right type of cleaning for you." },
+  { who: "caller", text: "Fair enough. Now, I get pretty nervous at the dentist. Do you have anything for that?" },
+  { who: "amy", text: "Yes. We offer nitrous oxide, noise-canceling headphones and warm blankets. Just let us know when you arrive." },
+  { who: "caller", text: "Okay, good. That's a relief. And do you have early morning or evening times?" },
+  { who: "amy", text: "Yes. We open at 7 AM on weekdays, and we have evening appointments on Tuesdays and Thursdays until 6 PM." },
+  { who: "caller", text: "Great, good to know. And where are you located, and is there parking?" },
+  { who: "amy", text: "We are located at 3940 Fourth Ave, Suite 202, San Diego, CA 92103. Free parking is available in the lot behind the building." },
+  { who: "caller", text: "Alright, good to know. Last one, what's the next new patient opening?" },
+  { who: "amy", text: "The next new patient opening is Monday at 7:00 AM. Would you like me to book it?" },
+  { who: "caller", text: "Yeah, let's do it. My name is Sam Whitaker, and my number is (619) 555-0191." },
+  { who: "amy", text: "Thank you, Sam. You're booked for a new patient exam and cleaning on Monday at 7:00 AM. You'll get a text confirmation at (619) 555-0191. Is there anything else I can help you with?" },
+  { who: "caller", text: "Awesome, thanks for your help. Have a great day!" },
+  { who: "amy", text: "You're welcome. Thank you for calling Brightwater Family Dentistry. Goodbye." },
 ];
 
+const fmtTime = (s: number) => (Number.isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "--:--");
+
 export function CallPlayer() {
-  const [active, setActive] = useState(SCENARIOS[0]!.id);
-  const [run, setRun] = useState(0);
-  const sc = SCENARIOS.find((s) => s.id === active) ?? SCENARIOS[0]!;
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const [playing, setPlaying] = useState(false);
+  const [time, setTime] = useState(0);
+  const [duration, setDuration] = useState(NaN);
+  const [failed, setFailed] = useState(false);
+  const [showTranscript, setShowTranscript] = useState(false);
+  const inView = useInView(cardRef, { margin: "-60px" });
+
+  // Pause when the card scrolls out of view.
+  useEffect(() => {
+    if (!inView && playing) audioRef.current?.pause();
+  }, [inView, playing]);
+
+  const toggle = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (a.paused) void a.play().catch(() => setFailed(true));
+    else a.pause();
+  };
+
+  const seekFromPointer = (clientX: number) => {
+    const bar = barRef.current;
+    const a = audioRef.current;
+    if (!bar || !a || !Number.isFinite(a.duration)) return;
+    const r = bar.getBoundingClientRect();
+    a.currentTime = Math.min(1, Math.max(0, (clientX - r.left) / r.width)) * a.duration;
+  };
+
+  const onBarPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    e.currentTarget.setPointerCapture(e.pointerId);
+    seekFromPointer(e.clientX);
+  };
+  const onBarPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (e.buttons === 1) seekFromPointer(e.clientX);
+  };
+
+  const progress = Number.isFinite(duration) && duration > 0 ? (time / duration) * 100 : 0;
+
   return (
     <section className="mx-auto max-w-6xl px-6 py-28">
-      <SectionHead center eyebrow="Hear Amy in action" title={<>Real Calls, <span className="text-gradient">Handled Warmly.</span></>} sub="Pick a call and watch how Amy handles it." />
-      <div role="tablist" aria-label="Call scenarios" className="mx-auto mt-10 flex max-w-3xl flex-wrap justify-center gap-2">
-        {SCENARIOS.map((s) => (
-          <button
-            key={s.id}
-            role="tab"
-            aria-selected={active === s.id}
-            onClick={() => { setActive(s.id); setRun((r) => r + 1); }}
-            className={`rounded-full px-5 py-2.5 text-sm font-bold transition ${active === s.id ? "bg-primary text-primary-foreground shadow-glow" : "border bg-card hover:bg-secondary"}`}
-          >
-            {s.label}
-          </button>
-        ))}
+      <SectionHead center eyebrow="Hear Amy in action" title={<>Real Calls, <span className="text-gradient">Handled Warmly.</span></>} sub="Listen to Amy book a new patient, start to finish." />
+      <div ref={cardRef} className="mx-auto mt-10 max-w-2xl rounded-[2rem] border bg-card p-6 shadow-soft">
+        <div className="flex items-center gap-3">
+          <img src={AGENT_PHOTOS.amy} alt="Amy, AI receptionist" className="h-12 w-12 rounded-full object-cover object-[50%_20%] ring-2 ring-agent-amy ring-offset-2" />
+          <div className="flex-1">
+            <p className="font-extrabold leading-tight">Amy · AI Receptionist</p>
+            <p className="text-xs font-semibold text-muted-foreground">New patient books a cleaning · 2:23</p>
+          </div>
+          <Waveform active={playing} bars={22} />
+        </div>
+
+        {!failed && (
+          <div className="mt-6 flex items-center gap-4">
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label={playing ? "Pause the call recording" : "Play the call recording"}
+              className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow transition hover:scale-105 active:scale-95"
+            >
+              {playing ? <Pause className="h-6 w-6" /> : <Play className="ml-0.5 h-6 w-6" />}
+            </button>
+            <div className="flex-1">
+              <div
+                ref={barRef}
+                role="slider"
+                aria-label="Call progress"
+                aria-valuemin={0}
+                aria-valuemax={Math.round(duration) || 0}
+                aria-valuenow={Math.round(time)}
+                tabIndex={0}
+                onPointerDown={onBarPointerDown}
+                onPointerMove={onBarPointerMove}
+                onKeyDown={(e) => {
+                  const a = audioRef.current;
+                  if (!a || !Number.isFinite(a.duration)) return;
+                  if (e.key === "ArrowRight") a.currentTime = Math.min(a.duration, a.currentTime + 5);
+                  if (e.key === "ArrowLeft") a.currentTime = Math.max(0, a.currentTime - 5);
+                }}
+                className="group relative h-6 cursor-pointer touch-none"
+              >
+                <div className="absolute top-1/2 h-1.5 w-full -translate-y-1/2 rounded-full bg-secondary" />
+                <div className="absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-primary" style={{ width: `${progress}%` }} />
+                <div className="absolute top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow transition group-hover:scale-110" style={{ left: `${progress}%` }} />
+              </div>
+              <div className="mt-1 flex justify-between text-xs font-bold tabular-nums text-muted-foreground">
+                <span>{fmtTime(time)}</span>
+                <span>{fmtTime(duration)}</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <audio
+          ref={audioRef}
+          src={CALL_AUDIO}
+          preload="none"
+          onPlay={() => setPlaying(true)}
+          onPause={() => setPlaying(false)}
+          onEnded={() => setPlaying(false)}
+          onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+          onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+          onError={() => { setFailed(true); setShowTranscript(true); }}
+        />
+
+        <button
+          type="button"
+          onClick={() => setShowTranscript((s) => !s)}
+          aria-expanded={showTranscript}
+          className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-primary underline-offset-2 hover:underline"
+        >
+          {showTranscript ? "Hide the transcript" : "Read the transcript"}
+          <ChevronDown className={`h-4 w-4 transition ${showTranscript ? "rotate-180" : ""}`} />
+        </button>
+
+        {showTranscript && (
+          <div className="mt-4 flex flex-col gap-2">
+            {TRANSCRIPT.map((l, i) => {
+              const isAmy = l.who === "amy";
+              return (
+                <p key={i} className={`max-w-[85%] rounded-2xl px-3.5 py-2 text-sm ${isAmy ? "self-end rounded-br-md bg-primary text-primary-foreground" : "self-start rounded-bl-md bg-secondary"}`}>
+                  <span className="mb-0.5 block text-[11px] font-extrabold uppercase tracking-wide opacity-70">{isAmy ? "Amy" : "Caller"}</span>
+                  {l.text}
+                </p>
+              );
+            })}
+          </div>
+        )}
       </div>
-      <div role="tabpanel" className="mx-auto mt-8 max-w-2xl rounded-[2rem] border bg-card p-6 shadow-soft">
-        <TypedCall lines={sc.lines} outcome={sc.outcome} playKey={`${active}-${run}`} />
-      </div>
-      <p className="mt-6 text-center text-sm text-muted-foreground">
-        Prefer to hear it for real?{" "}
-        <Link to="/free-trial" className="font-bold text-primary underline">Book a Free Trial</Link> and get your own recorded test call in 3–4 minutes.
+      <p className="mx-auto mt-4 max-w-2xl text-center text-xs text-muted-foreground">
+        Sample call with a fictional practice (Brightwater Family Dentistry). All calls are recorded for quality and training purposes.
       </p>
+      <div className="mt-8 text-center">
+        <CtaButton size="lg" />
+        <p className="mt-3 text-sm font-semibold text-muted-foreground">14-day free trial · No credit card required · Get your own recorded test call</p>
+      </div>
     </section>
   );
 }
