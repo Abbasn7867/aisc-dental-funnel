@@ -68,7 +68,7 @@ export function TeamSection() {
 const STEPS = [
   { icon: UserCog, title: "Set Up Your Profile", text: "With the Setup Wizard, or let us do it for you." },
   { icon: Hash, title: "Get Your Booking Line", text: "Your practice gets its own booking line." },
-  { icon: PhoneIncoming, title: "Joseph, Our AI Test Caller, Rings Amy", text: "She answers questions from your FAQs, live." },
+  { icon: PhoneIncoming, title: "A Test Caller Rings Amy", text: "Right after setup, a caller asks your FAQs and Amy answers live." },
   { icon: Mail, title: "Recording Delivered", text: "On your dashboard and in your inbox." },
 ];
 
