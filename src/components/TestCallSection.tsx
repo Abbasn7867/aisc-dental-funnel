@@ -2,31 +2,31 @@ import { useEffect, useRef, useState } from "react";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { AGENT_PHOTOS, Waveform } from "@/components/landing/shared";
 
-/** "Joseph Called Amy": the FAQ test call every practice gets after setup.
+/** Test call to Amy: someone rings the practice line after the Setup Wizard and asks its FAQs.
  *  Styled with the site's own tokens (bg-card, shadow-soft, primary, secondary, mint-soft) so it
  *  sits inside the dark #test-call band like the original dashboard card. */
 const AUDIO_SRC = "/audio/Dental-call-web.mp3";
 
-type Line = { t: number; who: "amy" | "joseph"; text: string };
+type Line = { t: number; who: "amy" | "caller"; text: string };
 const LINES: Line[] = [
   { t: 0.0, who: "amy", text: "Thank you for calling Brightwater Family Dentistry. This is Amy. How can I help you today?" },
-  { t: 6.47, who: "joseph", text: "Hey, hi there! So, uh, I've got a few quick questions about your practice. Mind if I ask? First... what are your office hours?" },
+  { t: 6.47, who: "caller", text: "Hey, hi there! So, uh, I've got a few quick questions about your practice. Mind if I ask? First... what are your office hours?" },
   { t: 15.76, who: "amy", text: "Of course. We are open Monday through Friday from 7 AM to 4 PM, with evening appointments on Tuesdays and Thursdays until 6 PM. We are closed on weekends." },
-  { t: 27.26, who: "joseph", text: "Alright, got it. That works for me. And where's your office located?" },
+  { t: 27.26, who: "caller", text: "Alright, got it. That works for me. And where's your office located?" },
   { t: 33.03, who: "amy", text: "We are located at 3940 Fourth Ave, Suite 202, San Diego, CA 92103, in Hillcrest. Free parking is available in the lot behind the building." },
-  { t: 45.33, who: "joseph", text: "Hmm, okay... yeah, I think I know that area. Now, uh, the big question... what insurance or payment options do you take?" },
+  { t: 45.33, who: "caller", text: "Hmm, okay... yeah, I think I know that area. Now, uh, the big question... what insurance or payment options do you take?" },
   { t: 55.95, who: "amy", text: "We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. If you don't have insurance, our new patient special is $129, and it includes an exam, X-rays and a cleaning. We also offer CareCredit financing." },
-  { t: 73.61, who: "joseph", text: "I see, okay. That helps a lot. And if something urgent comes up... do you handle same-day requests?" },
+  { t: 73.61, who: "caller", text: "I see, okay. That helps a lot. And if something urgent comes up... do you handle same-day requests?" },
   { t: 82.77, who: "amy", text: "Yes. We keep time open every weekday for same-day dental emergencies, like a toothache or a broken tooth. After hours, you can call (619) 555-0141, and our on-call dentist will call you back." },
-  { t: 97.69, who: "joseph", text: "Okay, good to know. Who would I be working with there?" },
+  { t: 97.69, who: "caller", text: "Okay, good to know. Who would I be working with there?" },
   { t: 102.37, who: "amy", text: "You would see Dr. Elena Park or Dr. James Whitfield. Both are general dentists, and they work with our team of hygienists." },
-  { t: 110.46, who: "joseph", text: "Nice, great to know that. And what services do you offer?" },
+  { t: 110.46, who: "caller", text: "Nice, great to know that. And what services do you offer?" },
   { t: 115.09, who: "amy", text: "We offer cleanings, exams, X-rays, fillings, crowns, root canals, implants, Invisalign and teeth whitening. We also offer nitrous oxide for patients who feel nervous." },
-  { t: 127.45, who: "joseph", text: "Oh, okay, nice. Good to know. Are you taking new clients right now?" },
+  { t: 127.45, who: "caller", text: "Oh, okay, nice. Good to know. Are you taking new clients right now?" },
   { t: 133.41, who: "amy", text: "Yes, we are welcoming new patients." },
-  { t: 136.23, who: "joseph", text: "Perfect, good to hear. And, uh, one last thing... do you have a website I can check out?" },
+  { t: 136.23, who: "caller", text: "Perfect, good to hear. And, uh, one last thing... do you have a website I can check out?" },
   { t: 141.95, who: "amy", text: "Yes. Our website is brightwaterfamilydentistry.com. You can also fill out your new patient forms there. Is there anything else I can help you with?" },
-  { t: 151.68, who: "joseph", text: "Awesome, I'll take a look. That answers all my questions. Nice team, really appreciate your help. Have a great day!" },
+  { t: 151.68, who: "caller", text: "Awesome, I'll take a look. That answers all my questions. Nice team, really appreciate your help. Have a great day!" },
   { t: 159.15, who: "amy", text: "You're welcome. Thank you for calling Brightwater Family Dentistry. Goodbye." },
 ];
 
@@ -98,13 +98,12 @@ export function TestCallSection() {
     <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground shadow-soft">
       <div className="flex items-center justify-between gap-3 border-b pb-3">
         <div className="flex items-center gap-3">
-          <div className="flex -space-x-2">
-            <img src={AGENT_PHOTOS.joseph} alt="" aria-hidden className="h-9 w-9 rounded-full object-cover object-[50%_20%] ring-2 ring-card" />
+          <div className="flex">
             <img src={AGENT_PHOTOS.amy} alt="" aria-hidden className="h-9 w-9 rounded-full object-cover object-[50%_20%] ring-2 ring-card" />
           </div>
           <div>
-            <p className="font-extrabold leading-tight">Joseph Called Amy</p>
-            <p className="text-xs font-semibold text-muted-foreground">Live FAQ check on your booking line</p>
+            <p className="font-extrabold leading-tight">Test Call to Amy</p>
+            <p className="text-xs font-semibold text-muted-foreground">A caller tests Amy right after setup</p>
           </div>
         </div>
         <span className="shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-muted-foreground">Sample call</span>
@@ -165,7 +164,7 @@ export function TestCallSection() {
         onError={() => setFailed(true)}
       />
 
-      <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Questions Joseph asks">
+      <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Questions the caller asks">
         {QUESTIONS.map((q) => {
           const done = started && current >= q.answer;
           return (
@@ -190,7 +189,7 @@ export function TestCallSection() {
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playFrom(l.t); } }}
               className={`max-w-[85%] cursor-pointer rounded-2xl px-3.5 py-2 text-sm transition ${isAmy ? "self-end rounded-br-md bg-primary text-primary-foreground" : "self-start rounded-bl-md bg-secondary"} ${started && !now ? "opacity-60" : ""} ${now ? "ring-2 ring-accent ring-offset-2 ring-offset-card" : ""}`}
             >
-              <span className="mb-0.5 block text-[11px] font-extrabold uppercase tracking-wide opacity-70">{isAmy ? "Amy · AI receptionist" : "Joseph · AI test caller"}</span>
+              <span className="mb-0.5 block text-[11px] font-extrabold uppercase tracking-wide opacity-70">{isAmy ? "Amy · AI receptionist" : "Test caller"}</span>
               {l.text}
             </div>
           );
@@ -209,7 +208,7 @@ export function TestCallSection() {
           </button>
         )}
       </div>
-      <p className="mt-2 text-xs text-muted-foreground">Sample practice (Brightwater Family Dentistry). This test call doesn't use your trial credits. Yours appears on your dashboard and in your inbox after setup.</p>
+      <p className="mt-2 text-xs text-muted-foreground">Sample practice (Brightwater Family Dentistry). Your own test call recording appears on your dashboard and in your inbox after setup.</p>
     </div>
   );
 }
