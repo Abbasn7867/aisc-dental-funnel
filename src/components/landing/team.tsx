@@ -68,7 +68,7 @@ export function TeamSection() {
 const STEPS = [
   { icon: UserCog, title: "Set Up Your Profile", text: "With the Setup Wizard, or let us do it for you." },
   { icon: Hash, title: "Get Your Booking Line", text: "Your practice gets its own booking line." },
-  { icon: PhoneIncoming, title: "Our Test Caller Rings Amy", text: "She answers questions from your FAQs, live." },
+  { icon: PhoneIncoming, title: "Joseph, Our AI Test Caller, Rings Amy", text: "She answers questions from your FAQs, live." },
   { icon: Mail, title: "Recording Delivered", text: "On your dashboard and in your inbox." },
 ];
 
@@ -97,8 +97,21 @@ export function ProofCall() {
           <p className="mt-3 text-sm opacity-80">Your test call recording arrives within 3–4 minutes of setup. The test call is recorded and sent to the email you provide.</p>
         </div>
 
-        <div className="relative">
+        <div className="relative min-w-0">
           <TestCallSection />
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.6, type: "spring", stiffness: 120 }}
+            className="glass absolute -bottom-16 -left-4 flex items-center gap-3 rounded-2xl p-4 text-foreground shadow-soft md:-left-10"
+          >
+            <span className="grid h-10 w-10 place-items-center rounded-full bg-mint-soft"><Mail className="h-5 w-5 text-primary" /></span>
+            <div>
+              <p className="text-sm font-extrabold">Your test call recording is ready</p>
+              <p className="text-xs text-muted-foreground">Sent to your inbox · just now</p>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
