@@ -1,3 +1,4 @@
+import { TestCallSection } from "@/components/TestCallSection";
 import { motion, useInView } from "framer-motion";
 import proofBand from "@/assets/landing/band-proof.webp";
 import { useEffect, useRef, useState } from "react";
@@ -97,37 +98,7 @@ export function ProofCall() {
         </div>
 
         <div className="relative">
-          <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground shadow-soft">
-            <div className="flex items-center justify-between border-b pb-3">
-              <p className="font-extrabold">Calls</p>
-              <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-muted-foreground">Illustrative dashboard</span>
-            </div>
-            <div className="mt-4 flex items-center gap-3 rounded-2xl bg-background p-4">
-              <button aria-label="Play recording (illustration)" className="grid h-11 w-11 place-items-center rounded-full bg-primary text-primary-foreground"><Play className="h-4 w-4" /></button>
-              <div className="flex-1">
-                <p className="text-sm font-extrabold">Test call · 3:12 · Recording ready</p>
-                <Waveform active bars={34} />
-              </div>
-            </div>
-            {["Opening hours question", "New patient booking", "Insurance question"].map((t) => (
-              <div key={t} className="mt-2 flex items-center justify-between rounded-xl px-4 py-2.5 text-sm">
-                <span>{t}</span><span className="font-bold text-primary">Answered ✓</span>
-              </div>
-            ))}
-          </div>
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6, type: "spring", stiffness: 120 }}
-            className="glass absolute -bottom-16 -left-4 flex items-center gap-3 rounded-2xl p-4 text-foreground shadow-soft md:-left-10"
-          >
-            <span className="grid h-10 w-10 place-items-center rounded-full bg-mint-soft"><Mail className="h-5 w-5 text-primary" /></span>
-            <div>
-              <p className="text-sm font-extrabold">Your test call recording is ready</p>
-              <p className="text-xs text-muted-foreground">Sent to your inbox · just now</p>
-            </div>
-          </motion.div>
+          <TestCallSection />
         </div>
       </div>
     </section>
