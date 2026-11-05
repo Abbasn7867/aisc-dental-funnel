@@ -1,0 +1,105 @@
+<!-- AISC test-call section: "Joseph Called Amy" (dental). Paste where the empty player was. Audio: /audio/dental-sample-call.mp3 -->
+<section class="aisc-tc" aria-labelledby="aisc-tc-title-dental">
+<style>
+.aisc-tc{--tc-navy:#0B1F3A;--tc-ink:#14202B;--tc-muted:#5B6874;--tc-line:#E1E6EB;--tc-soft:#F4F6F8;--tc-card:#FFFFFF;--tc-acc:#6D4AFF;--tc-acc-soft:#EFEBFF;--tc-ok:#12805C;--tc-ok-soft:#E3F5EE;
+  font:15px/1.55 inherit;color:var(--tc-ink);max-width:880px;margin:0 auto;padding:0 16px;box-sizing:border-box}
+.aisc-tc *{box-sizing:border-box}
+.aisc-tc .tc-frame{background:var(--tc-card);border:1px solid var(--tc-line);border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(11,31,58,.10);position:relative}
+.aisc-tc .tc-badge{position:absolute;top:14px;right:14px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);padding:3px 9px;border-radius:999px}
+.aisc-tc .tc-dash{background:var(--tc-navy);color:#fff;padding:18px 20px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.aisc-tc .tc-dash h3{margin:0;font-size:18px;font-weight:700}
+.aisc-tc .tc-dash p{margin:0;color:#B8C4D3;font-size:13px}
+.aisc-tc .tc-body{padding:18px 20px 20px;display:grid;gap:16px}
+.aisc-tc .tc-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:flex-start;justify-content:space-between}
+.aisc-tc .tc-eyebrow{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--tc-acc)}
+.aisc-tc .tc-head h4{margin:2px 0 4px;font-size:20px}
+.aisc-tc .tc-head p{margin:0;color:var(--tc-muted);font-size:14px;max-width:60ch}
+.aisc-tc .tc-btn{border:0;border-radius:10px;background:var(--tc-acc);color:#fff;font:inherit;font-weight:600;padding:9px 16px;cursor:pointer}
+.aisc-tc .tc-btn:focus-visible,.aisc-tc .tc-line:focus-visible,.aisc-tc .tc-seek:focus-visible{outline:3px solid #9C86FF;outline-offset:2px}
+.aisc-tc .tc-qs{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.aisc-tc .tc-qs li{font-size:13px;border:1px solid var(--tc-line);border-radius:999px;padding:4px 10px;color:var(--tc-muted);background:var(--tc-soft);transition:background .3s,color .3s,border-color .3s}
+.aisc-tc .tc-qs li.done{background:var(--tc-ok-soft);color:var(--tc-ok);border-color:#BFE6D5}
+.aisc-tc .tc-qs li.done::before{content:"✓ "}
+.aisc-tc .tc-player{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--tc-soft);border:1px solid var(--tc-line);border-radius:12px;padding:10px 12px}
+.aisc-tc .tc-play{width:44px;height:44px;border-radius:50%;border:0;background:var(--tc-acc);color:#fff;font-size:16px;cursor:pointer;display:grid;place-items:center}
+.aisc-tc .tc-seek{width:100%;accent-color:var(--tc-acc);min-width:0}
+.aisc-tc .tc-time{font-variant-numeric:tabular-nums;font-size:13px;color:var(--tc-muted);white-space:nowrap}
+.aisc-tc .tc-note{font-size:12.5px;color:var(--tc-muted);margin:0}
+.aisc-tc .tc-script{max-height:340px;overflow-y:auto;border:1px solid var(--tc-line);border-radius:12px;padding:12px;display:grid;gap:8px;background:#FBFCFD}
+.aisc-tc .tc-line{display:grid;gap:2px;max-width:86%;padding:8px 12px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:background .25s,border-color .25s,opacity .25s}
+.aisc-tc .tc-line .who{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--tc-muted)}
+.aisc-tc .tc-line.j{justify-self:start;background:#fff;border-color:var(--tc-line)}
+.aisc-tc .tc-line.a{justify-self:end;background:var(--tc-acc-soft)}
+.aisc-tc .tc-script.playing .tc-line{opacity:.55}
+.aisc-tc .tc-script.playing .tc-line.now{opacity:1;border-color:var(--tc-acc);box-shadow:0 2px 10px rgba(109,74,255,.18)}
+.aisc-tc .tc-done{justify-self:start;font-size:13px;font-weight:700;color:var(--tc-ok);background:var(--tc-ok-soft);border-radius:999px;padding:5px 12px}
+.aisc-tc .tc-toast{position:absolute;right:16px;bottom:16px;background:var(--tc-navy);color:#fff;border-radius:12px;padding:10px 14px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:.4s;pointer-events:none}
+.aisc-tc .tc-toast.show{transform:none;opacity:1}
+@media (max-width:560px){.aisc-tc .tc-line{max-width:100%}.aisc-tc .tc-player{grid-template-columns:auto 1fr}.aisc-tc .tc-time{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){.aisc-tc *{transition:none!important}}
+</style>
+<div class="tc-frame">
+  <span class="tc-badge">Sample preview</span>
+  <div class="tc-dash"><div><h3>Practice Dashboard</h3><p>Your dental practice</p></div></div>
+  <div class="tc-body">
+    <div class="tc-head">
+      <div>
+        <div class="tc-eyebrow">Live AI call demo</div>
+        <h4 id="aisc-tc-title-dental">Joseph Called Amy</h4>
+        <p>A live FAQ check on your new booking number, proof that inbound calling is working. Joseph, our AI test caller, asks the questions your patients ask, and Amy answers from your practice details. This call doesn't use your trial credits.</p>
+      </div>
+      <button class="tc-btn" type="button" data-act="retest">Replay call</button>
+    </div>
+    <ul class="tc-qs" aria-label="Questions Joseph asks"><li>Office hours</li><li>Location</li><li>Insurance & payment</li><li>Urgent & same-day requests</li><li>Who you'll see</li><li>Services</li><li>New patients</li><li>Website</li></ul>
+    <div class="tc-player">
+      <button class="tc-play" type="button" data-act="play" aria-label="Play sample call">▶</button>
+      <input class="tc-seek" type="range" min="0" max="164.6" step="0.1" value="0" aria-label="Seek">
+      <span class="tc-time"><span data-cur>0:00</span> / <span data-dur>2:44</span></span>
+    </div>
+    <audio preload="metadata" src="/audio/dental-sample-call.mp3"></audio>
+    <div class="tc-script" role="log" aria-label="Call transcript"><div class="tc-line a" data-t="0" tabindex="0"><span class="who">Amy</span><span>Thank you for calling Brightwater Family Dentistry. This is Amy. How can I help you today?</span></div><div class="tc-line j" data-t="6.47" tabindex="0"><span class="who">Joseph</span><span>Hey, hi there! So, uh, I&#x27;ve got a few quick questions about your practice. Mind if I ask? First... what are your office hours?</span></div><div class="tc-line a" data-t="15.76" tabindex="0"><span class="who">Amy</span><span>Of course. We are open Monday through Friday from 7 AM to 4 PM, with evening appointments on Tuesdays and Thursdays until 6 PM. We are closed on weekends.</span></div><div class="tc-line j" data-t="27.26" tabindex="0"><span class="who">Joseph</span><span>Alright, got it. That works for me. And where&#x27;s your office located?</span></div><div class="tc-line a" data-t="33.03" tabindex="0"><span class="who">Amy</span><span>We are located at 3940 Fourth Ave, Suite 202, San Diego, CA 92103, in Hillcrest. Free parking is available in the lot behind the building.</span></div><div class="tc-line j" data-t="45.33" tabindex="0"><span class="who">Joseph</span><span>Hmm, okay... yeah, I think I know that area. Now, uh, the big question... what insurance or payment options do you take?</span></div><div class="tc-line a" data-t="55.95" tabindex="0"><span class="who">Amy</span><span>We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. If you don&#x27;t have insurance, our new patient special is $129, and it includes an exam, X-rays and a cleaning. We also offer CareCredit financing.</span></div><div class="tc-line j" data-t="73.61" tabindex="0"><span class="who">Joseph</span><span>I see, okay. That helps a lot. And if something urgent comes up... do you handle same-day requests?</span></div><div class="tc-line a" data-t="82.77" tabindex="0"><span class="who">Amy</span><span>Yes. We keep time open every weekday for same-day dental emergencies, like a toothache or a broken tooth. After hours, you can call (619) 555-0141, and our on-call dentist will call you back.</span></div><div class="tc-line j" data-t="97.69" tabindex="0"><span class="who">Joseph</span><span>Okay, good to know. Who would I be working with there?</span></div><div class="tc-line a" data-t="102.37" tabindex="0"><span class="who">Amy</span><span>You would see Dr. Elena Park or Dr. James Whitfield. Both are general dentists, and they work with our team of hygienists.</span></div><div class="tc-line j" data-t="110.46" tabindex="0"><span class="who">Joseph</span><span>Nice, great to know that. And what services do you offer?</span></div><div class="tc-line a" data-t="115.09" tabindex="0"><span class="who">Amy</span><span>We offer cleanings, exams, X-rays, fillings, crowns, root canals, implants, Invisalign and teeth whitening. We also offer nitrous oxide for patients who feel nervous.</span></div><div class="tc-line j" data-t="127.45" tabindex="0"><span class="who">Joseph</span><span>Oh, okay, nice. Good to know. Are you taking new clients right now?</span></div><div class="tc-line a" data-t="133.41" tabindex="0"><span class="who">Amy</span><span>Yes, we are welcoming new patients.</span></div><div class="tc-line j" data-t="136.23" tabindex="0"><span class="who">Joseph</span><span>Perfect, good to hear. And, uh, one last thing... do you have a website I can check out?</span></div><div class="tc-line a" data-t="141.95" tabindex="0"><span class="who">Amy</span><span>Yes. Our website is brightwaterfamilydentistry.com. You can also fill out your new patient forms there. Is there anything else I can help you with?</span></div><div class="tc-line j" data-t="151.68" tabindex="0"><span class="who">Joseph</span><span>Awesome, I&#x27;ll take a look. That answers all my questions. Nice team, really appreciate your help. Have a great day!</span></div><div class="tc-line a" data-t="159.15" tabindex="0"><span class="who">Amy</span><span>You&#x27;re welcome. Thank you for calling Brightwater Family Dentistry. Goodbye.</span></div><span class="tc-done" hidden>All FAQs answered ✓</span></div>
+    <p class="tc-note">Sample practice and details. Your own test call recording appears on your dashboard and in your inbox after setup.</p>
+  </div>
+  <div class="tc-toast" role="status">Your test call is ready · Recording delivered to your inbox</div>
+</div>
+<script>
+(function(){
+  var root=document.currentScript.closest('.aisc-tc');
+  var A=root.querySelector('audio'),play=root.querySelector('[data-act=play]'),seek=root.querySelector('.tc-seek'),
+      cur=root.querySelector('[data-cur]'),durEl=root.querySelector('[data-dur]'),box=root.querySelector('.tc-script'),
+      lines=[].slice.call(root.querySelectorAll('.tc-line')),qs=[].slice.call(root.querySelectorAll('.tc-qs li')),
+      done=root.querySelector('.tc-done'),toast=root.querySelector('.tc-toast');
+  var T=lines.map(function(l){return parseFloat(l.dataset.t)});
+  var QA=[2, 4, 6, 8, 10, 12, 14, 16]; /* index of Amy's answer line for each question chip */
+  var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches, last=-1, dragging=false;
+  function fmt(s){s=Math.max(0,Math.floor(s));return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+  function idx(t){var i=-1;for(var k=0;k<T.length;k++){if(t>=T[k]-0.05)i=k}return i}
+  function update(t){
+    var i=idx(t);
+    if(i!==last){
+      lines.forEach(function(l,k){l.classList.toggle('now',k===i)});
+      if(i>=0&&!A.paused){var l=lines[i];var top=l.offsetTop-box.offsetTop-box.clientHeight/2+l.clientHeight/2;box.scrollTo({top:top,behavior:reduce?'auto':'smooth'})}
+      last=i;
+    }
+    qs.forEach(function(q,k){q.classList.toggle('done',i>=QA[k])});
+    done.hidden=!(i>=QA[QA.length-1]);
+    cur.textContent=fmt(t); if(!dragging)seek.value=t;
+  }
+  play.addEventListener('click',function(){
+    if(A.paused){var p=A.play();if(p&&p.catch)p.catch(function(){play.disabled=true;play.textContent='–';root.querySelector('.tc-note').textContent='Audio could not load. The full call transcript is shown below.';})}
+    else A.pause();
+  });
+  A.addEventListener('play',function(){play.textContent='❚❚';play.setAttribute('aria-label','Pause sample call');box.classList.add('playing');toast.classList.remove('show')});
+  A.addEventListener('pause',function(){play.textContent='▶';play.setAttribute('aria-label','Play sample call')});
+  A.addEventListener('timeupdate',function(){update(A.currentTime)});
+  A.addEventListener('loadedmetadata',function(){if(isFinite(A.duration)){seek.max=A.duration;durEl.textContent=fmt(A.duration)}});
+  A.addEventListener('ended',function(){box.classList.remove('playing');update(A.duration||T[T.length-1]+5);toast.classList.add('show');setTimeout(function(){toast.classList.remove('show')},5000)});
+  A.addEventListener('error',function(){play.disabled=true;play.textContent='–';box.classList.remove('playing');root.querySelector('.tc-note').textContent='Audio could not load. The full call transcript is shown below.'});
+  seek.addEventListener('input',function(){dragging=true;cur.textContent=fmt(seek.value)});
+  seek.addEventListener('change',function(){dragging=false;A.currentTime=parseFloat(seek.value);update(A.currentTime)});
+  lines.forEach(function(l){l.addEventListener('click',function(){A.currentTime=parseFloat(l.dataset.t);if(A.paused)play.click()});
+    l.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();l.click()}})});
+  root.querySelector('[data-act=retest]').addEventListener('click',function(){A.currentTime=0;last=-1;if(A.paused)play.click();else update(0)});
+})();
+</script>
+</section>
