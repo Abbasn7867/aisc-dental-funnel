@@ -1,362 +1,215 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Pause, Play, RotateCcw } from "lucide-react";
+import { AGENT_PHOTOS, Waveform } from "@/components/landing/shared";
 
+/** "Joseph Called Amy": the FAQ test call every practice gets after setup.
+ *  Styled with the site's own tokens (bg-card, shadow-soft, primary, secondary, mint-soft) so it
+ *  sits inside the dark #test-call band like the original dashboard card. */
 const AUDIO_SRC = "/audio/Dental-call-web.mp3";
 
-const CSS =
-  '.aisc-tc{--tc-navy:#0B1F3A;--tc-ink:#14202B;--tc-muted:#5B6874;--tc-line:#E1E6EB;--tc-soft:#F4F6F8;--tc-card:#FFFFFF;--tc-acc:#6D4AFF;--tc-acc-soft:#EFEBFF;--tc-ok:#12805C;--tc-ok-soft:#E3F5EE;\n  font:15px/1.55 inherit;color:var(--tc-ink);max-width:880px;margin:0 auto;padding:0 16px;box-sizing:border-box}\n.aisc-tc *{box-sizing:border-box}\n.aisc-tc .tc-frame{background:var(--tc-card);border:1px solid var(--tc-line);border-radius:18px;overflow:hidden;box-shadow:0 18px 50px rgba(11,31,58,.10);position:relative}\n.aisc-tc .tc-badge{position:absolute;top:14px;right:14px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.3);padding:3px 9px;border-radius:999px}\n.aisc-tc .tc-dash{background:var(--tc-navy);color:#fff;padding:18px 20px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}\n.aisc-tc .tc-dash h3{margin:0;font-size:18px;font-weight:700}\n.aisc-tc .tc-dash p{margin:0;color:#B8C4D3;font-size:13px}\n.aisc-tc .tc-body{padding:18px 20px 20px;display:grid;gap:16px}\n.aisc-tc .tc-head{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:flex-start;justify-content:space-between}\n.aisc-tc .tc-eyebrow{font-size:11px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--tc-acc)}\n.aisc-tc .tc-head h4{margin:2px 0 4px;font-size:20px}\n.aisc-tc .tc-head p{margin:0;color:var(--tc-muted);font-size:14px;max-width:60ch}\n.aisc-tc .tc-btn{border:0;border-radius:10px;background:var(--tc-acc);color:#fff;font:inherit;font-weight:600;padding:9px 16px;cursor:pointer}\n.aisc-tc .tc-btn:focus-visible,.aisc-tc .tc-line:focus-visible,.aisc-tc .tc-seek:focus-visible{outline:3px solid #9C86FF;outline-offset:2px}\n.aisc-tc .tc-qs{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}\n.aisc-tc .tc-qs li{font-size:13px;border:1px solid var(--tc-line);border-radius:999px;padding:4px 10px;color:var(--tc-muted);background:var(--tc-soft);transition:background .3s,color .3s,border-color .3s}\n.aisc-tc .tc-qs li.done{background:var(--tc-ok-soft);color:var(--tc-ok);border-color:#BFE6D5}\n.aisc-tc .tc-qs li.done::before{content:"✓ "}\n.aisc-tc .tc-player{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--tc-soft);border:1px solid var(--tc-line);border-radius:12px;padding:10px 12px}\n.aisc-tc .tc-play{width:44px;height:44px;border-radius:50%;border:0;background:var(--tc-acc);color:#fff;font-size:16px;cursor:pointer;display:grid;place-items:center}\n.aisc-tc .tc-seek{width:100%;accent-color:var(--tc-acc);min-width:0}\n.aisc-tc .tc-time{font-variant-numeric:tabular-nums;font-size:13px;color:var(--tc-muted);white-space:nowrap}\n.aisc-tc .tc-note{font-size:12.5px;color:var(--tc-muted);margin:0}\n.aisc-tc .tc-script{max-height:340px;overflow-y:auto;border:1px solid var(--tc-line);border-radius:12px;padding:12px;display:grid;gap:8px;background:#FBFCFD}\n.aisc-tc .tc-line{display:grid;gap:2px;max-width:86%;padding:8px 12px;border-radius:12px;cursor:pointer;border:1px solid transparent;transition:background .25s,border-color .25s,opacity .25s}\n.aisc-tc .tc-line .who{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--tc-muted)}\n.aisc-tc .tc-line.j{justify-self:start;background:#fff;border-color:var(--tc-line)}\n.aisc-tc .tc-line.a{justify-self:end;background:var(--tc-acc-soft)}\n.aisc-tc .tc-script.playing .tc-line{opacity:.55}\n.aisc-tc .tc-script.playing .tc-line.now{opacity:1;border-color:var(--tc-acc);box-shadow:0 2px 10px rgba(109,74,255,.18)}\n.aisc-tc .tc-done{justify-self:start;font-size:13px;font-weight:700;color:var(--tc-ok);background:var(--tc-ok-soft);border-radius:999px;padding:5px 12px}\n.aisc-tc .tc-toast{position:absolute;right:16px;bottom:16px;background:var(--tc-navy);color:#fff;border-radius:12px;padding:10px 14px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.25);transform:translateY(20px);opacity:0;transition:.4s;pointer-events:none}\n.aisc-tc .tc-toast.show{transform:none;opacity:1}\n@media (max-width:560px){.aisc-tc .tc-line{max-width:100%}.aisc-tc .tc-player{grid-template-columns:auto 1fr}.aisc-tc .tc-time{grid-column:1/-1}}\n@media (prefers-reduced-motion:reduce){.aisc-tc *{transition:none!important}}\n';
-
-const LINES: { s: "a" | "j"; t: number; who: string; text: string }[] = [
-  {
-    s: "a",
-    t: 0.0,
-    who: "Amy",
-    text: "Thank you for calling Brightwater Family Dentistry. This is Amy. How can I help you today?",
-  },
-  {
-    s: "j",
-    t: 6.47,
-    who: "Joseph",
-    text: "Hey, hi there! So, uh, I've got a few quick questions about your practice. Mind if I ask? First... what are your office hours?",
-  },
-  {
-    s: "a",
-    t: 15.76,
-    who: "Amy",
-    text: "Of course. We are open Monday through Friday from 7 AM to 4 PM, with evening appointments on Tuesdays and Thursdays until 6 PM. We are closed on weekends.",
-  },
-  {
-    s: "j",
-    t: 27.26,
-    who: "Joseph",
-    text: "Alright, got it. That works for me. And where's your office located?",
-  },
-  {
-    s: "a",
-    t: 33.03,
-    who: "Amy",
-    text: "We are located at 3940 Fourth Ave, Suite 202, San Diego, CA 92103, in Hillcrest. Free parking is available in the lot behind the building.",
-  },
-  {
-    s: "j",
-    t: 45.33,
-    who: "Joseph",
-    text: "Hmm, okay... yeah, I think I know that area. Now, uh, the big question... what insurance or payment options do you take?",
-  },
-  {
-    s: "a",
-    t: 55.95,
-    who: "Amy",
-    text: "We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. If you don't have insurance, our new patient special is $129, and it includes an exam, X-rays and a cleaning. We also offer CareCredit financing.",
-  },
-  {
-    s: "j",
-    t: 73.61,
-    who: "Joseph",
-    text: "I see, okay. That helps a lot. And if something urgent comes up... do you handle same-day requests?",
-  },
-  {
-    s: "a",
-    t: 82.77,
-    who: "Amy",
-    text: "Yes. We keep time open every weekday for same-day dental emergencies, like a toothache or a broken tooth. After hours, you can call (619) 555-0141, and our on-call dentist will call you back.",
-  },
-  {
-    s: "j",
-    t: 97.69,
-    who: "Joseph",
-    text: "Okay, good to know. Who would I be working with there?",
-  },
-  {
-    s: "a",
-    t: 102.37,
-    who: "Amy",
-    text: "You would see Dr. Elena Park or Dr. James Whitfield. Both are general dentists, and they work with our team of hygienists.",
-  },
-  {
-    s: "j",
-    t: 110.46,
-    who: "Joseph",
-    text: "Nice, great to know that. And what services do you offer?",
-  },
-  {
-    s: "a",
-    t: 115.09,
-    who: "Amy",
-    text: "We offer cleanings, exams, X-rays, fillings, crowns, root canals, implants, Invisalign and teeth whitening. We also offer nitrous oxide for patients who feel nervous.",
-  },
-  {
-    s: "j",
-    t: 127.45,
-    who: "Joseph",
-    text: "Oh, okay, nice. Good to know. Are you taking new clients right now?",
-  },
-  {
-    s: "a",
-    t: 133.41,
-    who: "Amy",
-    text: "Yes, we are welcoming new patients.",
-  },
-  {
-    s: "j",
-    t: 136.23,
-    who: "Joseph",
-    text: "Perfect, good to hear. And, uh, one last thing... do you have a website I can check out?",
-  },
-  {
-    s: "a",
-    t: 141.95,
-    who: "Amy",
-    text: "Yes. Our website is brightwaterfamilydentistry.com. You can also fill out your new patient forms there. Is there anything else I can help you with?",
-  },
-  {
-    s: "j",
-    t: 151.68,
-    who: "Joseph",
-    text: "Awesome, I'll take a look. That answers all my questions. Nice team, really appreciate your help. Have a great day!",
-  },
-  {
-    s: "a",
-    t: 159.15,
-    who: "Amy",
-    text: "You're welcome. Thank you for calling Brightwater Family Dentistry. Goodbye.",
-  },
+type Line = { t: number; who: "amy" | "joseph"; text: string };
+const LINES: Line[] = [
+  { t: 0.0, who: "amy", text: "Thank you for calling Brightwater Family Dentistry. This is Amy. How can I help you today?" },
+  { t: 6.47, who: "joseph", text: "Hey, hi there! So, uh, I've got a few quick questions about your practice. Mind if I ask? First... what are your office hours?" },
+  { t: 15.76, who: "amy", text: "Of course. We are open Monday through Friday from 7 AM to 4 PM, with evening appointments on Tuesdays and Thursdays until 6 PM. We are closed on weekends." },
+  { t: 27.26, who: "joseph", text: "Alright, got it. That works for me. And where's your office located?" },
+  { t: 33.03, who: "amy", text: "We are located at 3940 Fourth Ave, Suite 202, San Diego, CA 92103, in Hillcrest. Free parking is available in the lot behind the building." },
+  { t: 45.33, who: "joseph", text: "Hmm, okay... yeah, I think I know that area. Now, uh, the big question... what insurance or payment options do you take?" },
+  { t: 55.95, who: "amy", text: "We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. If you don't have insurance, our new patient special is $129, and it includes an exam, X-rays and a cleaning. We also offer CareCredit financing." },
+  { t: 73.61, who: "joseph", text: "I see, okay. That helps a lot. And if something urgent comes up... do you handle same-day requests?" },
+  { t: 82.77, who: "amy", text: "Yes. We keep time open every weekday for same-day dental emergencies, like a toothache or a broken tooth. After hours, you can call (619) 555-0141, and our on-call dentist will call you back." },
+  { t: 97.69, who: "joseph", text: "Okay, good to know. Who would I be working with there?" },
+  { t: 102.37, who: "amy", text: "You would see Dr. Elena Park or Dr. James Whitfield. Both are general dentists, and they work with our team of hygienists." },
+  { t: 110.46, who: "joseph", text: "Nice, great to know that. And what services do you offer?" },
+  { t: 115.09, who: "amy", text: "We offer cleanings, exams, X-rays, fillings, crowns, root canals, implants, Invisalign and teeth whitening. We also offer nitrous oxide for patients who feel nervous." },
+  { t: 127.45, who: "joseph", text: "Oh, okay, nice. Good to know. Are you taking new clients right now?" },
+  { t: 133.41, who: "amy", text: "Yes, we are welcoming new patients." },
+  { t: 136.23, who: "joseph", text: "Perfect, good to hear. And, uh, one last thing... do you have a website I can check out?" },
+  { t: 141.95, who: "amy", text: "Yes. Our website is brightwaterfamilydentistry.com. You can also fill out your new patient forms there. Is there anything else I can help you with?" },
+  { t: 151.68, who: "joseph", text: "Awesome, I'll take a look. That answers all my questions. Nice team, really appreciate your help. Have a great day!" },
+  { t: 159.15, who: "amy", text: "You're welcome. Thank you for calling Brightwater Family Dentistry. Goodbye." },
 ];
 
-const QUESTIONS = [
-  "Office hours",
-  "Location",
-  "Insurance & payment",
-  "Urgent & same-day requests",
-  "Who you'll see",
-  "Services",
-  "New patients",
-  "Website",
+/** Question chips and the index of Amy's answer line that completes each one. */
+const QUESTIONS: { label: string; answer: number }[] = [
+  { label: "Office hours", answer: 2 },
+  { label: "Location", answer: 4 },
+  { label: "Insurance & payment", answer: 6 },
+  { label: "Same-day requests", answer: 8 },
+  { label: "Who you'll see", answer: 10 },
+  { label: "Services", answer: 12 },
+  { label: "New patients", answer: 14 },
+  { label: "Website", answer: 16 },
 ];
-/** index of Amy's answer line for each question chip */
-const QA = [2, 4, 6, 8, 10, 12, 14, 16];
-const AUDIO_ERROR = "Audio could not load. The full call transcript is shown below.";
 
-/** "Joseph Called Amy" dental test-call preview, ported from public/sections/test-call-section-dental.html. */
+const fmt = (s: number) => (Number.isFinite(s) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}` : "--:--");
+
 export function TestCallSection() {
-  const rootRef = useRef<HTMLElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const barRef = useRef<HTMLDivElement>(null);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [playing, setPlaying] = useState(false);
+  const [time, setTime] = useState(0);
+  const [duration, setDuration] = useState(164.1);
+  const [failed, setFailed] = useState(false);
+  const [started, setStarted] = useState(false);
 
+  let current = -1;
+  LINES.forEach((l, i) => { if (time >= l.t - 0.05) current = i; });
+  if (!started) current = -1;
+  const allDone = started && current >= 16;
+
+  // Keep the line being spoken in view while the call plays.
   useEffect(() => {
-    const root = rootRef.current;
-    if (!root) return;
-    const A = root.querySelector("audio") as HTMLAudioElement;
-    const play = root.querySelector("[data-act=play]") as HTMLButtonElement;
-    const seek = root.querySelector(".tc-seek") as HTMLInputElement;
-    const cur = root.querySelector("[data-cur]") as HTMLElement;
-    const durEl = root.querySelector("[data-dur]") as HTMLElement;
-    const box = root.querySelector(".tc-script") as HTMLElement;
-    const lines = Array.from(root.querySelectorAll<HTMLElement>(".tc-line"));
-    const qs = Array.from(root.querySelectorAll<HTMLElement>(".tc-qs li"));
-    const done = root.querySelector(".tc-done") as HTMLElement;
-    const toast = root.querySelector(".tc-toast") as HTMLElement;
-    const note = root.querySelector(".tc-note") as HTMLElement;
-    const retest = root.querySelector("[data-act=retest]") as HTMLButtonElement;
-    const T = LINES.map((l) => l.t);
-    const reduce =
-      typeof window.matchMedia === "function" &&
-      matchMedia("(prefers-reduced-motion: reduce)").matches;
-    let last = -1;
-    let dragging = false;
-    let toastTimer: ReturnType<typeof setTimeout> | undefined;
-    const fmt = (v: number) => {
-      const s = Math.max(0, Math.floor(v));
-      return Math.floor(s / 60) + ":" + ("0" + (s % 60)).slice(-2);
-    };
-    const idx = (t: number) => {
-      let i = -1;
-      for (let k = 0; k < T.length; k++) if (t >= (T[k] ?? 0) - 0.05) i = k;
-      return i;
-    };
-    const update = (t: number) => {
-      const i = idx(t);
-      if (i !== last) {
-        lines.forEach((l, k) => l.classList.toggle("now", k === i));
-        if (i >= 0 && !A.paused) {
-          const l = lines[i];
-          if (!l) return;
-          const top = l.offsetTop - box.offsetTop - box.clientHeight / 2 + l.clientHeight / 2;
-          box.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
-        }
-        last = i;
-      }
-      qs.forEach((q, k) => q.classList.toggle("done", i >= (QA[k] ?? 0)));
-      done.hidden = !(i >= (QA[QA.length - 1] ?? 0));
-      cur.textContent = fmt(t);
-      if (!dragging) seek.value = String(t);
-    };
-    const fail = () => {
-      play.disabled = true;
-      play.textContent = "–";
-      box.classList.remove("playing");
-      note.textContent = AUDIO_ERROR;
-    };
-    const onPlayClick = () => {
-      if (A.paused) {
-        const p = A.play();
-        if (p && p.catch) p.catch(fail);
-      } else A.pause();
-    };
-    const onPlay = () => {
-      play.textContent = "❚❚";
-      play.setAttribute("aria-label", "Pause sample call");
-      box.classList.add("playing");
-      toast.classList.remove("show");
-    };
-    const onPause = () => {
-      play.textContent = "▶";
-      play.setAttribute("aria-label", "Play sample call");
-    };
-    const onTime = () => update(A.currentTime);
-    const onMeta = () => {
-      if (isFinite(A.duration)) {
-        seek.max = String(A.duration);
-        durEl.textContent = fmt(A.duration);
-      }
-    };
-    const onEnded = () => {
-      box.classList.remove("playing");
-      update(A.duration || (T[T.length - 1] ?? 0) + 5);
-      toast.classList.add("show");
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => toast.classList.remove("show"), 5000);
-    };
-    const onSeekInput = () => {
-      dragging = true;
-      cur.textContent = fmt(parseFloat(seek.value));
-    };
-    const onSeekChange = () => {
-      dragging = false;
-      A.currentTime = parseFloat(seek.value);
-      update(A.currentTime);
-    };
-    const lineHandlers = lines.map((l) => {
-      const click = () => {
-        A.currentTime = parseFloat(l.dataset["t"] || "0");
-        if (A.paused) play.click();
-      };
-      const key = (e: KeyboardEvent) => {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          l.click();
-        }
-      };
-      l.addEventListener("click", click);
-      l.addEventListener("keydown", key);
-      return () => {
-        l.removeEventListener("click", click);
-        l.removeEventListener("keydown", key);
-      };
-    });
-    const onRetest = () => {
-      A.currentTime = 0;
-      last = -1;
-      if (A.paused) play.click();
-      else update(0);
-    };
+    const box = boxRef.current, el = lineRefs.current[current];
+    if (!playing || !box || !el) return;
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    box.scrollTo({ top: el.offsetTop - box.clientHeight / 2 + el.clientHeight / 2, behavior: reduce ? "auto" : "smooth" });
+  }, [current, playing]);
 
-    play.addEventListener("click", onPlayClick);
-    A.addEventListener("play", onPlay);
-    A.addEventListener("pause", onPause);
-    A.addEventListener("timeupdate", onTime);
-    A.addEventListener("loadedmetadata", onMeta);
-    A.addEventListener("ended", onEnded);
-    A.addEventListener("error", fail);
-    seek.addEventListener("input", onSeekInput);
-    seek.addEventListener("change", onSeekChange);
-    retest.addEventListener("click", onRetest);
-    if (A.readyState >= 1) onMeta();
-    if (A.error) fail();
-
-    return () => {
-      play.removeEventListener("click", onPlayClick);
-      A.removeEventListener("play", onPlay);
-      A.removeEventListener("pause", onPause);
-      A.removeEventListener("timeupdate", onTime);
-      A.removeEventListener("loadedmetadata", onMeta);
-      A.removeEventListener("ended", onEnded);
-      A.removeEventListener("error", fail);
-      seek.removeEventListener("input", onSeekInput);
-      seek.removeEventListener("change", onSeekChange);
-      retest.removeEventListener("click", onRetest);
-      lineHandlers.forEach((off) => off());
-      clearTimeout(toastTimer);
-      A.pause();
-    };
-  }, []);
+  const toggle = () => {
+    const a = audioRef.current;
+    if (!a) return;
+    if (a.paused) void a.play().catch(() => setFailed(true));
+    else a.pause();
+  };
+  const seek = (secs: number) => {
+    const a = audioRef.current;
+    if (!a) return;
+    const d = Number.isFinite(a.duration) ? a.duration : duration;
+    a.currentTime = Math.min(d, Math.max(0, secs));
+    setTime(a.currentTime);
+    setStarted(true);
+  };
+  const seekFromPointer = (clientX: number) => {
+    const bar = barRef.current;
+    if (!bar) return;
+    const r = bar.getBoundingClientRect();
+    seek(((clientX - r.left) / r.width) * duration);
+  };
+  const playFrom = (secs: number) => {
+    seek(secs);
+    if (audioRef.current?.paused) toggle();
+  };
+  const progress = duration > 0 ? Math.min(100, (time / duration) * 100) : 0;
 
   return (
-    <section ref={rootRef} className="aisc-tc" aria-labelledby="aisc-tc-title-dental">
-      <style dangerouslySetInnerHTML={{ __html: CSS }} />
-      <div className="tc-frame">
-        <span className="tc-badge">Sample preview</span>
-        <div className="tc-dash">
+    <div className="rounded-[1.75rem] bg-card p-5 text-card-foreground shadow-soft">
+      <div className="flex items-center justify-between gap-3 border-b pb-3">
+        <div className="flex items-center gap-3">
+          <div className="flex -space-x-2">
+            <img src={AGENT_PHOTOS.joseph} alt="" aria-hidden className="h-9 w-9 rounded-full object-cover object-[50%_20%] ring-2 ring-card" />
+            <img src={AGENT_PHOTOS.amy} alt="" aria-hidden className="h-9 w-9 rounded-full object-cover object-[50%_20%] ring-2 ring-card" />
+          </div>
           <div>
-            <h3>Practice Dashboard</h3>
-            <p>Your dental practice</p>
+            <p className="font-extrabold leading-tight">Joseph Called Amy</p>
+            <p className="text-xs font-semibold text-muted-foreground">Live FAQ check on your booking line</p>
           </div>
         </div>
-        <div className="tc-body">
-          <div className="tc-head">
-            <div>
-              <div className="tc-eyebrow">Live AI call demo</div>
-              <h4 id="aisc-tc-title-dental">Joseph Called Amy</h4>
-              <p>
-                A live FAQ check on your new booking number, proof that inbound calling is working.
-                Joseph, our AI test caller, asks the questions your patients ask, and Amy answers
-                from your practice details. This call doesn't use your trial credits.
-              </p>
-            </div>
-            <button className="tc-btn" type="button" data-act="retest">
-              Replay call
-            </button>
-          </div>
-          <ul className="tc-qs" aria-label="Questions Joseph asks">
-            {QUESTIONS.map((q) => (
-              <li key={q}>{q}</li>
-            ))}
-          </ul>
-          <div className="tc-player">
-            <button className="tc-play" type="button" data-act="play" aria-label="Play sample call">
-              ▶
-            </button>
-            <input
-              className="tc-seek"
-              type="range"
-              min="0"
-              max="164.6"
-              step="0.1"
-              defaultValue="0"
-              aria-label="Seek"
-            />
-            <span className="tc-time">
-              <span data-cur>0:00</span> / <span data-dur>2:44</span>
-            </span>
-          </div>
-          <audio preload="metadata" src={AUDIO_SRC} />
-          <div className="tc-script" role="log" aria-label="Call transcript">
-            {LINES.map((l) => (
-              <div key={l.t} className={`tc-line ${l.s}`} data-t={l.t} tabIndex={0}>
-                <span className="who">{l.who}</span>
-                <span>{l.text}</span>
-              </div>
-            ))}
-            <span className="tc-done" hidden>
-              All FAQs answered ✓
-            </span>
-          </div>
-          <p className="tc-note">
-            Sample practice and details. Your own test call recording appears on your dashboard and
-            in your inbox after setup.
-          </p>
-        </div>
-        <div className="tc-toast" role="status">
-          Your test call is ready · Recording delivered to your inbox
-        </div>
+        <span className="shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-muted-foreground">Sample call</span>
       </div>
-    </section>
+
+      {!failed && (
+        <div className="mt-4 flex items-center gap-3 rounded-2xl bg-background p-4">
+          <button
+            type="button"
+            onClick={toggle}
+            aria-label={playing ? "Pause the test call" : "Play the test call"}
+            className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground shadow-glow transition hover:scale-105 active:scale-95"
+          >
+            {playing ? <Pause className="h-4 w-4" /> : <Play className="ml-0.5 h-4 w-4" />}
+          </button>
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center justify-between gap-2">
+              <p className="truncate text-sm font-extrabold">Test call · {fmt(duration)} · Recording ready</p>
+              <span className="hidden sm:block"><Waveform active={playing} bars={14} /></span>
+            </div>
+            <div
+              ref={barRef}
+              role="slider"
+              aria-label="Test call progress"
+              aria-valuemin={0}
+              aria-valuemax={Math.round(duration)}
+              aria-valuenow={Math.round(time)}
+              tabIndex={0}
+              onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); seekFromPointer(e.clientX); }}
+              onPointerMove={(e) => { if (e.buttons === 1) seekFromPointer(e.clientX); }}
+              onKeyDown={(e) => {
+                if (e.key === "ArrowRight") { e.preventDefault(); seek(time + 5); }
+                if (e.key === "ArrowLeft") { e.preventDefault(); seek(time - 5); }
+              }}
+              className="group relative mt-1 h-5 cursor-pointer touch-none"
+            >
+              <div className="absolute top-1/2 h-1.5 w-full -translate-y-1/2 rounded-full bg-secondary" />
+              <div className="absolute top-1/2 h-1.5 -translate-y-1/2 rounded-full bg-primary" style={{ width: `${progress}%` }} />
+              <div className="absolute top-1/2 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow transition group-hover:scale-110" style={{ left: `${progress}%` }} />
+            </div>
+            <div className="flex justify-between text-xs font-bold tabular-nums text-muted-foreground">
+              <span>{fmt(time)}</span>
+              <span>{fmt(duration)}</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <audio
+        ref={audioRef}
+        src={AUDIO_SRC}
+        preload="metadata"
+        onPlay={() => { setPlaying(true); setStarted(true); }}
+        onPause={() => setPlaying(false)}
+        onEnded={() => setPlaying(false)}
+        onTimeUpdate={(e) => setTime(e.currentTarget.currentTime)}
+        onLoadedMetadata={(e) => { if (Number.isFinite(e.currentTarget.duration)) setDuration(e.currentTarget.duration); }}
+        onError={() => setFailed(true)}
+      />
+
+      <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Questions Joseph asks">
+        {QUESTIONS.map((q) => {
+          const done = started && current >= q.answer;
+          return (
+            <li key={q.label} className={`rounded-full px-2.5 py-1 text-xs font-bold transition ${done ? "bg-mint-soft text-primary" : "bg-secondary text-muted-foreground"}`}>
+              {done ? "✓ " : ""}{q.label}
+            </li>
+          );
+        })}
+      </ul>
+
+      <div ref={boxRef} role="log" aria-label="Test call transcript" className="relative mt-3 flex max-h-56 flex-col gap-2 overflow-y-auto p-1">
+        {LINES.map((l, i) => {
+          const isAmy = l.who === "amy";
+          const now = i === current;
+          return (
+            <div
+              key={i}
+              ref={(el) => { lineRefs.current[i] = el; }}
+              role="button"
+              tabIndex={0}
+              onClick={() => playFrom(l.t)}
+              onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playFrom(l.t); } }}
+              className={`max-w-[85%] cursor-pointer rounded-2xl px-3.5 py-2 text-sm transition ${isAmy ? "self-end rounded-br-md bg-primary text-primary-foreground" : "self-start rounded-bl-md bg-secondary"} ${started && !now ? "opacity-60" : ""} ${now ? "ring-2 ring-accent ring-offset-2 ring-offset-card" : ""}`}
+            >
+              <span className="mb-0.5 block text-[11px] font-extrabold uppercase tracking-wide opacity-70">{isAmy ? "Amy · AI receptionist" : "Joseph · AI test caller"}</span>
+              {l.text}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+        {allDone ? (
+          <span className="rounded-full bg-mint-soft px-3 py-1 text-xs font-extrabold text-primary">All FAQs answered ✓</span>
+        ) : (
+          <span className="text-xs font-semibold text-muted-foreground">{failed ? "Audio couldn't load. The full call is shown above." : "Tap any line to jump to it."}</span>
+        )}
+        {!failed && (
+          <button type="button" onClick={() => playFrom(0)} className="inline-flex items-center gap-1.5 text-sm font-bold text-primary underline-offset-2 hover:underline">
+            <RotateCcw className="h-3.5 w-3.5" /> Replay call
+          </button>
+        )}
+      </div>
+      <p className="mt-2 text-xs text-muted-foreground">Sample practice (Brightwater Family Dentistry). This test call doesn't use your trial credits. Yours appears on your dashboard and in your inbox after setup.</p>
+    </div>
   );
 }
