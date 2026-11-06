@@ -4,13 +4,13 @@ import { AGENT_PHOTOS, Waveform } from "./shared";
 
 const MAX = 240;
 const GREETINGS = [
-  { label: "Warm & Friendly", text: "Thanks for calling Bright Smiles Dental! This is Amy. How can I help you today?" },
-  { label: "Short & Direct", text: "Bright Smiles Dental, this is Amy. How may I help?" },
-  { label: "New Patient Focus", text: "Thanks for calling Bright Smiles Dental, now welcoming new patients! This is Amy. How can I help?" },
+  { label: "Warm & Friendly", text: "Thanks for calling Bright Smiles Dental! This is Annie. How can I help you today?" },
+  { label: "Short & Direct", text: "Bright Smiles Dental, this is Annie. How may I help?" },
+  { label: "New Patient Focus", text: "Thanks for calling Bright Smiles Dental, now welcoming new patients! This is Annie. How can I help?" },
 ];
 const VOICES = ["Warm", "Bright", "Calm"];
 
-/** Interactive "How Should Amy Answer?" preview for the self-setup section. */
+/** Interactive "How Should Annie Answer?" preview for the self-setup section. */
 export function GreetingPreview() {
   const [text, setText] = useState(GREETINGS[0]!.text);
   const [voice, setVoice] = useState(VOICES[0]!);
@@ -25,7 +25,7 @@ export function GreetingPreview() {
   return (
     <div className="mx-auto mt-10 max-w-4xl rounded-[1.75rem] border bg-card p-6 shadow-soft md:p-8">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h3 className="text-xl font-extrabold">How Should Amy Answer?</h3>
+        <h3 className="text-xl font-extrabold">How Should Annie Answer?</h3>
         <span className="rounded-full bg-secondary px-3 py-1 text-xs font-bold text-muted-foreground">Sample</span>
       </div>
       <p className="mt-2 text-sm text-muted-foreground">Pick a ready-made greeting or write your own — this is the first thing your callers hear.</p>
@@ -57,7 +57,7 @@ export function GreetingPreview() {
           <p className={`mt-1 text-right text-xs font-bold tabular-nums ${text.length >= MAX ? "text-destructive" : "text-muted-foreground"}`}>
             {text.length}/{MAX}
           </p>
-          <p className="mt-3 text-sm font-bold">Amy's Voice</p>
+          <p className="mt-3 text-sm font-bold">Annie's Voice</p>
           <div className="mt-2 flex flex-wrap items-center gap-2" role="radiogroup" aria-label="Voice">
             {VOICES.map((v) => (
               <button
@@ -86,7 +86,7 @@ export function GreetingPreview() {
             <span className="rounded-full bg-mint-soft px-2 py-0.5 text-xs font-bold">{voice} voice</span>
           </div>
           <div className="mt-4 flex items-start gap-3">
-            <img src={AGENT_PHOTOS.amy} alt="Amy, AI receptionist" className="h-10 w-10 shrink-0 rounded-full object-cover object-[50%_20%] ring-2 ring-agent-amy ring-offset-2" />
+            <img src={AGENT_PHOTOS.amy} alt="Annie, AI receptionist" className="h-10 w-10 shrink-0 rounded-full object-cover object-[50%_20%] ring-2 ring-agent-amy ring-offset-2" />
             <div className="min-w-0 flex-1">
               <p className="rounded-2xl rounded-tl-md bg-secondary px-4 py-3 text-sm">{text || "…"}</p>
               <div className="mt-3 pl-1"><Waveform active={playing} bars={20} /></div>

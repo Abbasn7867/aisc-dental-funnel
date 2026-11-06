@@ -2,13 +2,13 @@ import { describe, expect, it } from "vitest";
 import { ALL_PAIN_IDS, PLAN_AGENTS, idsForAgents, recommendPlan } from "@/lib/configurator";
 
 describe("configurator plan recommendation", () => {
-  it("only Amy's items → Receptionist", () => {
+  it("only Annie's items → Receptionist", () => {
     expect(recommendPlan(idsForAgents(["amy"]))).toBe("receptionist");
   });
-  it("only Amy, Leena, Stephanie, Trisha items → Pro", () => {
+  it("only Annie, Sarah, Fiona, Megan items → Pro", () => {
     expect(recommendPlan(idsForAgents(PLAN_AGENTS.pro))).toBe("pro");
   });
-  it("any Morgan item → Elite", () => {
+  it("any Paula item → Elite", () => {
     expect(recommendPlan([...idsForAgents(["amy"]), ...idsForAgents(["morgan"]).slice(0, 1)])).toBe("full");
   });
   it("everything on → Elite", () => {

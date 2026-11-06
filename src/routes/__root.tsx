@@ -84,7 +84,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "AI Solution Company — AI Front Office for Dental Practices" },
-      { name: "description", content: "8 AI employees led by Amy, your AI receptionist." },
+      { name: "description", content: "8 AI employees led by Annie, your AI receptionist." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

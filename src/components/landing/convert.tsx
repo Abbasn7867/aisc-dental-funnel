@@ -57,9 +57,9 @@ export function HowItWorks() {
 }
 
 const VAS = [
-  ["Instant Test Call", "Your own booking line and a live test call where Amy answers your FAQs, with the recording in 3–4 minutes."],
+  ["Instant Test Call", "Your own booking line and a live test call where Annie answers your FAQs, with the recording in 3–4 minutes."],
   ["Self-serve or done-for-you setup", "Set up in minutes from your dashboard, or share your information and we configure it (normally $1,000, waived during launch)."],
-  ["Trisha's real-time performance view", "Calls answered, bookings, follow-ups and every agent's results in one dashboard."],
+  ["Megan's real-time performance view", "Calls answered, bookings, follow-ups and every agent's results in one dashboard."],
   ["Add-on services", "Billing, Credentialing, Payor Negotiation, Utilization Management, Eligibility Verification, Claims Follow-up, A/R Recovery, Payor Contract Audit and Fee Benchmarking, quoted separately."],
 ];
 
@@ -177,10 +177,10 @@ const FAQ = [
   ["What happens when the trial ends?", "Nothing is charged. Your account pauses until you pick a plan, and you get a new booking line when you activate."],
   ["Can I cancel?", "Monthly plans are month-to-month. Yearly plans are a 12-month commitment and save 12%."],
   ["How fast can we go live?", "Most practices finish the Setup Wizard in minutes, and your instant test call arrives 3–4 minutes after setup. Prefer not to do it yourself? Our team will set everything up at no cost during launch."],
-  ["What is the instant test call?", "Right after setup we give your practice its own phone number. Our test caller rings it and asks real questions from your FAQs, Amy answers live, and the recording lands on your dashboard and in your inbox."],
-  ["Which calendars and software does it work with?", "Amy works with the calendar and practice-management software you already use; we connect it during setup. Ask us about yours."],
-  ["Can calls transfer to my staff?", "Yes. When a caller asks for a person, Amy routes them to the right staff member and logs the reason so nothing gets lost."],
-  ["Does Amy give dental advice?", "No. Amy handles front-office tasks and routes clinical questions to your staff. Dental emergencies follow your practice's urgent protocol."],
+  ["What is the instant test call?", "Right after setup we give your practice its own phone number. Our test caller rings it and asks real questions from your FAQs, Annie answers live, and the recording lands on your dashboard and in your inbox."],
+  ["Which calendars and software does it work with?", "Annie works with the calendar and practice-management software you already use; we connect it during setup. Ask us about yours."],
+  ["Can calls transfer to my staff?", "Yes. When a caller asks for a person, Annie routes them to the right staff member and logs the reason so nothing gets lost."],
+  ["Does Annie give dental advice?", "No. Annie handles front-office tasks and routes clinical questions to your staff. Dental emergencies follow your practice's urgent protocol."],
   ["Is our data secure?", "Yes. We're HIPAA compliant and SOC 2 compliant, and a BAA is available on request. Everything runs on secure, enterprise-grade cloud infrastructure."],
   ["Will this replace my front desk team?", "No. Your AI team takes the phones, paperwork and follow-up so your staff can focus on the patients in front of them."],
 ];
@@ -208,7 +208,7 @@ export function FinalBand() {
         {/* People sit in the left third, so the text and the dark side of the overlay go right */}
         <img src={finalBand} alt="A family checking in at a bright, calm dental reception desk" loading="lazy" width={1920} height={832} className="absolute inset-0 h-full w-full object-cover object-[20%_35%]" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/20 md:bg-gradient-to-l md:from-ink md:via-ink/85 md:to-ink/0" />
-        <h2 className="relative max-w-xl text-4xl font-extrabold md:text-6xl">Your Patients Are Calling. Let Amy Answer.</h2>
+        <h2 className="relative max-w-xl text-4xl font-extrabold md:text-6xl">Your Patients Are Calling. Let Annie Answer.</h2>
         <CtaButton size="lg" className="relative mt-8 bg-ink hover:bg-ink" />
         <NoCardNote dark className="relative mt-3" />
         <p className="relative mt-4 max-w-xl font-semibold opacity-95"><OfferLine /></p>

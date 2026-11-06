@@ -114,7 +114,7 @@ export function CompareSlider() {
 
 const CHECKLIST = [
   "Your Practice Details", "Who Sees Patients?", "When Are You Open?", "Which Services Do You Offer?",
-  "Your Treatment Rooms", "Insurance and Payments", "How Should Amy Answer?", "Invite Your Team (Optional)",
+  "Your Treatment Rooms", "Insurance and Payments", "How Should Annie Answer?", "Invite Your Team (Optional)",
   "Connect Your Scheduling Software (Optional)", "You're All Set",
 ];
 
@@ -171,7 +171,7 @@ export function DashboardMock() {
               <div className="rounded-2xl bg-signature p-4 text-primary-foreground">
                 <p className="text-xs font-bold uppercase tracking-wider opacity-90">Booking number</p>
                 <p className="mt-1 text-2xl font-extrabold tabular-nums">+1 (555) 010-0000</p>
-                <p className="text-sm opacity-90">Callers reach Amy on this number.</p>
+                <p className="text-sm opacity-90">Callers reach Annie on this number.</p>
               </div>
             </div>
           </div>
