@@ -1,7 +1,7 @@
 import { useServerFn } from "@tanstack/react-start";
 import { useState } from "react";
 import { CtaButton } from "@/components/site";
-import { NoCardNote } from "@/components/landing/shared";
+import { AGENT_PHOTOS, NoCardNote } from "@/components/landing/shared";
 import { AGENTS } from "@/lib/funnel";
 import { getRecommendations } from "@/lib/recommend.functions";
 
@@ -81,7 +81,7 @@ export function Recommender() {
                 <p className="text-lg font-semibold">{result.data.summary}</p>
                 <div className="mt-6 grid gap-4 md:grid-cols-2">
                   {recs.map((r) => {
-                    const a = AGENTS.find((x) => x.name.toLowerCase() === r.agent);
+                    const a = AGENTS.find((x) => x.photo === AGENT_PHOTOS[r.agent]);
                     if (!a) return null;
                     return (
                       <article key={r.agent} className="flex gap-4 rounded-2xl border bg-background p-5">

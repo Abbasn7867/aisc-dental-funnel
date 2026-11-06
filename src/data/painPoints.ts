@@ -1,14 +1,14 @@
 // src/data/painPoints.ts — 54 pain points. Render EVERY item; do not drop, merge or shorten any.
 export type AgentKey = "amy" | "leena" | "morgan" | "kim" | "stephanie" | "elise" | "joseph" | "trisha";
 export const AGENTS: Record<AgentKey, { name: string; role: string; color: string }> = {
-  amy: { name: "Amy", role: "Receptionist", color: "#2B6E63" },
-  leena: { name: "Leena", role: "Schedule Optimizer", color: "#3E7CB8" },
-  morgan: { name: "Morgan", role: "Patient Intake", color: "#E8734A" },
-  kim: { name: "Kim", role: "Case Acceptance", color: "#5FA88A" },
-  stephanie: { name: "Stephanie", role: "Follow-up", color: "#C98A3E" },
-  elise: { name: "Elise", role: "Patient Experience", color: "#C2678D" },
-  joseph: { name: "Joseph", role: "Fax Management", color: "#5B7B8C" },
-  trisha: { name: "Trisha", role: "Practice Manager", color: "#6B5B95" },
+  amy: { name: "Annie", role: "Receptionist", color: "#2B6E63" },
+  leena: { name: "Sarah", role: "Schedule Optimizer", color: "#3E7CB8" },
+  morgan: { name: "Paula", role: "Patient Intake", color: "#E8734A" },
+  kim: { name: "Claire", role: "Case Acceptance", color: "#5FA88A" },
+  stephanie: { name: "Fiona", role: "Follow-up", color: "#C98A3E" },
+  elise: { name: "Emily", role: "Patient Experience", color: "#C2678D" },
+  joseph: { name: "David", role: "Fax Management", color: "#5B7B8C" },
+  trisha: { name: "Megan", role: "Practice Manager", color: "#6B5B95" },
 };
 export type PainItem = { id: string; pain: string; agent: AgentKey; fix: string };
 export type Category = { id: string; title: string; outcome: string; items: PainItem[] };

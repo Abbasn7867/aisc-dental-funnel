@@ -10,13 +10,13 @@ const JSON_LD = {
       "@type": "Organization",
       name: "AI Solution Company",
       url: SITE_URL,
-      description: "The AI front office for dental practices: 8 AI employees, led by Amy, that answer, book, follow up and report 24/7.",
+      description: "The AI front office for dental practices: 8 AI employees, led by Annie, that answer, book, follow up and report 24/7.",
     },
     {
       "@type": "Product",
       name: "AI Front Office for Dental Practices",
       brand: { "@type": "Organization", name: "AI Solution Company" },
-      description: "8 AI employees, led by Amy the AI receptionist, that answer calls 24/7, book appointments and follow up with patients for dental practices.",
+      description: "8 AI employees, led by Annie the AI receptionist, that answer calls 24/7, book appointments and follow up with patients for dental practices.",
       offers: [
         { "@type": "Offer", name: "Receptionist" },
         { "@type": "Offer", name: "Pro" },
@@ -31,7 +31,7 @@ export const Route = createFileRoute("/")({
     ...seoMeta(
       "/",
       "AI Receptionist & Front Office for Dental Practices | AI Solution Company",
-      "Amy and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform — no credit card required.",
+      "Annie and 7 more AI employees answer calls 24/7, book appointments and follow up with patients. Start a 14-day free trial of the full platform — no credit card required.",
     ),
     scripts: [{ type: "application/ld+json", children: JSON.stringify(JSON_LD) }],
   }),

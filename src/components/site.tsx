@@ -69,7 +69,7 @@ export function Footer() {
         <div>
           <img src={logo.url} alt="AI Solution Company" loading="lazy" decoding="async" className="h-12 w-auto" />
           <p className="mt-4 max-w-sm text-sm text-muted-foreground">
-            The Complete AI Front Office for dental practices. Eight AI employees, led by Amy, that free your team for the patients in the chair.
+            The Complete AI Front Office for dental practices. Eight AI employees, led by Annie, that free your team for the patients in the chair.
           </p>
           <p className="mt-4 text-sm font-semibold">Powered by AI Solution Company</p>
         </div>

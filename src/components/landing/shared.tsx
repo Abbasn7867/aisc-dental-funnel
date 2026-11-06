@@ -149,11 +149,11 @@ export function TypedCall({ lines, outcome, playKey, loop = false, compact = fal
     <div ref={ref} className="flex h-full flex-col">
       <div className="flex items-center gap-3">
         <div className="relative">
-          <img src={AGENT_PHOTOS.amy} alt="Amy, AI receptionist" className="h-12 w-12 rounded-full object-cover object-[50%_20%] ring-2 ring-agent-amy ring-offset-2" />
+          <img src={AGENT_PHOTOS.amy} alt="Annie, AI receptionist" className="h-12 w-12 rounded-full object-cover object-[50%_20%] ring-2 ring-agent-amy ring-offset-2" />
           {!done && <span className="pulse-ring absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full border-2 border-card bg-accent" />}
         </div>
         <div className="flex-1">
-          <p className="font-extrabold leading-tight">Amy · AI Receptionist</p>
+          <p className="font-extrabold leading-tight">Annie · AI Receptionist</p>
           <p className="text-xs font-semibold text-muted-foreground">{done ? "Call ended" : "On a call"} · <span className="tabular-nums">{mm}</span></p>
         </div>
         <Waveform active={!done && inView} bars={compact ? 14 : 22} />
@@ -175,7 +175,7 @@ export function TypedCall({ lines, outcome, playKey, loop = false, compact = fal
           </span>
         )}
       </div>
-      <p className="sr-only">{lines.map((l) => `${l.who === "amy" ? "Amy" : "Caller"}: ${l.text}`).join(" ")} Outcome: {outcome}</p>
+      <p className="sr-only">{lines.map((l) => `${l.who === "amy" ? "Annie" : "Caller"}: ${l.text}`).join(" ")} Outcome: {outcome}</p>
     </div>
   );
 }

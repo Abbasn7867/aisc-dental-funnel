@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Pause, Play, RotateCcw } from "lucide-react";
 import { AGENT_PHOTOS, Waveform } from "@/components/landing/shared";
 
-/** Test call to Amy: someone rings the practice line after the Setup Wizard and asks its FAQs.
+/** Test call to Annie: someone rings the practice line after the Setup Wizard and asks its FAQs.
  *  Styled with the site's own tokens (bg-card, shadow-soft, primary, secondary, mint-soft) so it
  *  sits inside the dark #test-call band like the original dashboard card. */
 const AUDIO_SRC = "/audio/Dental-call-web.mp3";
@@ -30,7 +30,7 @@ const LINES: Line[] = [
   { t: 159.15, who: "amy", text: "You're welcome. Thank you for calling Brightwater Family Dentistry. Goodbye." },
 ];
 
-/** Question chips and the index of Amy's answer line that completes each one. */
+/** Question chips and the index of Annie's answer line that completes each one. */
 const QUESTIONS: { label: string; answer: number }[] = [
   { label: "Office hours", answer: 2 },
   { label: "Location", answer: 4 },
@@ -102,8 +102,8 @@ export function TestCallSection() {
             <img src={AGENT_PHOTOS.amy} alt="" aria-hidden className="h-9 w-9 rounded-full object-cover object-[50%_20%] ring-2 ring-card" />
           </div>
           <div>
-            <p className="font-extrabold leading-tight">Test Call to Amy</p>
-            <p className="text-xs font-semibold text-muted-foreground">A caller tests Amy right after setup</p>
+            <p className="font-extrabold leading-tight">Test Call to Annie</p>
+            <p className="text-xs font-semibold text-muted-foreground">A caller tests Annie right after setup</p>
           </div>
         </div>
         <span className="shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-xs font-bold text-muted-foreground">Sample call</span>
@@ -189,7 +189,7 @@ export function TestCallSection() {
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); playFrom(l.t); } }}
               className={`max-w-[85%] cursor-pointer rounded-2xl px-3.5 py-2 text-sm transition ${isAmy ? "self-end rounded-br-md bg-primary text-primary-foreground" : "self-start rounded-bl-md bg-secondary"} ${started && !now ? "opacity-60" : ""} ${now ? "ring-2 ring-accent ring-offset-2 ring-offset-card" : ""}`}
             >
-              <span className="mb-0.5 block text-[11px] font-extrabold uppercase tracking-wide opacity-70">{isAmy ? "Amy · AI receptionist" : "Test caller"}</span>
+              <span className="mb-0.5 block text-[11px] font-extrabold uppercase tracking-wide opacity-70">{isAmy ? "Annie · AI receptionist" : "Test caller"}</span>
               {l.text}
             </div>
           );

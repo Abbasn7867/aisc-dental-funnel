@@ -64,7 +64,7 @@ export function LandingNav() {
 }
 
 const HERO_CALL: CallLine[] = [
-  { who: "amy", text: "Thanks for calling. All calls are recorded for quality and training purposes. This is Amy, how can I help?" },
+  { who: "amy", text: "Thanks for calling. All calls are recorded for quality and training purposes. This is Annie, how can I help?" },
   { who: "caller", text: "Hi, my son needs a cleaning. Do you have anything after school?" },
   { who: "amy", text: "Happy to help. I have Wednesday at 3:45 or Thursday at 4:15. Which works better?" },
   { who: "caller", text: "Thursday at 4:15, please." },
@@ -110,7 +110,7 @@ export function Hero() {
             <WordReveal segments={[{ text: "Your dental practice, always answering." }, { text: "Every call booked, every chair filled.", className: "text-gradient" }]} />
           </h1>
           <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-            Meet Amy and the AI Front Office team: <CountUp value={8} /> AI employees that answer, book, follow up and report for your practice, 24/7.
+            Meet Annie and the AI Front Office team: <CountUp value={8} /> AI employees that answer, book, follow up and report for your practice, 24/7.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <CtaButton size="lg" />
@@ -124,7 +124,7 @@ export function Hero() {
           {/* Mobile/tablet: 4:5 art-directed crop shown as its own block so the face is never sliced */}
           <picture className="mt-10 block overflow-hidden rounded-[2rem] shadow-soft lg:hidden">
             <source media="(min-width: 640px) and (max-width: 1023px)" srcSet={heroWide} />
-            <img src={heroMobile} alt="Amy, your AI receptionist, wearing a headset at the dental reception desk" width={928} height={1152} className="aspect-[4/5] w-full object-cover object-[50%_35%] sm:aspect-[21/9] sm:object-[75%_30%]" />
+            <img src={heroMobile} alt="Annie, your AI receptionist, wearing a headset at the dental reception desk" width={928} height={1152} className="aspect-[4/5] w-full object-cover object-[50%_35%] sm:aspect-[21/9] sm:object-[75%_30%]" />
           </picture>
         </motion.div>
 

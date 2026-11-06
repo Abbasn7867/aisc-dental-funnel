@@ -73,7 +73,7 @@ export function CtaBar() {
           <div className="text-sm leading-snug">
             <p className="hidden font-extrabold sm:block"><OfferLine /></p>
             <p className="font-extrabold sm:hidden">{TRIAL_OFFER_SHORT}</p>
-            <p className="text-muted-foreground">Amy answers and books your practice's calls 24/7.</p>
+            <p className="text-muted-foreground">Annie answers and books your practice's calls 24/7.</p>
           </div>
         </div>
         <Link to="/free-trial" tabIndex={visible ? 0 : -1} onClick={() => track("cta_bar_click")} className="inline-flex w-full items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-bold text-primary-foreground sm:w-auto">
@@ -164,13 +164,13 @@ export function ExitPopup() {
           >
             <button aria-label="Close" onClick={() => setOpen(false)} className="absolute right-4 top-4 rounded-full p-1.5 hover:bg-secondary"><X className="h-4 w-4" /></button>
             <div className="relative mx-auto h-20 w-20">
-              <img src={amy.url} alt="Amy, AI receptionist" className="pulse-ring h-20 w-20 rounded-full object-cover object-[50%_20%] ring-4 ring-accent" />
+              <img src={amy.url} alt="Annie, AI receptionist" className="pulse-ring h-20 w-20 rounded-full object-cover object-[50%_20%] ring-4 ring-accent" />
             </div>
             <div className="mx-auto mt-3 flex h-6 w-24 items-center justify-center gap-[3px]" aria-hidden>
               {Array.from({ length: 12 }).map((_, i) => <span key={i} className="wave-bar w-[3px] rounded-full bg-signature" style={{ height: `${40 + ((i * 29) % 60)}%`, animationDelay: `${i * 80}ms` }} />)}
             </div>
             <h2 id="exit-title" className="mt-4 text-3xl font-extrabold">Before you go</h2>
-            <p className="mt-3 text-muted-foreground">Try the full platform free for 14 days, and hear Amy answer your practice's questions within 3–4 minutes of setup.</p>
+            <p className="mt-3 text-muted-foreground">Try the full platform free for 14 days, and hear Annie answer your practice's questions within 3–4 minutes of setup.</p>
             <span className="mt-4 inline-block rounded-full bg-mint-soft px-4 py-1.5 text-sm font-extrabold"><OfferLine /></span>
             <Link to="/free-trial" onClick={() => { track("exit_popup_click"); setOpen(false); }} className="mt-6 flex w-full items-center justify-center rounded-full bg-primary py-3.5 font-bold text-primary-foreground shadow-glow">Book a Free Trial</Link>
             <NoCardNote className="mt-2" />

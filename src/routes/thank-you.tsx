@@ -27,7 +27,7 @@ const STEPS = [
   { icon: ListChecks, text: "Which Services Do You Offer?" },
   { icon: DoorOpen, text: "Your Treatment Rooms", note: "Medical: Your Exam Rooms" },
   { icon: CreditCard, text: "Insurance and Payments" },
-  { icon: Mic, text: "How Should Amy Answer?" },
+  { icon: Mic, text: "How Should Annie Answer?" },
   { icon: Users, text: "Invite Your Team", note: "Optional" },
   { icon: Plug, text: "Connect Your Scheduling Software", note: "Optional" },
   { icon: CheckCircle2, text: "You're All Set" },
@@ -94,7 +94,7 @@ function ThankYou() {
         </ol>
         <p className="mt-6 flex gap-3 rounded-2xl bg-muted p-4 text-sm">
           <PhoneCall className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-          Then your practice gets its own booking line, and our test caller rings Amy. The call is recorded, and the recording appears on your dashboard and is emailed to you within 3–4 minutes.
+          Then your practice gets its own booking line, and our test caller rings Annie. The call is recorded, and the recording appears on your dashboard and is emailed to you within 3–4 minutes.
         </p>
       </section>
 
