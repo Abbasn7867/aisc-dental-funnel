@@ -121,7 +121,7 @@ export function ProofCall() {
 const CALL_AUDIO = "/audio/dental-new-patient-call.mp3";
 
 const TRANSCRIPT: CallLine[] = [
-  { who: "amy", text: "Thank you for calling Brightwater Family Dentistry. This is Amy. How can I help you today?" },
+  { who: "amy", text: "Thank you for calling Brightwater Family Dentistry. This is Annie. How can I help you today?" },
   { who: "caller", text: "Hey there. So, it's been a few years since my last cleaning. I'm a little overdue. First off, do you take Cigna?" },
   { who: "amy", text: "Yes. We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. We will check your benefits before your visit." },
   { who: "caller", text: "Oh nice, that's good to hear. Also, how much is a cleaning and exam for a new patient?" },
@@ -202,7 +202,7 @@ export function CallPlayer() {
           <img src={AGENT_PHOTOS.amy} alt="Annie, AI receptionist" className="h-12 w-12 rounded-full object-cover object-[50%_20%] ring-2 ring-agent-amy ring-offset-2" />
           <div className="flex-1">
             <p className="font-extrabold leading-tight">Annie · AI Receptionist</p>
-            <p className="text-xs font-semibold text-muted-foreground">New patient books a cleaning · 2:23</p>
+            <p className="text-xs font-semibold text-muted-foreground">New patient books a cleaning · 2:22</p>
           </div>
           <Waveform active={playing} bars={22} />
         </div>
