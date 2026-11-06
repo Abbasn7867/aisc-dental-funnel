@@ -9,25 +9,25 @@ const AUDIO_SRC = "/audio/Dental-call-web.mp3";
 
 type Line = { t: number; who: "amy" | "caller"; text: string };
 const LINES: Line[] = [
-  { t: 0.0, who: "amy", text: "Thank you for calling Brightwater Family Dentistry. This is Amy. How can I help you today?" },
-  { t: 6.47, who: "caller", text: "Hey, hi there! So, uh, I've got a few quick questions about your practice. Mind if I ask? First... what are your office hours?" },
-  { t: 15.76, who: "amy", text: "Of course. We are open Monday through Friday from 7 AM to 4 PM, with evening appointments on Tuesdays and Thursdays until 6 PM. We are closed on weekends." },
-  { t: 27.26, who: "caller", text: "Alright, got it. That works for me. And where's your office located?" },
-  { t: 33.03, who: "amy", text: "We are located at 3940 Fourth Ave, Suite 202, San Diego, CA 92103, in Hillcrest. Free parking is available in the lot behind the building." },
-  { t: 45.33, who: "caller", text: "Hmm, okay... yeah, I think I know that area. Now, uh, the big question... what insurance or payment options do you take?" },
-  { t: 55.95, who: "amy", text: "We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. If you don't have insurance, our new patient special is $129, and it includes an exam, X-rays and a cleaning. We also offer CareCredit financing." },
-  { t: 73.61, who: "caller", text: "I see, okay. That helps a lot. And if something urgent comes up... do you handle same-day requests?" },
-  { t: 82.77, who: "amy", text: "Yes. We keep time open every weekday for same-day dental emergencies, like a toothache or a broken tooth. After hours, you can call (619) 555-0141, and our on-call dentist will call you back." },
-  { t: 97.69, who: "caller", text: "Okay, good to know. Who would I be working with there?" },
-  { t: 102.37, who: "amy", text: "You would see Dr. Elena Park or Dr. James Whitfield. Both are general dentists, and they work with our team of hygienists." },
-  { t: 110.46, who: "caller", text: "Nice, great to know that. And what services do you offer?" },
-  { t: 115.09, who: "amy", text: "We offer cleanings, exams, X-rays, fillings, crowns, root canals, implants, Invisalign and teeth whitening. We also offer nitrous oxide for patients who feel nervous." },
-  { t: 127.45, who: "caller", text: "Oh, okay, nice. Good to know. Are you taking new clients right now?" },
-  { t: 133.41, who: "amy", text: "Yes, we are welcoming new patients." },
-  { t: 136.23, who: "caller", text: "Perfect, good to hear. And, uh, one last thing... do you have a website I can check out?" },
-  { t: 141.95, who: "amy", text: "Yes. Our website is brightwaterfamilydentistry.com. You can also fill out your new patient forms there. Is there anything else I can help you with?" },
-  { t: 151.68, who: "caller", text: "Awesome, I'll take a look. That answers all my questions. Nice team, really appreciate your help. Have a great day!" },
-  { t: 159.15, who: "amy", text: "You're welcome. Thank you for calling Brightwater Family Dentistry. Goodbye." },
+  { t: 0.0, who: "amy", text: "Thank you for calling Brightwater Family Dentistry. This is Annie. How can I help you today?" },
+  { t: 5.99, who: "caller", text: "Hey, hi there! So, uh, I've got a few quick questions about your practice. Mind if I ask? First... what are your office hours?" },
+  { t: 15.28, who: "amy", text: "Of course. We are open Monday through Friday from 7 AM to 4 PM, with evening appointments on Tuesdays and Thursdays until 6 PM. We are closed on weekends." },
+  { t: 26.78, who: "caller", text: "Alright, got it. That works for me. And where's your office located?" },
+  { t: 32.55, who: "amy", text: "We are located at 3940 Fourth Ave, Suite 202, San Diego, CA 92103, in Hillcrest. Free parking is available in the lot behind the building." },
+  { t: 44.85, who: "caller", text: "Hmm, okay... yeah, I think I know that area. Now, uh, the big question... what insurance or payment options do you take?" },
+  { t: 55.47, who: "amy", text: "We accept most PPO plans, including Delta Dental, Cigna, MetLife, Aetna and Guardian. If you don't have insurance, our new patient special is $129, and it includes an exam, X-rays and a cleaning. We also offer CareCredit financing." },
+  { t: 73.13, who: "caller", text: "I see, okay. That helps a lot. And if something urgent comes up... do you handle same-day requests?" },
+  { t: 82.29, who: "amy", text: "Yes. We keep time open every weekday for same-day dental emergencies, like a toothache or a broken tooth. After hours, you can call (619) 555-0141, and our on-call dentist will call you back." },
+  { t: 97.21, who: "caller", text: "Okay, good to know. Who would I be working with there?" },
+  { t: 101.89, who: "amy", text: "You would see Dr. Elena Park or Dr. James Whitfield. Both are general dentists, and they work with our team of hygienists." },
+  { t: 109.98, who: "caller", text: "Nice, great to know that. And what services do you offer?" },
+  { t: 114.61, who: "amy", text: "We offer cleanings, exams, X-rays, fillings, crowns, root canals, implants, Invisalign and teeth whitening. We also offer nitrous oxide for patients who feel nervous." },
+  { t: 126.97, who: "caller", text: "Oh, okay, nice. Good to know. Are you taking new clients right now?" },
+  { t: 132.93, who: "amy", text: "Yes, we are welcoming new patients." },
+  { t: 135.75, who: "caller", text: "Perfect, good to hear. And, uh, one last thing... do you have a website I can check out?" },
+  { t: 141.47, who: "amy", text: "Yes. Our website is brightwaterfamilydentistry.com. You can also fill out your new patient forms there. Is there anything else I can help you with?" },
+  { t: 151.2, who: "caller", text: "Awesome, I'll take a look. That answers all my questions. Nice team, really appreciate your help. Have a great day!" },
+  { t: 158.67, who: "amy", text: "You're welcome. Thank you for calling Brightwater Family Dentistry. Goodbye." },
 ];
 
 /** Question chips and the index of Annie's answer line that completes each one. */
@@ -51,7 +51,7 @@ export function TestCallSection() {
   const lineRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [playing, setPlaying] = useState(false);
   const [time, setTime] = useState(0);
-  const [duration, setDuration] = useState(164.1);
+  const [duration, setDuration] = useState(163.2);
   const [failed, setFailed] = useState(false);
   const [started, setStarted] = useState(false);
 
